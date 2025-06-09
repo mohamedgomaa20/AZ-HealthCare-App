@@ -12,58 +12,58 @@ class SplashViewBody extends StatefulWidget {
 
 class _SplashViewBodyState extends State<SplashViewBody>
     with SingleTickerProviderStateMixin {
-  late AnimationController _controller;
-  late Animation<double> _fadeInImage;
-  late Animation<Offset> _slideImage;
-  late Animation<Offset> _slideText;
-  late Animation<double> _fadeInText;
+  late AnimationController animationController;
+  late Animation<double> fadeInImage;
+  late Animation<Offset> slideImage;
+  late Animation<Offset> slideText;
+  late Animation<double> fadeInText;
 
   @override
   void initState() {
     super.initState();
     _initAnimationController();
     _initAnimations();
-    _controller.forward();
+    animationController.forward();
   }
 
   void _initAnimationController() {
-    _controller = AnimationController(
+    animationController = AnimationController(
       vsync: this,
       duration: const Duration(seconds: 2),
     );
   }
 
   void _initAnimations() {
-    _fadeInImage = CurvedAnimation(
-      parent: _controller,
+    fadeInImage = CurvedAnimation(
+      parent: animationController,
       curve: const Interval(0.0, 0.5, curve: Curves.easeIn),
     );
 
-    _slideImage = Tween<Offset>(
+    slideImage = Tween<Offset>(
       begin: const Offset(0, 0.5),
       end: Offset.zero,
     ).animate(CurvedAnimation(
-      parent: _controller,
+      parent: animationController,
       curve: const Interval(0.0, 0.6, curve: Curves.easeOut),
     ));
 
-    _slideText = Tween<Offset>(
+    slideText = Tween<Offset>(
       begin: const Offset(0, 0.5),
       end: Offset.zero,
     ).animate(CurvedAnimation(
-      parent: _controller,
-      curve: const Interval(0.6, 1.0, curve: Curves.easeOut),
+      parent: animationController,
+      curve: const Interval(0.5, 1.0, curve: Curves.easeOut),
     ));
 
-    _fadeInText = CurvedAnimation(
-      parent: _controller,
-      curve: const Interval(0.6, 1.0, curve: Curves.easeIn),
+    fadeInText = CurvedAnimation(
+      parent: animationController,
+      curve: const Interval(0.5, 1.0, curve: Curves.easeIn),
     );
   }
 
   @override
   void dispose() {
-    _controller.dispose();
+    animationController.dispose();
     super.dispose();
   }
 
@@ -71,19 +71,19 @@ class _SplashViewBodyState extends State<SplashViewBody>
   Widget build(BuildContext context) {
     return Center(
       child: AnimatedBuilder(
-        animation: _controller,
+        animation: animationController,
         builder: (_, __) => Column(
           mainAxisSize: MainAxisSize.min,
           children: [
             AnimatedImageWidget(
-              opacity: _fadeInImage,
-              position: _slideImage,
+              opacity: fadeInImage,
+              position: slideImage,
               imagePath: 'assets/images/onboard_1.png',
             ),
             const SizedBox(height: 24),
             AnimatedTextWidget(
-              opacity: _fadeInText,
-              position: _slideText,
+              opacity: fadeInText,
+              position: slideText,
               text: "AZ Healthcare",
             ),
           ],

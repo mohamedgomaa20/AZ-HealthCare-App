@@ -1,5 +1,4 @@
-// lib/widgets/animated_image_widget.dart
-import 'package:flutter/material.dart';
+ import 'package:flutter/material.dart';
 
 class AnimatedImageWidget extends StatelessWidget {
   final Animation<double> opacity;

@@ -1,5 +1,4 @@
-// lib/widgets/animated_text_widget.dart
-import 'package:flutter/material.dart';
+ import 'package:flutter/material.dart';
 
 class AnimatedTextWidget extends StatelessWidget {
   final Animation<double> opacity;

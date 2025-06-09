@@ -16,19 +16,19 @@ class SplashView extends StatefulWidget {
 class _SplashViewState extends State<SplashView> {
   @override
   void initState() {
-// excuteNavigation();
     super.initState();
+    executeNavigation();
   }
   @override
   Widget build(BuildContext context) {
     return Scaffold(body: SplashViewBody());
   }
-  // void excuteNavigation(){
-  //   Future.delayed(Duration(seconds: 3),() {
-  //     // Navigator.pushReplacementNamed(context, OnBoardingView.routeName);
-  //   },);
-  //
-  // }
+  void executeNavigation(){
+    Future.delayed(Duration(seconds: 3),() {
+      Navigator.pushReplacementNamed(context, OnBoardingView.routeName);
+    },);
+
+  }
 }
 
 
