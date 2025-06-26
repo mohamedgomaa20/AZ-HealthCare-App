@@ -141,6 +141,7 @@ class _AccountSetupScreenState extends State<AccountSetupScreen> {
     );
   }
 
+
   Widget _buildGenderPage() {
     return _buildPage(
       title: "What's your gender?",
