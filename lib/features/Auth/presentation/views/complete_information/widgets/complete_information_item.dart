@@ -34,11 +34,11 @@ class CompleteInfoItem extends StatelessWidget {
           textAlign: TextAlign.center,
         ),
         VerticalSpace(2),
-        CustomTextFormField(
-          maxLines: maxLines,
-          keyboardType: inputType,
-          onSaved: (value) {},
-        ),
+        // CustomTextFormField(
+        //   maxLines: maxLines,
+        //   keyboardType: inputType,
+        //   onSaved: (value) {},
+        // ),
       ],
     );
   }

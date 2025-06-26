@@ -1,161 +1,182 @@
 import 'package:az_health_care/core/utils/app_text_styles.dart';
+import 'package:az_health_care/features/Auth/presentation/views/sign_up/widgets/switch_auth_text.dart';
+import 'package:az_health_care/features/Auth/presentation/views/sign_up/widgets/terms_and_conditions_dialog.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
- import '../../../../../../core/widgets/space_widget.dart';
+import '../../../../../../core/constants.dart';
+import '../../../../../../core/utils/app_colors.dart';
+import '../../../../../../core/widgets/custom_button.dart';
+import '../../../../../../core/widgets/custom_sliver_app_bar.dart';
+import '../../../../../../core/widgets/custom_text_form_field.dart';
+import '../../../../../../core/widgets/or_continue_with.dart';
+import '../../../../../get_start/presentation/views/widgets/google_button.dart';
+import '../../login/login_view.dart';
+import '../../login/widgets/remember_me_widget.dart';
+import '../../welcome_to_a2z_care/welcome_to_a2z_care_view.dart';
+import 'agree_with_action_text.dart';
 
-class SignUpViewBody extends StatelessWidget {
+class SignUpViewBody extends StatefulWidget {
   const SignUpViewBody({super.key});
 
   @override
+  State<SignUpViewBody> createState() => _SignUpViewBodyState();
+}
+
+class _SignUpViewBodyState extends State<SignUpViewBody> {
+  bool agreedToTerms = false;
+  bool agreed = false;
+  String termsText = '';
+
+  Future<void> _showTermsDialog() async {
+    // Load the string (you can also use DefaultAssetBundle or rootBundle)
+    if (termsText.isEmpty) {
+      termsText = await rootBundle.loadString(
+        'assets/texts/terms_conditions.txt',
+      );
+    }
+
+    showDialog(
+      context: context,
+      builder:
+          (_) => TermsAndConditionsDialog(
+            title: "Terms & Conditions",
+            body: termsText,
+            onCancel: () => Navigator.pop(context),
+            onConfirm: () {
+              setState(() => agreedToTerms = true);
+              Navigator.pop(context);
+            },
+          ),
+    );
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [VerticalSpace(10), Text("Sign Up View Body",style: AppTextStyles.semiBold28,)],
+    return NestedScrollView(
+      headerSliverBuilder:
+          (context, innerBoxIsScrolled) => [
+            const CustomSliverAppBar(title: "Join A2Z Care Today \uD83E\uDE7A"),
+          ],
+      body: Builder(
+        builder:
+            (context) => CustomScrollView(
+              slivers: [
+                SliverOverlapInjector(
+                  handle: NestedScrollView.sliverOverlapAbsorberHandleFor(
+                    context,
+                  ),
+                ),
+                SliverToBoxAdapter(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: kHorizontalPadding,
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const SizedBox(height: 10),
+                        Text(
+                          "Create your account and start monitoring your health",
+                          style: AppTextStyles.medium14,
+                        ),
+                        const SizedBox(height: 45),
+                        Text("UserName", style: AppTextStyles.semiBold16),
+                        const SizedBox(height: 5),
+                        CustomTextFormField(
+                          hintText: "UserName",
+                          controller: TextEditingController(),
+                          keyboardType: TextInputType.name,
+                          prefixIconData: CupertinoIcons.profile_circled,
+                        ),
+                        const SizedBox(height: 20),
+                        Text("Email", style: AppTextStyles.semiBold16),
+                        const SizedBox(height: 5),
+                        CustomTextFormField(
+                          hintText: "Email",
+                          controller: TextEditingController(),
+                          keyboardType: TextInputType.emailAddress,
+                          prefixIconData: Icons.email,
+                        ),
+                        const SizedBox(height: 20),
+                        Text(
+                          "Create Password",
+                          style: AppTextStyles.semiBold16,
+                        ),
+                        const SizedBox(height: 5),
+                        CustomTextFormField(
+                          hintText: "Create Password",
+                          controller: TextEditingController(),
+                          keyboardType: TextInputType.visiblePassword,
+                          prefixIconData: Icons.lock,
+                          suffixIconData: CupertinoIcons.eye_fill,
+                          isPassword: true,
+                        ),
+                        const SizedBox(height: 20),
+                        Text(
+                          "Confirm Password",
+                          style: AppTextStyles.semiBold16,
+                        ),
+                        const SizedBox(height: 5),
+                        CustomTextFormField(
+                          hintText: "Confirm Password",
+                          controller: TextEditingController(),
+                          keyboardType: TextInputType.visiblePassword,
+                          prefixIconData: Icons.lock,
+                          suffixIconData: CupertinoIcons.eye_fill,
+                          isPassword: true,
+                        ),
+                        const SizedBox(height: 10),
+                        AgreeWithActionText(
+                          value: agreedToTerms,
+                          onChanged: (val) {
+                            if (val == true) {
+                              _showTermsDialog();
+                            } else {
+                              setState(() => agreedToTerms = false);
+                            }
+                          },
+                          normalText: "I agree to A2ZCare ",
+                          actionText: "Terms & Conditions",
+                          onTap: _showTermsDialog,
+                        ),
+
+                        const SizedBox(height: 16),
+                        SwitchAuthText(
+                          normalText: "Already have an account? ",
+                          actionText: "Sign in",
+                          onTap: () {
+                            Navigator.pushReplacementNamed(
+                              context,
+                              LoginView.routeName,
+                            );
+                          },
+                        ),
+                        const SizedBox(height: 20),
+                        const OrContinueWith(),
+                        const SizedBox(height: 16),
+                        const GoogleButton(),
+                        const SizedBox(height: 32),
+                        CustomButton(
+                          text: "Sign Up",
+                          onPressed:
+                              agreedToTerms
+                                  ? () {
+                                    Navigator.pushNamed(
+                                      context,
+                                      WelcomeToA2zCareView.routeName,
+                                    );
+                                  }
+                                  : null,
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
       ),
     );
   }
 }
-
-// class LoginViewBody extends StatefulWidget {
-//   const LoginViewBody({Key? key}) : super(key: key);
-//
-//   @override
-//   State<LoginViewBody> createState() => _OnboardingScreenState();
-// }
-
-// class _OnboardingScreenState extends State<LoginViewBody> {
-//   final controller = PageController();
-//   int currentPage = 0;
-//
-//   final pages = [
-//     OnboardingPageModel(
-//       image: AppImages.onboardImage1,
-//       title: "Welcome to A2Z Healthcare",
-//       description:
-//           "Your personal AI-powered healthcare companion, ready to assist you anytime, anywhere made by Azhar Group.",
-//     ),
-//     OnboardingPageModel(
-//       image: AppImages.onboardImage2,
-//       title: "Features",
-//       description:
-//           "Step Tracker, Calories Tracking, Water Intake Tracker, Medication Reminder, Medication History, Blood Pressure Prediction (AI-powered), Accident Alert (sends location and alert to emergency contacts).",
-//     ),
-//     OnboardingPageModel(
-//       image: AppImages.onboardImage3,      title: "VIP Features",
-//       description:
-//           "Ability to order medicine directly via the app with faster delivery and exclusive service. Request doctor consultations remotely through the app.",
-//     ),
-//   ];
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       body: Container(
-//         decoration: const BoxDecoration(
-//           gradient: LinearGradient(
-//             colors: [Color(0xFFFFCDD2), Color(0xFFB71C1C)],
-//             begin: Alignment.topCenter,
-//             end: Alignment.bottomCenter,
-//           ),
-//         ),
-//         child: Column(
-//           children: [
-//             Expanded(
-//               flex: 10,
-//               child: PageView.builder(
-//                 controller: controller,
-//                 itemCount: pages.length,
-//                 onPageChanged: (index) {
-//                   setState(() {
-//                     currentPage = index;
-//                   });
-//                 },
-//                 itemBuilder:
-//                     (context, index) =>
-//                         OnboardingPageWidget(model: pages[index]),
-//               ),
-//             ),
-//             Expanded(
-//               flex: 1,
-//               child: SmoothPageIndicator(
-//                 controller: controller,
-//                 count: pages.length,
-//                 effect: ExpandingDotsEffect(
-//                   activeDotColor: Colors.black,
-//                   dotColor: Colors.grey.shade300,
-//                   dotHeight: 10,
-//                   dotWidth: 10,
-//                 ),
-//               ),
-//             ),
-//             if (currentPage == 2)
-//               Expanded(
-//                 flex: 1,
-//                 child: Padding(
-//                   padding: const EdgeInsets.symmetric(horizontal: 40.0),
-//                   child: ElevatedButton(
-//                     onPressed: () {
-//                       // TODO: navigate to Get Start screen & save onboarding completed
-//                     },
-//                     style: ElevatedButton.styleFrom(
-//                       backgroundColor: Colors.black,
-//                       minimumSize: const Size.fromHeight(50),
-//                     ),
-//                     child: const Text(
-//                       "Get Start",
-//                       style: TextStyle(
-//                         fontSize: 20,
-//                         fontWeight: FontWeight.bold,
-//                       ),
-//                     ),
-//                   ),
-//                 ),
-//               ),
-//           ],
-//         ),
-//       ),
-//     );
-//   }
-// }
-
-// class OnboardingPageModel {
-//   final String image, title, description;
-//
-//   OnboardingPageModel({
-//     required this.image,
-//     required this.title,
-//     required this.description,
-//   });
-// }
-
-// class OnboardingPageWidget extends StatelessWidget {
-//   final OnboardingPageModel model;
-//
-//   const OnboardingPageWidget({super.key, required this.model});
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return Padding(
-//       padding: const EdgeInsets.all(24.0),
-//       child: Column(
-//         mainAxisAlignment: MainAxisAlignment.center,
-//         children: [
-//           Image.asset(model.image, height: 250),
-//           const SizedBox(height: 32),
-//           Text(
-//             model.title,
-//             style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-//             textAlign: TextAlign.center,
-//           ),
-//           const SizedBox(height: 16),
-//           Text(
-//             model.description,
-//             style: const TextStyle(fontSize: 16),
-//             textAlign: TextAlign.center,
-//           ),
-//         ],
-//       ),
-//     );
-//   }
-// }

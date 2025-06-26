@@ -8,9 +8,16 @@ abstract class AppTextStyles {
     fontSize: 24,
     fontWeight: FontWeight.bold,
   );
+  static const TextStyle regular14 = TextStyle(
+    fontSize: 14,
+   );
   static const TextStyle semiBold28 = TextStyle(
     fontSize: 28,
     fontWeight: FontWeight.w600,
+  );
+  static const TextStyle bold28 = TextStyle(
+    fontSize: 28,
+    fontWeight: FontWeight.bold,
   );
 
   static const TextStyle semiBold18 = TextStyle(

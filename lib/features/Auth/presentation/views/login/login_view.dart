@@ -12,7 +12,7 @@ class LoginView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.backgroundColor,
-
+      resizeToAvoidBottomInset: false,
       body: LoginViewBody(),
     );
   }

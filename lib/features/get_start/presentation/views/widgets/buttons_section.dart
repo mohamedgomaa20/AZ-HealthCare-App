@@ -15,14 +15,14 @@ class ButtonsSection extends StatelessWidget {
         const GoogleButton(),
         const SizedBox(height: 50),
         CustomButton(
-          buttonText: 'Sign Up',
+          text: 'Sign Up',
           onPressed: () {
             Navigator.pushNamed(context, SignUpView.routeName);
           },
         ),
         const SizedBox(height: 10),
         CustomButton(
-          buttonText: 'Sign In',
+          text: 'Sign In',
           onPressed: () {
             Navigator.pushNamed(context, LoginView.routeName);
           },

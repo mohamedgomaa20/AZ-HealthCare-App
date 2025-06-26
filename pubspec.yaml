@@ -57,6 +57,7 @@ flutter:
 
   assets:
     - assets/images/
+    - assets/texts/terms_conditions.txt
 
   fonts:
     - family: jannah

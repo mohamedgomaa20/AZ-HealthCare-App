@@ -7,7 +7,7 @@ import '../utils/app_text_styles.dart';
 class CustomButton extends StatelessWidget {
   const CustomButton({
     super.key,
-    required this.buttonText,
+    required this.text,
     required this.onPressed,
     this.backgroundColor,
     this.textColor,
@@ -16,8 +16,8 @@ class CustomButton extends StatelessWidget {
     this.width,
   });
 
-  final String buttonText;
-  final VoidCallback onPressed;
+  final String text;
+  final VoidCallback? onPressed;
   final Color? backgroundColor;
   final Color? textColor;
   final double? fontSize;
@@ -34,14 +34,17 @@ class CustomButton extends StatelessWidget {
           child: TextButton(
             onPressed: onPressed,
             style: TextButton.styleFrom(
-              backgroundColor: backgroundColor ?? AppColors.primaryColor,
+              backgroundColor:
+                  onPressed == null
+                      ? AppColors.primaryColor.withValues(alpha: 0.3)
+                      : AppColors.primaryColor,
               foregroundColor: textColor ?? AppColors.whiteColor,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(kDefaultRadius),
               ),
             ),
             child: Text(
-              buttonText,
+              text,
               style: AppTextStyles.semiBold18.copyWith(
                 fontSize: fontSize ?? 18,
                 letterSpacing: -0.50,

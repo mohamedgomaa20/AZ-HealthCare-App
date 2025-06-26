@@ -20,7 +20,7 @@ class CompleteInformationBody extends StatelessWidget {
           VerticalSpace(2),
           CompleteInfoItem(maxLines: 5, text: 'Enter your address'),
           VerticalSpace(5),
-          CustomButton(buttonText: 'Login', onPressed: () {}),
+          CustomButton(text: 'Login', onPressed: () {}),
         ],
       ),
     );

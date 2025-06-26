@@ -31,7 +31,7 @@ class OnBoardingActionsSection extends StatelessWidget {
         condition: isLast,
         builder:
             (context) => CustomButton(
-              buttonText: 'Get Started',
+              text: 'Get Started',
               onPressed: () {
                 CacheHelper.setData(key: kIsOnBoardingScreen, value: true);
                 Navigator.pushReplacementNamed(context, GetStartView.routeName);
@@ -43,7 +43,7 @@ class OnBoardingActionsSection extends StatelessWidget {
               children: [
                 CustomButton(
                   width: MediaQuery.sizeOf(context).width / 2 - 25,
-                  buttonText: 'Skip',
+                  text: 'Skip',
                   backgroundColor: AppColors.darkGray,
                   onPressed: () {
                     CacheHelper.setData(key: kIsOnBoardingScreen, value: true);
@@ -56,7 +56,7 @@ class OnBoardingActionsSection extends StatelessWidget {
                 SizedBox(width: 10),
                 CustomButton(
                   width: MediaQuery.sizeOf(context).width / 2 - 25,
-                  buttonText: 'Continue',
+                  text: 'Continue',
                   onPressed: () {
                     pageController.nextPage(
                       duration: Duration(milliseconds: 900),

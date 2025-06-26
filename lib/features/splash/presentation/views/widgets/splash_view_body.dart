@@ -1,4 +1,4 @@
-// lib/views/get_start_view_body.dart
+// lib/views/personal_info_view_body.dart
 import 'package:az_health_care/core/utils/app_images.dart';
 import 'package:az_health_care/features/splash/presentation/views/widgets/animated_image_widget.dart';
 import 'package:az_health_care/features/splash/presentation/views/widgets/animated_text_widget.dart';
