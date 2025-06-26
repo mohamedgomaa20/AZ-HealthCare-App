@@ -1,8 +1,8 @@
 import 'package:az_health_care/features/get_start/presentation/views/widgets/get_start_view_body.dart';
- import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 
 import '../../../../core/utils/app_colors.dart';
-
+import '../../../../shared/network/remote/dio_helper.dart';
 
 class GetStartView extends StatelessWidget {
   static const routeName = "getStart";
@@ -12,8 +12,23 @@ class GetStartView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: AppColors.backgroundColor,
+      backgroundColor: AppColors.backgroundColor,
 
-        body: GetStartViewBody());
+      body: GetStartViewBody(),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          DioHelper.getData(url: '/api/Admin/users')
+              .then((value) {
+            print("=====================================");
+            print(value.data);
+            print("=====================================");
+          })
+              .catchError((error) {
+            print(error.toString());
+          });
+        },
+        child: Icon(Icons.cloud_download),
+      ),
+    );
   }
 }

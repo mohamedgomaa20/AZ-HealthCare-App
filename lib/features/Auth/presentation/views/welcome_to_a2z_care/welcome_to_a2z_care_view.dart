@@ -12,6 +12,7 @@ class WelcomeToA2zCareView extends StatelessWidget {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: WelcomeToA2zCareViewBody(),
+
     );
   }
 }

@@ -1,36 +1,37 @@
-import 'dart:io';
-
 import 'package:dio/dio.dart';
 
-import '../../../styles/constants.dart';
-import '../../end_points.dart';
-
 class DioHelper {
-
   static late Dio dio;
 
   static init() {
     dio = Dio(
       BaseOptions(
-        baseUrl: 'https://student.valuxapps.com/api/',
+        baseUrl: 'http://healthmonitoring.runasp.net',
         receiveDataWhenStatusError: true,
       ),
     );
   }
 
   static Future<Response<dynamic>> getData({
-    required String path,
-    String language = 'en',
-    String? token,
+    required String url,
     Map<String, dynamic>? query,
   }) async {
-    dio.options.headers = {
-      'lang': language,
-      'Content-Type': 'application/json',
-      'Authorization': token ?? '',
-    };
-    return await dio.get(path, queryParameters: query);
+    return await dio.get(url, queryParameters: query);
   }
+
+  // static Future<Response<dynamic>> getData({
+  //   required String path,
+  //   String language = 'en',
+  //   String? token,
+  //   Map<String, dynamic>? query,
+  // }) async {
+  //   dio.options.headers = {
+  //     'lang': language,
+  //     'Content-Type': 'application/json',
+  //     'Authorization': token ?? '',
+  //   };
+  //   return await dio.get(path, queryParameters: query);
+  // }
 
   static Future<Response> postData({
     required String path,

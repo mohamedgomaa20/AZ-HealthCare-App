@@ -7,7 +7,7 @@ import '../../../models/login_model.dart';
 import '../../../modules/settings/settings_screen.dart';
 import '../../../shared/styles/constants.dart';
 import '../../../shared/network/end_points.dart';
-import '../../../shared/network/remote/dio_helper/dio_helper.dart';
+import '../../shared/network/remote/dio_helper.dart';
 
 class ShopCubit extends Cubit<ShopStates> {
   ShopCubit() : super(ShopInitialState());
@@ -36,57 +36,57 @@ class ShopCubit extends Cubit<ShopStates> {
   HomeModel? homeModel;
   Map<int, bool> favorites = {};
 
-  void getHomeData() {
-    print('==================token=================');
-    print(token);
-    print('========================================');
-    emit(ShopLoadingHomeDataState());
-    DioHelper.getData(path: HOME, token: token)
-        .then((value) {
-          homeModel = HomeModel.fromJson(value.data);
-          homeModel!.data!.products.forEach((element) {
-            favorites.addAll({element.id!: element.inFavorites!});
-          });
-          // print('==================favorite========================');
-          // print(favorites);
-          // print('==================end fav========================');
-          // print('==================Home Model========================');
-          // printFullText(value.data);
-          // print(homeModel!.status);
-          // print(homeModel!.data!.banners[2].image);
-          // print(value.data['data']);
-          // print('==========================================');
-          emit(ShopSuccessHomeDataState());
-        })
-        .catchError((error) {
-          //   print('==================Error========================');
-          //   print(error.toString());
-          //   print('===================END=======================');
-          emit(ShopErrorHomeDataState(error.toString()));
-        });
-  }
+  // void getHomeData() {
+  //   print('==================token=================');
+  //   print(token);
+  //   print('========================================');
+  //   emit(ShopLoadingHomeDataState());
+  //   DioHelper.getData(path: HOME, token: token)
+  //       .then((value) {
+  //         homeModel = HomeModel.fromJson(value.data);
+  //         homeModel!.data!.products.forEach((element) {
+  //           favorites.addAll({element.id!: element.inFavorites!});
+  //         });
+  //         // print('==================favorite========================');
+  //         // print(favorites);
+  //         // print('==================end fav========================');
+  //         // print('==================Home Model========================');
+  //         // printFullText(value.data);
+  //         // print(homeModel!.status);
+  //         // print(homeModel!.data!.banners[2].image);
+  //         // print(value.data['data']);
+  //         // print('==========================================');
+  //         emit(ShopSuccessHomeDataState());
+  //       })
+  //       .catchError((error) {
+  //         //   print('==================Error========================');
+  //         //   print(error.toString());
+  //         //   print('===================END=======================');
+  //         emit(ShopErrorHomeDataState(error.toString()));
+  //       });
+  // }
 
   ShopLoginModel? userModel;
 
-  void getUserData() {
-    emit(ShopLoadingUserDataState());
-    DioHelper.getData(path: PROFILE, token: token)
-        .then((value) {
-          userModel = ShopLoginModel.fromJson(value.data);
-          print('==================User Model========================');
-          print(userModel!.data!.name);
-          print(userModel!.data!.email);
-          print(userModel!.data!.phone);
-          print(userModel!.data!.token);
-          emit(ShopSuccessUserDataState(userModel!));
-          print('============================================================');
-        })
-        .catchError((error) {
-          print('==================User Error========================');
-          emit(ShopErrorUserDataState(error.toString()));
-          print('============================================================');
-        });
-  }
+  // void getUserData() {
+  //   emit(ShopLoadingUserDataState());
+  //   DioHelper.getData(path: PROFILE, token: token)
+  //       .then((value) {
+  //         userModel = ShopLoginModel.fromJson(value.data);
+  //         print('==================User Model========================');
+  //         print(userModel!.data!.name);
+  //         print(userModel!.data!.email);
+  //         print(userModel!.data!.phone);
+  //         print(userModel!.data!.token);
+  //         emit(ShopSuccessUserDataState(userModel!));
+  //         print('============================================================');
+  //       })
+  //       .catchError((error) {
+  //         print('==================User Error========================');
+  //         emit(ShopErrorUserDataState(error.toString()));
+  //         print('============================================================');
+  //       });
+  // }
 
   void updateUserData({
     required String name,
