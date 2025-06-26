@@ -1,38 +1,34 @@
+import '../../../../core/utils/app_images.dart';
+
 class BoardingModel {
   final String image;
   final String title;
-  final String body;
+  final String description;
 
   BoardingModel({
     required this.image,
     required this.title,
-    required this.body,
+    required this.description,
   });
 }
 
 final List<BoardingModel> boardingItems = [
   BoardingModel(
-    image: "assets/images/onboard_1.png",
-    title: "Welcome to AZ Healthcare",
-    body:
-    "Your personal AI-powered healthcare companion, ready to assist you anytime, anywhere.",
+    image: AppImages.onboardImage1,
+    title: "Welcome to A2Z Healthcare",
+    description:
+        "Your personal AI-powered healthcare companion, ready to assist you anytime, anywhere made by Azhar Group.",
   ),
   BoardingModel(
-    image: "assets/images/onboard_2.jpg",
-    title: "AI-Powered Diagnosis",
-    body:
-    "Get instant medical insights and preliminary diagnoses using advanced AI technology.",
+    image: AppImages.onboardImage2,
+    title: "Features",
+    description:
+        "Step Tracker, Calories Tracking, Water Intake Tracker, Medication Reminder, Medication History, Blood Pressure Prediction (AI-powered), Accident Alert (sends location and alert to emergency contacts).",
   ),
   BoardingModel(
-    image: "assets/images/onboard_3.png",
-    title: "24/7 Medical Support",
-    body:
-    "Access medical advice and support around the clock, whenever you need it.",
-  ),
-  BoardingModel(
-    image: "assets/images/onboard_4.jpg",
-    title: "Your Health Journey",
-    body:
-    "Track your health progress and get personalized recommendations for a healthier life.",
+    image: AppImages.onboardImage3,
+    title: "VIP Features",
+    description:
+        "Ability to order medicine directly via the app with faster delivery and exclusive service. Request doctor consultations remotely through the app.",
   ),
 ];

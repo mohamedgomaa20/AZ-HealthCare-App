@@ -1,7 +1,13 @@
-// lib/views/splash_view_body.dart
-import 'package:az_health_care/features/splash/presentation/views/widgets/widgets/animated_image_widget.dart';
-import 'package:az_health_care/features/splash/presentation/views/widgets/widgets/animated_text_widget.dart';
+// lib/views/get_start_view_body.dart
+import 'package:az_health_care/core/utils/app_images.dart';
+import 'package:az_health_care/features/splash/presentation/views/widgets/animated_image_widget.dart';
+import 'package:az_health_care/features/splash/presentation/views/widgets/animated_text_widget.dart';
 import 'package:flutter/material.dart';
+
+import '../../../../../core/constants.dart';
+import '../../../../../core/services/cache_helper.dart';
+import '../../../../get_start/presentation/views/get_start_view.dart';
+import '../../../../on_boarding/presentation/views/on_boarding_view.dart';
 
 class SplashViewBody extends StatefulWidget {
   const SplashViewBody({super.key});
@@ -20,10 +26,23 @@ class _SplashViewBodyState extends State<SplashViewBody>
 
   @override
   void initState() {
-    super.initState();
+    executeNavigation();
     _initAnimationController();
     _initAnimations();
     animationController.forward();
+    super.initState();
+  }
+
+  void executeNavigation() {
+    bool isOnBoardingScreen =
+        CacheHelper.getData(key: kIsOnBoardingScreen) ?? false;
+    Future.delayed(Duration(seconds: 3), () {
+      if (isOnBoardingScreen) {
+        Navigator.pushReplacementNamed(context, GetStartView.routeName);
+      } else {
+        Navigator.pushReplacementNamed(context, OnBoardingView.routeName);
+      }
+    });
   }
 
   void _initAnimationController() {
@@ -42,18 +61,22 @@ class _SplashViewBodyState extends State<SplashViewBody>
     slideImage = Tween<Offset>(
       begin: const Offset(0, 0.5),
       end: Offset.zero,
-    ).animate(CurvedAnimation(
-      parent: animationController,
-      curve: const Interval(0.0, 0.6, curve: Curves.easeOut),
-    ));
+    ).animate(
+      CurvedAnimation(
+        parent: animationController,
+        curve: const Interval(0.0, 0.6, curve: Curves.easeOut),
+      ),
+    );
 
     slideText = Tween<Offset>(
       begin: const Offset(0, 0.5),
       end: Offset.zero,
-    ).animate(CurvedAnimation(
-      parent: animationController,
-      curve: const Interval(0.5, 1.0, curve: Curves.easeOut),
-    ));
+    ).animate(
+      CurvedAnimation(
+        parent: animationController,
+        curve: const Interval(0.5, 1.0, curve: Curves.easeOut),
+      ),
+    );
 
     fadeInText = CurvedAnimation(
       parent: animationController,
@@ -72,22 +95,23 @@ class _SplashViewBodyState extends State<SplashViewBody>
     return Center(
       child: AnimatedBuilder(
         animation: animationController,
-        builder: (_, __) => Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            AnimatedImageWidget(
-              opacity: fadeInImage,
-              position: slideImage,
-              imagePath: 'assets/images/onboard_1.png',
+        builder:
+            (context, child) => Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                AnimatedImageWidget(
+                  opacity: fadeInImage,
+                  position: slideImage,
+                  imagePath: AppImages.onboardImage1,
+                ),
+                const SizedBox(height: 24),
+                AnimatedTextWidget(
+                  opacity: fadeInText,
+                  position: slideText,
+                  text: "A2Z Care",
+                ),
+              ],
             ),
-            const SizedBox(height: 24),
-            AnimatedTextWidget(
-              opacity: fadeInText,
-              position: slideText,
-              text: "AZ Healthcare",
-            ),
-          ],
-        ),
       ),
     );
   }

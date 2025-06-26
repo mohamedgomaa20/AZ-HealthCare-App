@@ -17,11 +17,11 @@ class CustomIndicator extends StatelessWidget {
       controller: pageController,
       count: count,
       effect: ExpandingDotsEffect(
-        expansionFactor: 4,
+        expansionFactor: 4.0,
         spacing: 5.0,
-        dotWidth: 10.0,
-        dotHeight: 10.0,
-        dotColor: AppColors.primaryColor.withOpacity(.3),
+        dotWidth: 8.0,
+        dotHeight: 9.0,
+        dotColor: AppColors.primaryColor.withValues(alpha: .3),
         activeDotColor: AppColors.primaryColor,
       ),
     );

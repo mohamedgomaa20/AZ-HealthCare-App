@@ -1,7 +1,7 @@
- import 'package:flutter/material.dart';
+import 'package:az_health_care/core/utils/app_text_styles.dart';
+import 'package:flutter/material.dart';
 
- import '../../../domain/models/boarding_model.dart';
-
+import '../../../domain/models/boarding_model.dart';
 
 class PageViewItem extends StatelessWidget {
   final BoardingModel model;
@@ -15,25 +15,19 @@ class PageViewItem extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          SizedBox(height: 150),
+          SizedBox(height: 200),
           Image.asset(model.image, width: double.infinity, height: 250),
           SizedBox(height: 50),
           Text(
-            textAlign: TextAlign.center,
             model.title,
-            style: TextStyle(
-              fontSize: 23,
-               fontWeight: FontWeight.bold,
-            ),
-          ),
-          SizedBox(height: 15),
-          Text(
             textAlign: TextAlign.center,
-            model.body,
-            style: TextStyle(fontSize: 17, color: Colors.grey
-
-              // ,fontStyle: FontStyle.italic
-            ),
+            style: AppTextStyles.bold24,
+          ),
+          SizedBox(height: 25),
+          Text(
+            model.description,
+            textAlign: TextAlign.center,
+            style: AppTextStyles.regular16,
           ),
         ],
       ),

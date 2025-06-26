@@ -1,9 +1,12 @@
 import 'package:az_health_care/core/helper_functions/on_generate_routes.dart';
+import 'package:az_health_care/core/services/cache_helper.dart';
 import 'package:flutter/material.dart';
 
 import 'features/splash/presentation/views/splash_view.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await CacheHelper.init();
   runApp(AZHealthCareApp());
 }
 
