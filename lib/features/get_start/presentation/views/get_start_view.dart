@@ -1,4 +1,5 @@
 import 'package:az_health_care/features/get_start/presentation/views/widgets/get_start_view_body.dart';
+import 'package:az_health_care/features/home/presentation/views/home_layout.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../core/utils/app_colors.dart';
@@ -17,15 +18,8 @@ class GetStartView extends StatelessWidget {
       body: GetStartViewBody(),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          DioHelper.getData(url: '/api/Admin/users')
-              .then((value) {
-            print("=====================================");
-            print(value.data);
-            print("=====================================");
-          })
-              .catchError((error) {
-            print(error.toString());
-          });
+          Navigator.pushNamed(context, HomeLayout.routeName);
+
         },
         child: Icon(Icons.cloud_download),
       ),
