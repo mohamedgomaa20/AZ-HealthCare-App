@@ -1,3 +1,4 @@
+import 'package:az_health_care/core/constants.dart';
 import 'package:az_health_care/features/Auth/presentation/views/welcome_to_a2z_care/widgets/welcome_footer.dart';
 import 'package:az_health_care/features/Auth/presentation/views/welcome_to_a2z_care/widgets/welcome_header.dart';
 import 'package:flutter/material.dart';
@@ -9,21 +10,24 @@ class WelcomeToA2zCareViewBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 24),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          const SizedBox(height: 15),
-          const WelcomeHeader(),
-          WelcomeFooter(
-            onPressed: () {
-              Navigator.pushNamed(context, PersonalInfoView.routeName);
-            },
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        const SizedBox(height: 15),
+        Padding(
+          padding: const EdgeInsets.symmetric(
+            horizontal: 12,
+            vertical: kHorizontalPadding,
           ),
-        ],
-      ),
+          child: const WelcomeHeader(),
+        ),
+        WelcomeFooter(
+          onPressed: () {
+            Navigator.pushNamed(context, PersonalInfoView.routeName);
+          },
+        ),
+      ],
     );
   }
 }

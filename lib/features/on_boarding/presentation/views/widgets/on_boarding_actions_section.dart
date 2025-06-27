@@ -33,7 +33,7 @@ class OnBoardingActionsSection extends StatelessWidget {
             (context) => CustomButton(
               text: 'Get Started',
               onPressed: () {
-                CacheHelper.setData(key: kIsOnBoardingScreen, value: true);
+                CacheHelper.saveData(key: kIsOnBoardingScreen, value: true);
                 Navigator.pushReplacementNamed(context, GetStartView.routeName);
               },
             ),
@@ -46,7 +46,7 @@ class OnBoardingActionsSection extends StatelessWidget {
                   text: 'Skip',
                   backgroundColor: AppColors.darkGray,
                   onPressed: () {
-                    CacheHelper.setData(key: kIsOnBoardingScreen, value: true);
+                    CacheHelper.saveData(key: kIsOnBoardingScreen, value: true);
                     Navigator.pushReplacementNamed(
                       context,
                       GetStartView.routeName,

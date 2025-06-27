@@ -1,20 +1,14 @@
 import 'package:az_health_care/core/constants.dart';
-import 'package:az_health_care/core/widgets/custom_button.dart';
-import 'package:az_health_care/core/widgets/or_continue_with.dart';
-import 'package:az_health_care/features/home/presentation/views/home_layout.dart';
-import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
-import 'package:flutter/material.dart';
+ import 'package:az_health_care/features/home/presentation/views/home_layout.dart';
+ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../../core/utils/app_text_styles.dart';
-import '../../../../../../core/widgets/customLoadingButton.dart';
-import '../../../../../../shared/components/show_tost.dart';
-import '../../../../../get_start/presentation/views/widgets/google_button.dart';
-import '../../../../../../core/widgets/custom_sliver_app_bar.dart';
-import '../../sign_up/sign_up_view.dart';
-import '../../sign_up/widgets/switch_auth_text.dart';
-import '../login_cubit/login_cubit.dart';
+ import '../../../../../../core/services/show_toast.dart';
+ import '../../../../../../core/widgets/custom_sliver_app_bar.dart';
+ import '../login_cubit/login_cubit.dart';
 import '../login_cubit/login_states.dart';
+import 'login_footer.dart';
 import 'login_form_fields.dart';
 
 class LoginViewBody extends StatelessWidget {
@@ -80,42 +74,18 @@ class LoginViewBody extends StatelessWidget {
                                 passwordController: passwordController,
                               ),
                               const SizedBox(height: 16),
-                              SwitchAuthText(
-                                normalText: "Don't have an account? ",
-                                actionText: "Sign Up",
-                                onTap: () {
-                                  Navigator.pushReplacementNamed(
-                                    context,
-                                    SignUpView.routeName,
+                              LoginFooter(
+                                isValid: isValid,
+                                condition: state is! LoginLoadingState,
+                                formKey: formKey,
+                                emailController: emailController,
+                                passwordController: passwordController,
+                                onLoginPressed: (email, password) {
+                                  cubit.userLogin(
+                                    email: email,
+                                    password: password,
                                   );
                                 },
-                              ),
-                              const SizedBox(height: 20),
-                              const OrContinueWith(),
-                              const SizedBox(height: 16),
-                              const GoogleButton(),
-                              const SizedBox(height: 32),
-                              ConditionalBuilder(
-                                condition: state is! LoginLoadingState,
-                                builder:
-                                    (context) => CustomButton(
-                                      text: "Log In",
-                                      onPressed:
-                                          isValid
-                                              ? () {
-                                                if (formKey.currentState!
-                                                    .validate()) {
-                                                  cubit.userLogin(
-                                                    email: emailController.text,
-                                                    password:
-                                                        passwordController.text,
-                                                  );
-                                                }
-                                              }
-                                              : null,
-                                    ),
-                                fallback:
-                                    (context) => const CustomLoadingButton(),
                               ),
                             ],
                           ),

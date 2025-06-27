@@ -1,20 +1,20 @@
 import 'login_result.dart';
 
-class LoginResponse {
+class LoginAndRegisterResponse {
   final int statusCode;
   final bool isSuccess;
   final List<dynamic> errors;
   final LoginResult? result;
 
-  LoginResponse({
+  LoginAndRegisterResponse({
     required this.statusCode,
     required this.isSuccess,
     required this.errors,
     required this.result,
   });
 
-  factory LoginResponse.fromJson(Map<String, dynamic> json) {
-    return LoginResponse(
+  factory LoginAndRegisterResponse.fromJson(Map<String, dynamic> json) {
+    return LoginAndRegisterResponse(
       statusCode: json['statusCode'],
       isSuccess: json['isSuccess'],
       errors: json['errors'] ?? [],
