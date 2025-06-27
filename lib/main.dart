@@ -1,7 +1,6 @@
 import 'package:az_health_care/core/helper_functions/on_generate_routes.dart';
 import 'package:az_health_care/core/services/cache_helper.dart';
-import 'package:az_health_care/features/account_setup_screen.dart';
-import 'package:az_health_care/shared/my_bloc_observer.dart';
+ import 'package:az_health_care/shared/my_bloc_observer.dart';
 import 'package:az_health_care/shared/network/remote/dio_helper.dart';
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';

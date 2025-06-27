@@ -4,8 +4,9 @@ import 'package:az_health_care/shared/network/remote/dio_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../../../core/constants.dart';
 import '../../../../../../core/services/cache_helper.dart';
-import '../../../../domain/models/login_respose.dart';
+import '../../../../domain/models/login_response.dart';
 import 'login_states.dart';
 
 class LoginCubit extends Cubit<LoginStates> {
@@ -74,7 +75,7 @@ class LoginCubit extends Cubit<LoginStates> {
             final user = loginResponse.result!.user;
             final token = loginResponse.result!.token;
 
-            CacheHelper.setData(key: 'token', value: token);
+            CacheHelper.saveData(key: kToken, value: token);
 
             emit(LoginSuccessState(user: user));
           } else {

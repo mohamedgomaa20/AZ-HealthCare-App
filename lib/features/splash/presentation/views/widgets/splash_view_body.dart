@@ -1,5 +1,5 @@
-// lib/views/personal_info_view_body.dart
-import 'package:az_health_care/core/utils/app_images.dart';
+ import 'package:az_health_care/core/utils/app_images.dart';
+import 'package:az_health_care/features/home/presentation/views/home_layout.dart';
 import 'package:az_health_care/features/splash/presentation/views/widgets/animated_image_widget.dart';
 import 'package:az_health_care/features/splash/presentation/views/widgets/animated_text_widget.dart';
 import 'package:flutter/material.dart';
@@ -33,15 +33,27 @@ class _SplashViewBodyState extends State<SplashViewBody>
     super.initState();
   }
 
-  void executeNavigation() {
+  void startWidget() {
     bool isOnBoardingScreen =
         CacheHelper.getData(key: kIsOnBoardingScreen) ?? false;
-    Future.delayed(Duration(seconds: 3), () {
-      if (isOnBoardingScreen) {
-        Navigator.pushReplacementNamed(context, GetStartView.routeName);
+    String token = CacheHelper.getData(key: kToken) ?? "";
+
+    if (isOnBoardingScreen) {
+      if (token.isNotEmpty) {
+        Navigator.pushReplacementNamed(context, HomeLayout.routeName);
       } else {
-        Navigator.pushReplacementNamed(context, OnBoardingView.routeName);
+        Navigator.pushReplacementNamed(context, GetStartView.routeName);
       }
+    } else {
+      Navigator.pushReplacementNamed(context, OnBoardingView.routeName);
+    }
+  }
+
+  void executeNavigation() {
+
+    Future.delayed(Duration(seconds: 3), () async {
+      await animationController.reverse();
+      startWidget();
     });
   }
 

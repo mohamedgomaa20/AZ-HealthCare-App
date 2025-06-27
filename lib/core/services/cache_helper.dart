@@ -7,7 +7,7 @@ class CacheHelper {
     _sharedPreferences = await SharedPreferences.getInstance();
   }
 
-  static Future<bool> setData({
+  static Future<bool> saveData({
     required String key,
     required dynamic value,
   }) async {
