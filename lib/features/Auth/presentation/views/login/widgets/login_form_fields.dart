@@ -39,7 +39,7 @@ class LoginFormFields extends StatelessWidget {
                 return 'Email is required';
               }
               if (!RegExp(
-                r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}\$',
+                r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$',
               ).hasMatch(value)) {
                 return 'Please enter a valid email';
               }
@@ -65,36 +65,31 @@ class LoginFormFields extends StatelessWidget {
               if (value.length < 8) {
                 return 'Password must be at least 8 characters';
               }
-              if (!RegExp(
-                r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\W).{8,}\$',
-              ).hasMatch(value)) {
-                return 'Password must include upper, lower, and special character';
+              final hasUppercase = value.contains(
+                RegExp(r'[A-Z]'),
+              );
+              final hasLowercase = value.contains(
+                RegExp(r'[a-z]'),
+              );
+              final hasDigit = value.contains(
+                RegExp(r'[0-9]'),
+              );
+              final hasSpecialChar = value.contains(
+                RegExp(r'[!@#$%^&*(),.?":{}|<>]'),
+              );
+
+              if (!hasUppercase) {
+                return 'Password must include an uppercase letter';
               }
-              // final hasUppercase = value.contains(
-              //   RegExp(r'[A-Z]'),
-              // );
-              // final hasLowercase = value.contains(
-              //   RegExp(r'[a-z]'),
-              // );
-              // final hasDigit = value.contains(
-              //   RegExp(r'[0-9]'),
-              // );
-              // final hasSpecialChar = value.contains(
-              //   RegExp(r'[!@#$%^&*(),.?":{}|<>]'),
-              // );
-              //
-              // if (!hasUppercase) {
-              //   return 'Password must include an uppercase letter';
-              // }
-              // if (!hasLowercase) {
-              //   return 'Password must include a lowercase letter';
-              // }
-              // if (!hasDigit) {
-              //   return 'Password must include a number';
-              // }
-              // if (!hasSpecialChar) {
-              //   return 'Password must include a special character';
-              // }
+              if (!hasLowercase) {
+                return 'Password must include a lowercase letter';
+              }
+              if (!hasDigit) {
+                return 'Password must include a number';
+              }
+              if (!hasSpecialChar) {
+                return 'Password must include a special character';
+              }
               return null;
             },
           ),

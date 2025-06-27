@@ -1,12 +1,8 @@
 import 'package:az_health_care/core/network/end_points.dart';
-import 'package:az_health_care/features/home/data/models/user_model.dart';
-import 'package:az_health_care/shared/network/remote/dio_helper.dart';
+ import 'package:az_health_care/shared/network/remote/dio_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../../../core/constants.dart';
-import '../../../../../../core/services/cache_helper.dart';
-import '../../../../domain/models/login_response.dart';
 import '../../../../domain/models/register_response.dart';
 import '../../../../domain/models/register_result.dart';
 import 'register_states.dart';
