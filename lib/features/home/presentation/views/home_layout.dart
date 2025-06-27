@@ -1,4 +1,5 @@
 import 'package:az_health_care/core/utils/app_colors.dart';
+import 'package:az_health_care/features/get_start/presentation/views/get_start_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -41,10 +42,12 @@ class HomeLayout extends StatelessWidget {
             ),
             floatingActionButton: FloatingActionButton(
               onPressed: () {
-                cubit.getUserDataByUserName(userName:"mo_gomaam" );
-                print("===============================================");
+                // cubit.getUserDataByUserName(userName:"mo_gomaa_m" );
+                // print("===============================================");
                 // print("===============================================");
                 // cubit.getUserDataByUserId(userId:"d9fe7ac7-9075-4885-b272-53af9e963c96" );
+                // cubit.getAllUsers();
+                Navigator.pushReplacementNamed(context, GetStartView.routeName);
               },
               child: Icon(Icons.cloud_download),
             ),

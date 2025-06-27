@@ -23,7 +23,7 @@ class ButtonsSection extends StatelessWidget {
         const SizedBox(height: 10),
         CustomButton(
           text: 'Sign In',
-          onPressed: () {
+           onPressed: () {
             Navigator.pushNamed(context, LoginView.routeName);
           },
           backgroundColor: AppColors.darkGray,

@@ -4,11 +4,11 @@ import '../utils/app_colors.dart';
 import '../utils/app_text_styles.dart';
 
 class CustomTextButton extends StatelessWidget {
-  CustomTextButton({
+  const CustomTextButton({
     super.key,
     required this.text,
     this.onPressed,
-    this.textColor = AppColors.redColor,
+    this.textColor,
   });
 
   final String text;
@@ -23,10 +23,10 @@ class CustomTextButton extends StatelessWidget {
       child: Text(
         text,
         style: AppTextStyles.semiBold16.copyWith(
-          color: textColor,
+          color: textColor ?? AppColors.primaryColor,
           decoration:
               isUnderline ? TextDecoration.underline : TextDecoration.none,
-          decorationColor: AppColors.redColor,
+          decorationColor: AppColors.primaryColor,
         ),
       ),
     );

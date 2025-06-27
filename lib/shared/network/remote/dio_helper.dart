@@ -8,6 +8,10 @@ class DioHelper {
       BaseOptions(
         baseUrl: 'http://healthmonitoring.runasp.net',
         receiveDataWhenStatusError: true,
+        validateStatus: (status) {
+          return status != null;
+        },
+        headers: {'Content-Type': 'application/json', 'Accept': 'text/plain'},
       ),
     );
   }
@@ -17,6 +21,14 @@ class DioHelper {
     Map<String, dynamic>? query,
   }) async {
     return await dio.get(url, queryParameters: query);
+  }
+
+  static Future<Response> portData({
+    required String url,
+    Map<String, dynamic>? query,
+    required Map<String, dynamic>? data,
+  }) async {
+    return await dio.post(url, queryParameters: query, data: data);
   }
 
   // static Future<Response<dynamic>> getData({
@@ -34,7 +46,7 @@ class DioHelper {
   // }
 
   static Future<Response> postData({
-    required String path,
+    required String url,
     String language = 'en',
     String? token,
     // required Map<String, dynamic> query,
@@ -46,7 +58,7 @@ class DioHelper {
       'Authorization': token ?? '',
     };
     return await dio.post(
-      path,
+      url,
       // queryParameters: query,
       data: data,
     );

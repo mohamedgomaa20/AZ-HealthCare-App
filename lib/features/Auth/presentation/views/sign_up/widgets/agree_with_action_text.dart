@@ -40,7 +40,7 @@ class AgreeWithActionText extends StatelessWidget {
                 TextSpan(
                   text: actionText,
                   style: AppTextStyles.semiBold16.copyWith(
-                    color: AppColors.redColor,
+                    color: AppColors.primaryColor,
                     decoration: TextDecoration.underline,
                   ),
                   recognizer: TapGestureRecognizer()..onTap = onTap,

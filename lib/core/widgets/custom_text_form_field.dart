@@ -13,6 +13,7 @@ class CustomTextFormField extends StatelessWidget {
     this.validation,
     required this.prefixIconData,
     this.suffixIconData,
+    this.suffixOnPressed,
   });
 
   final String hintText;
@@ -24,6 +25,7 @@ class CustomTextFormField extends StatelessWidget {
   final String? Function(String?)? validation;
   final IconData prefixIconData;
   final IconData? suffixIconData;
+  final VoidCallback? suffixOnPressed ;
 
   @override
   Widget build(BuildContext context) {
@@ -40,10 +42,17 @@ class CustomTextFormField extends StatelessWidget {
         filled: true,
         fillColor: AppColors.buttonColor,
         prefixIcon: Icon(prefixIconData),
-        suffixIcon: Icon(suffixIconData),
+        suffixIcon: IconButton(
+          onPressed: suffixOnPressed,
+          icon: Icon(suffixIconData),
+        ),
         hintText: hintText,
 
-        border: buildBorder(),
+        border: OutlineInputBorder(),
+        focusedBorder: buildBorder(),
+        enabledBorder: buildBorder(),
+        disabledBorder: buildBorder(),
+        errorBorder: OutlineInputBorder(),
       ),
     );
   }
