@@ -17,3 +17,9 @@ class LoginErrorState extends LoginStates {
 }
 
 class LoginTogglePasswordVisibilityState extends LoginStates {}
+
+class LoginValidationChanged extends LoginStates{
+  final bool isValid;
+  LoginValidationChanged(this.isValid);
+}
+class LoginToggleRememberMeState extends LoginStates {}

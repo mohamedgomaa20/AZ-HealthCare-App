@@ -4,15 +4,16 @@ import '../../../../../../core/utils/app_colors.dart';
 import '../../../../../../core/utils/app_text_styles.dart';
 import '../../../../../../core/widgets/custom_text_button.dart';
 
-class RememberMeWidget extends StatefulWidget {
-  const RememberMeWidget({super.key});
+class RememberMeAndForgetPasswordRow extends StatelessWidget {
+  const RememberMeAndForgetPasswordRow({
+    super.key,
+    required this.isRememberMe,
+    required this.onRememberMeChanged,
+  });
 
-  @override
-  State<RememberMeWidget> createState() => _RememberMeWidgetState();
-}
+  final bool isRememberMe;
 
-class _RememberMeWidgetState extends State<RememberMeWidget> {
-  bool isRememberMe = false;
+  final Function(bool?)? onRememberMeChanged;
 
   @override
   Widget build(BuildContext context) {
@@ -23,11 +24,7 @@ class _RememberMeWidgetState extends State<RememberMeWidget> {
           children: [
             Checkbox(
               value: isRememberMe,
-              onChanged: (val) {
-                setState(() {
-                  isRememberMe = val!;
-                });
-              },
+              onChanged: onRememberMeChanged,
               checkColor: Colors.white,
               activeColor: AppColors.primaryColor,
             ),
@@ -38,5 +35,6 @@ class _RememberMeWidgetState extends State<RememberMeWidget> {
         CustomTextButton(text: "Forgot Password?", onPressed: () {}),
       ],
     );
+    ;
   }
 }

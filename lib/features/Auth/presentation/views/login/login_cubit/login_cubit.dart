@@ -1,6 +1,7 @@
 import 'package:az_health_care/core/network/end_points.dart';
 import 'package:az_health_care/features/home/data/models/user_model.dart';
 import 'package:az_health_care/shared/network/remote/dio_helper.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../../core/services/cache_helper.dart';
@@ -13,10 +14,47 @@ class LoginCubit extends Cubit<LoginStates> {
   static LoginCubit get(context) => BlocProvider.of(context);
 
   bool isPassword = true;
+  IconData suffixIcon = Icons.visibility;
 
   void togglePasswordVisibility() {
     isPassword = !isPassword;
+    suffixIcon = isPassword ? Icons.visibility : Icons.visibility_off;
     emit(LoginTogglePasswordVisibilityState());
+  }
+
+  /////////////////////////////////////
+  /////////////////////////////////////
+
+  String _email = '';
+  String _password = '';
+
+  bool get isFormValid => _isEmailValid(_email) && _isPasswordValid(_password);
+
+  void onEmailChanged(String value) {
+    _email = value;
+    emit(LoginValidationChanged(isFormValid));
+  }
+
+  void onPasswordChanged(String value) {
+    _password = value;
+    emit(LoginValidationChanged(isFormValid));
+  }
+
+  bool _isEmailValid(String email) {
+    return RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$').hasMatch(email);
+  }
+
+  bool _isPasswordValid(String password) {
+    return RegExp(r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\W).{8,}$').hasMatch(password);
+  }
+
+  /////////////////////////////////////
+  /////////////////////////////////////
+  bool isRememberMe = false;
+
+  void toggleRememberMe() {
+    isRememberMe = !isRememberMe;
+    emit(LoginToggleRememberMeState());
   }
 
   LoginResponse? loginResponse;
