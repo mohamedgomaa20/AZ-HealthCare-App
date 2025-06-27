@@ -4,10 +4,8 @@ import 'package:az_health_care/features/home/presentation/views/home_layout.dart
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../../../core/utils/app_text_styles.dart';
-import '../../../../../../core/services/show_toast.dart';
-import '../../../../../../core/widgets/custom_sliver_app_bar.dart';
-import '../login_cubit/login_cubit.dart';
+ import '../../../../../../core/services/show_toast.dart';
+ import '../login_cubit/login_cubit.dart';
 import '../login_cubit/login_states.dart';
 import 'login_footer.dart';
 import 'login_form_fields.dart';
@@ -54,7 +52,7 @@ class LoginViewBody extends StatelessWidget {
                 ),
                 const SizedBox(height: 10),
                 LoginFooter(
-                  isValid: isValid,
+                  isValid: cubit.isFormValid,
                   condition: state is! LoginLoadingState,
                   formKey: formKey,
                   emailController: emailController,

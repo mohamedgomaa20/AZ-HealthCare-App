@@ -12,7 +12,8 @@ class WelcomeFooter extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const Divider(color: Colors.grey, thickness: 1, height: 32),
+        Divider(),
+        // SizedBox(height: 15),
         Padding(
           padding: const EdgeInsets.symmetric(
             horizontal: 12,

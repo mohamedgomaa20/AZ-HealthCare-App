@@ -1,10 +1,10 @@
-import 'package:az_health_care/features/Auth/presentation/views/welcome_to_a2z_care/widgets/welcome_to_a2z_care_view_body.dart';
-import 'package:az_health_care/features/get_start/presentation/views/get_start_view.dart';
+ import 'package:az_health_care/features/get_start/presentation/views/get_start_view.dart';
 import 'package:az_health_care/features/on_boarding/presentation/views/on_boarding_view.dart';
 import 'package:az_health_care/features/splash/presentation/views/splash_view.dart';
 import 'package:flutter/material.dart';
 
-import '../../features/Auth/presentation/views/login/login_view.dart';
+import '../../features/Auth/presentation/views/forget_password/forgot_password_view.dart';
+ import '../../features/Auth/presentation/views/login/login_view.dart';
 import '../../features/Auth/presentation/views/sign_up/sign_up_view.dart';
 import '../../features/Auth/presentation/views/welcome_to_a2z_care/welcome_to_a2z_care_view.dart';
 import '../../features/home/presentation/views/home_layout.dart';
@@ -23,8 +23,14 @@ Route<dynamic> onGenerateRoute(RouteSettings settings) {
       return MaterialPageRoute(builder: (context) => const OnBoardingView());
     case GetStartView.routeName:
       return MaterialPageRoute(builder: (context) => const GetStartView());
+
+    //auth-----------------------------
     case LoginView.routeName:
       return MaterialPageRoute(builder: (context) => const LoginView());
+    case ForgotPasswordView.routeName:
+      return MaterialPageRoute(
+        builder: (context) => const ForgotPasswordView(),
+      );
     case SignUpView.routeName:
       return MaterialPageRoute(builder: (context) => const SignUpView());
     case PersonalInfoView.routeName:
@@ -35,7 +41,7 @@ Route<dynamic> onGenerateRoute(RouteSettings settings) {
         builder: (context) => const WelcomeToA2zCareView(),
       );
     //home------------------------------
-  case HomeLayout.routeName:
+    case HomeLayout.routeName:
       return MaterialPageRoute(builder: (context) => const HomeLayout());
     case HomeView.routeName:
       return MaterialPageRoute(builder: (context) => const HomeView());

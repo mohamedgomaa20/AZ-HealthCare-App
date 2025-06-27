@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../../../../core/utils/app_colors.dart';
 import '../../../../../../core/utils/app_text_styles.dart';
 import '../../../../../../core/widgets/custom_text_button.dart';
+import '../../forget_password/forgot_password_view.dart';
 
 class RememberMeAndForgetPasswordRow extends StatelessWidget {
   const RememberMeAndForgetPasswordRow({
@@ -32,7 +33,10 @@ class RememberMeAndForgetPasswordRow extends StatelessWidget {
             Text("Remember me", style: AppTextStyles.semiBold16),
           ],
         ),
-        CustomTextButton(text: "Forgot Password?", onPressed: () {}),
+        CustomTextButton(text: "Forgot Password?", onPressed: () {
+          Navigator.pushNamed(context, ForgotPasswordView.routeName);
+
+        }),
       ],
     );
     ;
