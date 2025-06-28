@@ -11,6 +11,7 @@ import 'birthday_view.dart';
 import 'creating_account_dialog_loading.dart';
 import 'gender_view.dart';
 import 'height_view.dart';
+import 'name_view.dart';
 
 class OnboardingProfileSetupViewBody extends StatelessWidget {
   const OnboardingProfileSetupViewBody({super.key});
@@ -19,6 +20,13 @@ class OnboardingProfileSetupViewBody extends StatelessWidget {
     final cubit = OnboardingProfileSetupCubit.get(context);
 
     return [
+      NameView(
+        key: const PageStorageKey('NameScreen'),
+        initialName: cubit.name,
+        onNameSubmitted: (name) {
+          cubit.updateName(name);
+        },
+      ),
       GenderView(
         key: const PageStorageKey('GenderScreen'),
         selectedGender: cubit.selectedGender,
@@ -39,13 +47,8 @@ class OnboardingProfileSetupViewBody extends StatelessWidget {
 
       const BirthdayView(key: PageStorageKey('BirthdayScreen')),
       WeightView(key: const PageStorageKey('WeightScreen')),
-      HeightView(
-        key: const PageStorageKey('HeightScreen'),
-
-      ),
-      ReminderView(
-        key: const PageStorageKey('ReminderScreen'),
-       ),
+      HeightView(key: const PageStorageKey('HeightScreen')),
+      ReminderView(key: const PageStorageKey('ReminderScreen')),
     ];
   }
 

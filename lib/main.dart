@@ -81,21 +81,14 @@ class AZHealthCareApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         brightness: Brightness.light,
-        // تفعيل الـ Dark Mode للتطبيق بالكامل
         primaryColor: const Color(0xFFFE2B54),
-        // اللون الأحمر الأساسي
         hintColor: const Color(0xFFFE2B54),
-        // لتلوين الـ TextField وغيره
-        scaffoldBackgroundColor: const Color(0xFF1E1E1E),
-        // خلفية داكنة
-        // scaffoldBackgroundColor: AppColors.backgroundColor,
+        // scaffoldBackgroundColor: const Color(0xFF1E1E1E),
+        scaffoldBackgroundColor: AppColors.backgroundColor,
         appBarTheme: const AppBarTheme(
           backgroundColor: Colors.transparent,
-          // لجعل الـ AppBar شفاف
           elevation: 0,
-          // إزالة الظل
           iconTheme: IconThemeData(color: Colors.white),
-          // لون الأيقونات في الـ AppBar
           titleTextStyle: TextStyle(
             color: Colors.white,
             fontSize: 20,
@@ -128,10 +121,8 @@ class AZHealthCareApp extends StatelessWidget {
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
             backgroundColor: const Color(0xFFFE2B54),
-            // لون زر "Continue"
-            foregroundColor: Colors.white,
-            // لون النص داخل الزر
-            padding: const EdgeInsets.symmetric(vertical: 16),
+             foregroundColor: Colors.white,
+             padding: const EdgeInsets.symmetric(vertical: 16),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(12),
             ),

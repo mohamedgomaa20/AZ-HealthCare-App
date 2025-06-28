@@ -45,7 +45,15 @@ class OnboardingProfileSetupCubit extends Cubit<OnboardingProfileSetupStates> {
     }
   }
 
-  ///gender view
+  /// ================= birthday View Logic =================
+  String? name;
+
+  void updateName(String newName) {
+    name = newName;
+    emit(OnboardingProfileSetupSuccessState());
+  }
+
+  /// ================= gender View Logic =================
   Gender? get selectedGender {
     switch (gender) {
       case 'Male':
@@ -61,8 +69,7 @@ class OnboardingProfileSetupCubit extends Cubit<OnboardingProfileSetupStates> {
 
   /////////////////////////////////////////////////////
   /////////////////////////////////////////////////////
-
-  /// birthday view
+  /// ================= birthday View Logic =================
   /////////////////
   int currentDayIndex = 0;
   int currentMonthIndex = 0;
@@ -153,19 +160,19 @@ class OnboardingProfileSetupCubit extends Cubit<OnboardingProfileSetupStates> {
 
   /// ================= Weight View Logic =================
 
-   double selectedWeight = 70.0;
+  double selectedWeight = 70.0;
 
-   int currentWeightIndex = 0;
+  int currentWeightIndex = 0;
 
-   String selectedWeightUnit = 'kg';
+  String selectedWeightUnit = 'kg';
 
-   FixedExtentScrollController? weightController;
+  FixedExtentScrollController? weightController;
 
-   final List<double> weights = List.generate(200, (index) => 20.0 + index);
+  final List<double> weights = List.generate(200, (index) => 20.0 + index);
 
-   bool isWeightPickerInitialized = false;
+  bool isWeightPickerInitialized = false;
 
-   void initWeightPicker({double? initialWeight, String initialUnit = 'kg'}) {
+  void initWeightPicker({double? initialWeight, String initialUnit = 'kg'}) {
     if (isWeightPickerInitialized) return;
 
     selectedWeight = initialWeight ?? 70.0;
@@ -184,15 +191,16 @@ class OnboardingProfileSetupCubit extends Cubit<OnboardingProfileSetupStates> {
     isWeightPickerInitialized = true;
   }
 
-   void onWeightChanged(int index) {
+  void onWeightChanged(int index) {
     selectedWeight = weights[index];
     currentWeightIndex = index;
     emit(OnboardingProfileSetupSuccessState());
   }
+
   double get convertedWeightInKg =>
       selectedWeightUnit == 'lb' ? selectedWeight * 0.453592 : selectedWeight;
 
-   void onWeightUnitChanged(String unit) {
+  void onWeightUnitChanged(String unit) {
     if (unit == selectedWeightUnit) return;
     selectedWeightUnit = unit;
     emit(OnboardingProfileSetupSuccessState());
@@ -206,7 +214,10 @@ class OnboardingProfileSetupCubit extends Cubit<OnboardingProfileSetupStates> {
   int currentHeightIndex = 0;
   String selectedHeightUnit = 'cm';
   FixedExtentScrollController? heightController;
-  final List<double> heights = List.generate(151, (index) => 100.0 + index); // 100 to 250 cm
+  final List<double> heights = List.generate(
+    151,
+    (index) => 100.0 + index,
+  ); // 100 to 250 cm
   bool isHeightPickerInitialized = false;
 
   void initHeightPicker({double? initialHeight, String initialUnit = 'cm'}) {
@@ -247,11 +258,10 @@ class OnboardingProfileSetupCubit extends Cubit<OnboardingProfileSetupStates> {
     return "$feet'$inches\"";
   }
 
-
   /////////////////////////////////////////////////////
   /////////////////////////////////////////////////////
 
-// ================= Reminder View Logic =================
+  /// ================= Reminder View Logic =================
 
   TimeOfDay selectedReminderTime = TimeOfDay.now();
   String selectedPeriod = 'AM'; // AM or PM
@@ -265,8 +275,14 @@ class OnboardingProfileSetupCubit extends Cubit<OnboardingProfileSetupStates> {
   FixedExtentScrollController? hourController;
   FixedExtentScrollController? minuteController;
 
-  final List<String> hours = List.generate(12, (i) => (i + 1).toString().padLeft(2, '0')); // 01-12
-  final List<String> minutes = List.generate(60, (i) => i.toString().padLeft(2, '0')); // 00-59
+  final List<String> hours = List.generate(
+    12,
+    (i) => (i + 1).toString().padLeft(2, '0'),
+  ); // 01-12
+  final List<String> minutes = List.generate(
+    60,
+    (i) => i.toString().padLeft(2, '0'),
+  ); // 00-59
 
   bool isReminderInitialized = false;
 
@@ -279,11 +295,17 @@ class OnboardingProfileSetupCubit extends Cubit<OnboardingProfileSetupStates> {
     selectedMinute = time.minute;
     selectedPeriod = time.period == DayPeriod.am ? 'AM' : 'PM';
 
-    currentHourIndex = hours.indexOf(selectedHour.toString().padLeft(2, '0')).clamp(0, hours.length - 1);
-    currentMinuteIndex = minutes.indexOf(selectedMinute.toString().padLeft(2, '0')).clamp(0, minutes.length - 1);
+    currentHourIndex = hours
+        .indexOf(selectedHour.toString().padLeft(2, '0'))
+        .clamp(0, hours.length - 1);
+    currentMinuteIndex = minutes
+        .indexOf(selectedMinute.toString().padLeft(2, '0'))
+        .clamp(0, minutes.length - 1);
 
     hourController = FixedExtentScrollController(initialItem: currentHourIndex);
-    minuteController = FixedExtentScrollController(initialItem: currentMinuteIndex);
+    minuteController = FixedExtentScrollController(
+      initialItem: currentMinuteIndex,
+    );
 
     isReminderInitialized = true;
   }
