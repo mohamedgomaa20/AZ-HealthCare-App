@@ -6,7 +6,7 @@ abstract class AppColors {
   static const Color primaryColor = Color(0xFFE71E50);
   static const Color darkGray = Color(0xFF35383f);
   // static const Color darkGray = Color(0xFF444444);
-
+  // 1f222a
   static const Color buttonColor = Color(0xFF1f222a);
    static const Color secondaryColor = Color(0xFFEFEFEF);
   static const Color primaryTextColor = Color(0xFF1E1E1E);

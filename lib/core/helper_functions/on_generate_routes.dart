@@ -3,6 +3,7 @@ import 'package:az_health_care/features/on_boarding/presentation/views/on_boardi
 import 'package:az_health_care/features/splash/presentation/views/splash_view.dart';
 import 'package:flutter/material.dart';
 
+import '../../features/Auth/presentation/views/all_set_password/all_set_password_view.dart';
 import '../../features/Auth/presentation/views/forget_password/forgot_password_view.dart';
 import '../../features/Auth/presentation/views/login/login_view.dart';
 import '../../features/Auth/presentation/views/sign_up/sign_up_view.dart';
@@ -13,7 +14,8 @@ import '../../features/home/presentation/views/notification_view.dart';
 import '../../features/home/presentation/views/profile_view.dart';
 import '../../features/home/presentation/views/tracker_view.dart';
 import '../../features/home/presentation/views/vip_view.dart';
-import '../../features/initial_user_info/presentation/views/initial_user_info_view.dart';
+import '../../features/onboarding_profile_setup/presentation/views/initial_user_info_view.dart';
+import '../../features/onboarding_profile_setup/presentation/views/wigets/initial_user_info_view_body.dart';
 import '../../features/personal_info/presentation/views/personal_info_view.dart';
 
 Route<dynamic> onGenerateRoute(RouteSettings settings) {
@@ -61,6 +63,10 @@ Route<dynamic> onGenerateRoute(RouteSettings settings) {
       return MaterialPageRoute(
         builder: (context) => const InitialUserInfoView(),
       );
+    case AccountSetupFlow.routeName:
+      return MaterialPageRoute(builder: (context) => const AccountSetupFlow());
+      case AllSetPasswordView.routeName:
+      return MaterialPageRoute(builder: (context) => const AllSetPasswordView());
     default:
       return MaterialPageRoute(builder: (context) => const Scaffold());
   }
