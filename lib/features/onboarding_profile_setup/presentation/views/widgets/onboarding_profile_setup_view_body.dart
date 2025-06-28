@@ -37,15 +37,8 @@ class OnboardingProfileSetupViewBody extends StatelessWidget {
         },
       ),
 
-       const BirthdayView(
-        key: PageStorageKey('BirthdayScreen'),
-      ),
-      WeightView(
-        key: const PageStorageKey('WeightScreen'),
-        onWeightSelected: (value, unit) {
-          cubit.updateWeight(value.toInt());
-        },
-      ),
+      const BirthdayView(key: PageStorageKey('BirthdayScreen')),
+      WeightView(key: const PageStorageKey('WeightScreen')),
       HeightView(
         key: const PageStorageKey('HeightScreen'),
         onHeightSelected: (value, unit) {

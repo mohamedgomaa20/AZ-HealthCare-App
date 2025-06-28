@@ -153,6 +153,43 @@ class OnboardingProfileSetupCubit extends Cubit<OnboardingProfileSetupStates> {
 
   /// weight view
   /////////////////
+   double selectedWeight = 70.0;
+  int currentWeightIndex = 0;
+
+   String selectedWeightUnit = 'kg';
+
+   late FixedExtentScrollController weightController;
+
+   final List<double> weights = List.generate(200, (index) => 20.0 + index);
+
+   void initWeightPicker({double? initialWeight, String initialUnit = 'kg'}) {
+    selectedWeight = initialWeight ?? 70.0;
+    selectedWeightUnit = initialUnit;
+
+    currentWeightIndex = weights.indexOf(selectedWeight.roundToDouble());
+    if (currentWeightIndex == -1) {
+      selectedWeight = weights[0];
+      currentWeightIndex = 0;
+    }
+
+    weightController = FixedExtentScrollController(
+      initialItem: currentWeightIndex.clamp(0, weights.length - 1),
+    );
+  }
+
+  /// تغيير الوزن
+  void onWeightChanged(int index) {
+    selectedWeight = weights[index];
+    currentWeightIndex = index;
+    emit(OnboardingProfileSetupSuccessState());
+  }
+
+  /// تغيير الوحدة
+  void onWeightUnitChanged(String unit) {
+    selectedWeightUnit = unit;
+    emit(OnboardingProfileSetupSuccessState());
+  }
+
 
   /////////////////////////////////////////////////////
   /////////////////////////////////////////////////////
