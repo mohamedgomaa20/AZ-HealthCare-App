@@ -1,47 +1,47 @@
 import 'package:flutter/material.dart';
 
-class HeightScreen extends StatefulWidget {
-  final Function(double, String) onHeightSelected;
-  final double? initialHeight;
+class WeightScreen extends StatefulWidget {
+  final Function(double, String) onWeightSelected;
+  final double? initialWeight;
   final String initialUnit;
 
-  const HeightScreen({
+  const WeightScreen({
     super.key,
-    required this.onHeightSelected,
-    this.initialHeight,
-    this.initialUnit = 'cm',
+    required this.onWeightSelected,
+    this.initialWeight,
+    this.initialUnit = 'kg',
   });
 
   @override
-  State<HeightScreen> createState() => _HeightScreenState();
+  State<WeightScreen> createState() => _WeightScreenState();
 }
 
-class _HeightScreenState extends State<HeightScreen> {
-  late double _selectedHeight;
+class _WeightScreenState extends State<WeightScreen> {
+  late double _selectedWeight;
   late String _selectedUnit;
 
-  final FixedExtentScrollController _heightController = FixedExtentScrollController();
+  final FixedExtentScrollController _weightController = FixedExtentScrollController();
 
-  final List<double> _heightsCm = List.generate(150, (index) => 100.0 + index);
+  final List<double> _weights = List.generate(200, (index) => 20.0 + index);
 
   @override
   void initState() {
     super.initState();
     _selectedUnit = widget.initialUnit;
-    _selectedHeight = widget.initialHeight ?? 170.0;
+    _selectedWeight = widget.initialWeight ?? 70.0;
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      int initialIndex = _heightsCm.indexOf(_selectedHeight);
+      int initialIndex = _weights.indexOf(_selectedWeight);
       if (initialIndex != -1) {
-        _heightController.jumpToItem(initialIndex);
+        _weightController.jumpToItem(initialIndex);
       }
-      widget.onHeightSelected(_selectedHeight, _selectedUnit);
+      widget.onWeightSelected(_selectedWeight, _selectedUnit);
     });
   }
 
   @override
   void dispose() {
-    _heightController.dispose();
+    _weightController.dispose();
     super.dispose();
   }
 
@@ -54,8 +54,8 @@ class _HeightScreenState extends State<HeightScreen> {
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          _buildUnitButton('cm'),
-          _buildUnitButton('ft'),
+          _buildUnitButton('kg'),
+          _buildUnitButton('lb'),
         ],
       ),
     );
@@ -67,7 +67,7 @@ class _HeightScreenState extends State<HeightScreen> {
       onTap: () {
         setState(() {
           _selectedUnit = unit;
-          widget.onHeightSelected(_selectedHeight, _selectedUnit);
+          widget.onWeightSelected(_selectedWeight, _selectedUnit);
         });
       },
       child: Container(
@@ -86,13 +86,6 @@ class _HeightScreenState extends State<HeightScreen> {
     );
   }
 
-  String _cmToFeetAndInches(double cm) {
-    final double totalInches = cm / 2.54;
-    final int feet = (totalInches / 12).floor();
-    final double inches = (totalInches % 12);
-    return '${feet}\' ${inches.toStringAsFixed(0)}."';
-  }
-
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -101,7 +94,7 @@ class _HeightScreenState extends State<HeightScreen> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            "How tall are you?",
+            "What's your body weight?",
             style: Theme.of(context).textTheme.headlineLarge,
           ),
           const SizedBox(height: 40),
@@ -117,35 +110,27 @@ class _HeightScreenState extends State<HeightScreen> {
                 textBaseline: TextBaseline.alphabetic,
                 children: [
                   SizedBox(
-                    width: 180, // لتحديد عرض الـ picker (أكبر قليلاً للقدم والبوصة)
+                    width: 150, // لتحديد عرض الـ picker
                     height: 200,
                     child: ListWheelScrollView.useDelegate(
-                      controller: _heightController,
+                      controller: _weightController,
                       itemExtent: 50,
                       perspective: 0.005,
                       physics: const FixedExtentScrollPhysics(),
                       diameterRatio: 1.2,
                       onSelectedItemChanged: (index) {
                         setState(() {
-                          _selectedHeight = _heightsCm[index];
-                          widget.onHeightSelected(_selectedHeight, _selectedUnit);
+                          _selectedWeight = _weights[index];
+                          widget.onWeightSelected(_selectedWeight, _selectedUnit);
                         });
                       },
                       childDelegate: ListWheelChildBuilderDelegate(
                         builder: (context, index) {
-                          final double heightCm = _heightsCm[index];
-                          final bool isSelected = heightCm == _selectedHeight;
-
-                          String displayText;
-                          if (_selectedUnit == 'cm') {
-                            displayText = heightCm.toStringAsFixed(0);
-                          } else {
-                            displayText = _cmToFeetAndInches(heightCm);
-                          }
-
+                          final item = _weights[index].toStringAsFixed(0);
+                          final isSelected = _weights[index] == _selectedWeight;
                           return Center(
                             child: Text(
-                              displayText,
+                              item,
                               style: Theme.of(context).textTheme.headlineLarge?.copyWith(
                                 color: isSelected ? Theme.of(context).primaryColor : Colors.white54,
                                 fontSize: isSelected ? 48 : 36,
@@ -154,22 +139,20 @@ class _HeightScreenState extends State<HeightScreen> {
                             ),
                           );
                         },
-                        childCount: _heightsCm.length,
+                        childCount: _weights.length,
                       ),
                     ),
                   ),
                   // الوحدة الثابتة
                   const SizedBox(width: 10), // مسافة بين الرقم والوحدة
-                  if (_selectedUnit == 'cm') // عرض "cm" فقط إذا كانت الوحدة سم
-                    Text(
-                      _selectedUnit,
-                      style: TextStyle(
-                        color: Theme.of(context).primaryColor,
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                      ),
+                  Text(
+                    _selectedUnit, // عرض الوحدة المختارة
+                    style: TextStyle(
+                      color: Theme.of(context).primaryColor,
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
                     ),
-                  // لا نعرض 'ft' هنا لأنها جزء من _cmToFeetAndInches
+                  ),
                 ],
               ),
             ),
