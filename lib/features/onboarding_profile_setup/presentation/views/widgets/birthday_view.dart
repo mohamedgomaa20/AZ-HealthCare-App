@@ -1,3 +1,4 @@
+import 'package:az_health_care/core/constants.dart';
 import 'package:az_health_care/features/onboarding_profile_setup/presentation/views/widgets/custom_wheel_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -33,7 +34,7 @@ class _BirthdayViewState extends State<BirthdayView> {
     >(
       builder: (context, state) {
         return Padding(
-          padding: const EdgeInsets.all(24.0),
+          padding: const EdgeInsets.symmetric(horizontal: kHorizontalPadding),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [

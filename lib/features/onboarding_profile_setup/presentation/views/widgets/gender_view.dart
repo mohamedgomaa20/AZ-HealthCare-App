@@ -1,3 +1,4 @@
+import 'package:az_health_care/core/constants.dart';
 import 'package:az_health_care/core/utils/app_colors.dart';
 import 'package:flutter/material.dart';
 
@@ -65,7 +66,7 @@ class GenderView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(24.0),
+      padding: const EdgeInsets.symmetric(horizontal: kHorizontalPadding),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [

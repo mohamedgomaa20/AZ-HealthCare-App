@@ -38,7 +38,7 @@ class _CreatingAccountDialogLoadingState extends State<CreatingAccountDialogLoad
   @override
   Widget build(BuildContext context) {
     return PopScope(
-      canPop: false, // لا تسمح بإغلاق الـ dialog بالضغط على زر الرجوع
+      canPop: false,
       child: Stack(
         children: [
           BackdropFilter(
@@ -54,7 +54,7 @@ class _CreatingAccountDialogLoadingState extends State<CreatingAccountDialogLoad
               height: MediaQuery.sizeOf(context).height * .22,
               padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 30),
               decoration: BoxDecoration(
-                color: AppColors.backgroundColor, // لون خلفية الـ dialog نفسه
+                color: AppColors.backgroundColor,
                 borderRadius: BorderRadius.circular(20),
                 boxShadow: [
                   BoxShadow(
@@ -74,7 +74,7 @@ class _CreatingAccountDialogLoadingState extends State<CreatingAccountDialogLoad
                     height: 40,
                     child: CircularProgressIndicator(
                       color: Theme.of(context).primaryColor,
-                      strokeWidth: 6, // سمك المؤشر
+                      strokeWidth: 6,
                     ),
                   ),
                   const SizedBox(height: 40),

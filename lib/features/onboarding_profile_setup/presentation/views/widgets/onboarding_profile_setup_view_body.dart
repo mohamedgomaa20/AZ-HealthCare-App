@@ -45,8 +45,7 @@ class OnboardingProfileSetupViewBody extends StatelessWidget {
       ),
       ReminderView(
         key: const PageStorageKey('ReminderScreen'),
-        onReminderTimeSelected: cubit.updateReminderTime,
-      ),
+       ),
     ];
   }
 

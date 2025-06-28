@@ -249,6 +249,72 @@ class OnboardingProfileSetupCubit extends Cubit<OnboardingProfileSetupStates> {
 
 
   /////////////////////////////////////////////////////
+  /////////////////////////////////////////////////////
+
+// ================= Reminder View Logic =================
+
+  TimeOfDay selectedReminderTime = TimeOfDay.now();
+  String selectedPeriod = 'AM'; // AM or PM
+
+  int selectedHour = 9;
+  int selectedMinute = 0;
+
+  int currentHourIndex = 8; // 9 AM
+  int currentMinuteIndex = 0;
+
+  FixedExtentScrollController? hourController;
+  FixedExtentScrollController? minuteController;
+
+  final List<String> hours = List.generate(12, (i) => (i + 1).toString().padLeft(2, '0')); // 01-12
+  final List<String> minutes = List.generate(60, (i) => i.toString().padLeft(2, '0')); // 00-59
+
+  bool isReminderInitialized = false;
+
+  void initReminderPicker({TimeOfDay? initialTime}) {
+    if (isReminderInitialized) return;
+
+    final time = initialTime ?? TimeOfDay.now();
+
+    selectedHour = time.hourOfPeriod == 0 ? 12 : time.hourOfPeriod;
+    selectedMinute = time.minute;
+    selectedPeriod = time.period == DayPeriod.am ? 'AM' : 'PM';
+
+    currentHourIndex = hours.indexOf(selectedHour.toString().padLeft(2, '0')).clamp(0, hours.length - 1);
+    currentMinuteIndex = minutes.indexOf(selectedMinute.toString().padLeft(2, '0')).clamp(0, minutes.length - 1);
+
+    hourController = FixedExtentScrollController(initialItem: currentHourIndex);
+    minuteController = FixedExtentScrollController(initialItem: currentMinuteIndex);
+
+    isReminderInitialized = true;
+  }
+
+  void onHourChanged(int index) {
+    selectedHour = int.parse(hours[index]);
+    currentHourIndex = index;
+    _updateSelectedReminderTime();
+  }
+
+  void onMinuteChanged(int index) {
+    selectedMinute = int.parse(minutes[index]);
+    currentMinuteIndex = index;
+    _updateSelectedReminderTime();
+  }
+
+  void onAmPmChanged(String period) {
+    selectedPeriod = period;
+    _updateSelectedReminderTime();
+  }
+
+  void _updateSelectedReminderTime() {
+    int hour24 = selectedHour;
+    if (selectedPeriod == 'PM' && selectedHour != 12) hour24 += 12;
+    if (selectedPeriod == 'AM' && selectedHour == 12) hour24 = 0;
+    selectedReminderTime = TimeOfDay(hour: hour24, minute: selectedMinute);
+    emit(OnboardingProfileSetupSuccessState());
+  }
+
+  /////////////////////////////////////////////////////
+  /////////////////////////////////////////////////////
   void updateGender(String value) {
     gender = value;
     emit(OnboardingProfileSetupSuccessState());
