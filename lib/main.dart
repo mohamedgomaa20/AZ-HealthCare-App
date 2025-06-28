@@ -1,6 +1,6 @@
 // import 'package:flutter/material.dart';
 //
-// import 'features/onboarding_profile_setup/presentation/views/wigets/onboarding_profile_setup_view_body.dart'; // سنقوم بإنشاء هذا الملف
+// import 'features/onboarding_profile_setup/presentation/views/widgets/onboarding_profile_setup_view_body.dart'; // سنقوم بإنشاء هذا الملف
 //
 // void main() {
 //   runApp(const MyApp());

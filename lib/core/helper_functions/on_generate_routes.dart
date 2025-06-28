@@ -15,8 +15,7 @@ import '../../features/home/presentation/views/profile_view.dart';
 import '../../features/home/presentation/views/tracker_view.dart';
 import '../../features/home/presentation/views/vip_view.dart';
 import '../../features/onboarding_profile_setup/presentation/views/onboarding_profile_setup_view.dart';
-import '../../features/onboarding_profile_setup/presentation/views/wigets/onboarding_profile_setup_view_body.dart';
-import '../../features/personal_info/presentation/views/personal_info_view.dart';
+ import '../../features/personal_info/presentation/views/personal_info_view.dart';
 
 Route<dynamic> onGenerateRoute(RouteSettings settings) {
   switch (settings.name) {

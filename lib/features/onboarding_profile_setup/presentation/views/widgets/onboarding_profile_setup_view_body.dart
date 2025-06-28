@@ -1,5 +1,5 @@
-import 'package:az_health_care/features/onboarding_profile_setup/presentation/views/wigets/reminder_view.dart';
-import 'package:az_health_care/features/onboarding_profile_setup/presentation/views/wigets/weight_view.dart';
+import 'package:az_health_care/features/onboarding_profile_setup/presentation/views/widgets/reminder_view.dart';
+import 'package:az_health_care/features/onboarding_profile_setup/presentation/views/widgets/weight_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -21,16 +21,22 @@ class OnboardingProfileSetupViewBody extends StatelessWidget {
     return [
       GenderView(
         key: const PageStorageKey('GenderScreen'),
-        initialGender:
-            cubit.gender == null
-                ? null
-                : cubit.gender == "Male"
-                ? Gender.male
-                : Gender.female,
+        selectedGender: cubit.selectedGender,
         onGenderSelected: (gender) {
-          cubit.updateGender(gender == Gender.male ? "Male" : "Female");
+          switch (gender) {
+            case Gender.male:
+              cubit.updateGender("Male");
+              break;
+            case Gender.female:
+              cubit.updateGender("Female");
+              break;
+            case Gender.preferNotToSay:
+              cubit.updateGender("PreferNotToSay");
+              break;
+          }
         },
       ),
+
       BirthdayView(
         key: const PageStorageKey('BirthdayScreen'),
         initialBirthday: cubit.birthday,

@@ -2,6 +2,8 @@ import 'package:az_health_care/features/onboarding_profile_setup/presentation/da
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../views/widgets/gender_view.dart';
+
 class OnboardingProfileSetupCubit extends Cubit<OnboardingProfileSetupStates> {
   OnboardingProfileSetupCubit() : super(OnboardingProfileSetupInitialState());
 
@@ -42,6 +44,20 @@ class OnboardingProfileSetupCubit extends Cubit<OnboardingProfileSetupStates> {
       updateCurrentPage(currentPage - 1);
     }
   }
+  ///gender view
+  Gender? get selectedGender {
+    switch (gender) {
+      case 'Male':
+        return Gender.male;
+      case 'Female':
+        return Gender.female;
+      case 'PreferNotToSay':
+        return Gender.preferNotToSay;
+      default:
+        return null;
+    }
+  }
+
 
   /////////////////////////////////////////////////////
   /////////////////////////////////////////////////////
