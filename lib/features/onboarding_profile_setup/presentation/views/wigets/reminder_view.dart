@@ -2,21 +2,21 @@ import 'package:flutter/material.dart';
 
 import '../../../../../core/constants.dart';
 
-class ReminderScreen extends StatefulWidget {
+class ReminderView extends StatefulWidget {
   final Function(TimeOfDay) onReminderTimeSelected;
   final TimeOfDay? initialTime;
 
-  const ReminderScreen({
+  const ReminderView({
     super.key,
     required this.onReminderTimeSelected,
     this.initialTime,
   });
 
   @override
-  State<ReminderScreen> createState() => _ReminderScreenState();
+  State<ReminderView> createState() => _ReminderViewState();
 }
 
-class _ReminderScreenState extends State<ReminderScreen> {
+class _ReminderViewState extends State<ReminderView> {
   late int _selectedHour;
   late int _selectedMinute;
   late String _selectedAmPm;
@@ -26,11 +26,11 @@ class _ReminderScreenState extends State<ReminderScreen> {
 
   final List<String> _hours = List.generate(
     12,
-        (index) => (index + 1).toString().padLeft(2, '0'),
+    (index) => (index + 1).toString().padLeft(2, '0'),
   ); // 01-12
   final List<String> _minutes = List.generate(
     60,
-        (index) => index.toString().padLeft(2, '0'),
+    (index) => index.toString().padLeft(2, '0'),
   ); // 00-59
 
   // متغيرات جديدة لتتبع العنصر المحدد حالياً في ListWheelScrollView لأغراض التنسيق البصري
@@ -99,9 +99,11 @@ class _ReminderScreenState extends State<ReminderScreen> {
   }) {
     // نفس الثوابت التي استخدمناها في HeightScreen
     const double itemHeight = 70; // ارتفاع كل عنصر
-    const double pickerTotalHeight = itemHeight * 7; // الارتفاع الكلي للعجلة (7 عناصر مرئية)
+    const double pickerTotalHeight =
+        itemHeight * 7; // الارتفاع الكلي للعجلة (7 عناصر مرئية)
     // موضع الخطوط الفاصلة (منتصف ارتفاع العجلة - نصف ارتفاع العنصر - ضبط يدوي)
-    final double lineVerticalPosition = (pickerTotalHeight / 2) - (itemHeight / 2)-5 ;
+    final double lineVerticalPosition =
+        (pickerTotalHeight / 2) - (itemHeight / 2) - 5;
 
     return Expanded(
       child: Stack(
@@ -138,10 +140,13 @@ class _ReminderScreenState extends State<ReminderScreen> {
             width: pickerWidth, // عرض العمود
             child: ListWheelScrollView.useDelegate(
               controller: controller,
-              itemExtent: itemHeight, // ارتفاع كل عنصر
-              perspective: 0.0000001, // قيمة صغيرة جداً لتقليل المنظور (جعلها مسطحة)
+              itemExtent: itemHeight,
+              // ارتفاع كل عنصر
+              perspective: 0.0000001,
+              // قيمة صغيرة جداً لتقليل المنظور (جعلها مسطحة)
               physics: const FixedExtentScrollPhysics(),
-              diameterRatio: 12, // قيمة كبيرة جداً لجعلها شبه مسطحة
+              diameterRatio: 12,
+              // قيمة كبيرة جداً لجعلها شبه مسطحة
               onSelectedItemChanged: (index) {
                 // نحدث الـ index المحلي أولاً ثم نبلغ الـ parent
                 onSelectedItemChanged(index);
@@ -177,10 +182,13 @@ class _ReminderScreenState extends State<ReminderScreen> {
                   return Center(
                     child: Text(
                       item,
-                      style: Theme.of(context).textTheme.headlineLarge?.copyWith(
+                      style: Theme.of(
+                        context,
+                      ).textTheme.headlineLarge?.copyWith(
                         color: textColor,
                         fontSize: fontSize,
-                        fontWeight: distance == 0 ? FontWeight.bold : FontWeight.normal,
+                        fontWeight:
+                            distance == 0 ? FontWeight.bold : FontWeight.normal,
                       ),
                     ),
                   );
@@ -220,7 +228,7 @@ class _ReminderScreenState extends State<ReminderScreen> {
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
         decoration: BoxDecoration(
           color:
-          isSelected ? Theme.of(context).primaryColor : Colors.transparent,
+              isSelected ? Theme.of(context).primaryColor : Colors.transparent,
           borderRadius: BorderRadius.circular(10),
         ),
         child: Text(
@@ -236,7 +244,11 @@ class _ReminderScreenState extends State<ReminderScreen> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top: kHorizontalPadding, left: kHorizontalPadding, right: kHorizontalPadding),
+      padding: const EdgeInsets.only(
+        top: kHorizontalPadding,
+        left: kHorizontalPadding,
+        right: kHorizontalPadding,
+      ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
@@ -252,15 +264,17 @@ class _ReminderScreenState extends State<ReminderScreen> {
           Expanded(
             child: Center(
               child: SizedBox(
-                width: 250, // زيادة العرض لاستيعاب العمودين (ساعات ودقائق) وعلامة الفاصل
+                width: 250,
 
+                // زيادة العرض لاستيعاب العمودين (ساعات ودقائق) وعلامة الفاصل
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                     _buildTimePickerColumn(
+                    _buildTimePickerColumn(
                       controller: _hourController,
                       items: _hours,
-                      currentScrollIndex: _currentHourIndex, // تمرير الـ index الحالي
+                      currentScrollIndex: _currentHourIndex,
+                      // تمرير الـ index الحالي
                       onSelectedItemChanged: (index) {
                         setState(() {
                           _selectedHour = int.parse(_hours[index]);
@@ -271,16 +285,15 @@ class _ReminderScreenState extends State<ReminderScreen> {
                     ),
                     Text(
                       ':',
-                      style: Theme.of(context).textTheme.headlineLarge?.copyWith(
-                        color: Colors.white,
-                        fontSize: 48,
-                      ),
+                      style: Theme.of(context).textTheme.headlineLarge
+                          ?.copyWith(color: Colors.white, fontSize: 48),
                     ),
                     // عمود الدقائق
                     _buildTimePickerColumn(
                       controller: _minuteController,
                       items: _minutes,
-                      currentScrollIndex: _currentMinuteIndex, // تمرير الـ index الحالي
+                      currentScrollIndex: _currentMinuteIndex,
+                      // تمرير الـ index الحالي
                       onSelectedItemChanged: (index) {
                         setState(() {
                           _selectedMinute = int.parse(_minutes[index]);
@@ -294,8 +307,7 @@ class _ReminderScreenState extends State<ReminderScreen> {
               ),
             ),
           ),
-
-
+          SizedBox(height: 10),
           Center(
             child: Text(
               'You can always change this later.',
@@ -304,6 +316,7 @@ class _ReminderScreenState extends State<ReminderScreen> {
               ).textTheme.bodySmall?.copyWith(color: Colors.white54),
             ),
           ),
+          SizedBox(height: 10),
         ],
       ),
     );

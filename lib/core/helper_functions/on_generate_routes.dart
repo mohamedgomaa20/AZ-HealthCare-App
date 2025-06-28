@@ -14,8 +14,8 @@ import '../../features/home/presentation/views/notification_view.dart';
 import '../../features/home/presentation/views/profile_view.dart';
 import '../../features/home/presentation/views/tracker_view.dart';
 import '../../features/home/presentation/views/vip_view.dart';
-import '../../features/onboarding_profile_setup/presentation/views/initial_user_info_view.dart';
-import '../../features/onboarding_profile_setup/presentation/views/wigets/initial_user_info_view_body.dart';
+import '../../features/onboarding_profile_setup/presentation/views/onboarding_profile_setup_view.dart';
+import '../../features/onboarding_profile_setup/presentation/views/wigets/onboarding_profile_setup_view_body.dart';
 import '../../features/personal_info/presentation/views/personal_info_view.dart';
 
 Route<dynamic> onGenerateRoute(RouteSettings settings) {
@@ -59,12 +59,12 @@ Route<dynamic> onGenerateRoute(RouteSettings settings) {
       return MaterialPageRoute(builder: (context) => const TrackerView());
 
     ///
-    case InitialUserInfoView.routeName:
+    case OnboardingProfileSetupView.routeName:
       return MaterialPageRoute(
-        builder: (context) => const InitialUserInfoView(),
+        builder: (context) => const OnboardingProfileSetupView(),
       );
-    case AccountSetupFlow.routeName:
-      return MaterialPageRoute(builder: (context) => const AccountSetupFlow());
+    // case AccountSetupFlow.routeName:
+    //   return MaterialPageRoute(builder: (context) => const AccountSetupFlow());
       case AllSetPasswordView.routeName:
       return MaterialPageRoute(builder: (context) => const AllSetPasswordView());
     default:

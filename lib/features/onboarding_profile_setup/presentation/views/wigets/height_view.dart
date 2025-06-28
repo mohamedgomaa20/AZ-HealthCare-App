@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-class HeightScreen extends StatefulWidget {
+class HeightView extends StatefulWidget {
   final Function(double, String) onHeightSelected;
   final double? initialHeight;
   final String initialUnit;
 
-  const HeightScreen({
+  const HeightView({
     super.key,
     required this.onHeightSelected,
     this.initialHeight,
@@ -13,10 +13,10 @@ class HeightScreen extends StatefulWidget {
   });
 
   @override
-  State<HeightScreen> createState() => _HeightScreenState();
+  State<HeightView> createState() => _HeightViewState();
 }
 
-class _HeightScreenState extends State<HeightScreen> {
+class _HeightViewState extends State<HeightView> {
   late double _selectedHeight;
   late String _selectedUnit;
 

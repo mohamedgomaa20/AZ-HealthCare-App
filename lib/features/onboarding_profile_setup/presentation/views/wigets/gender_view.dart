@@ -4,21 +4,21 @@ import 'package:flutter/material.dart';
 // لتسهيل إدارة الجنس المختار
 enum Gender { male, female, preferNotToSay }
 
-class GenderScreen extends StatefulWidget {
+class GenderView extends StatefulWidget {
   final Function(Gender) onGenderSelected;
   final Gender? initialGender;
 
-  const GenderScreen({
+  const GenderView({
     super.key,
     required this.onGenderSelected,
     this.initialGender,
   });
 
   @override
-  State<GenderScreen> createState() => _GenderScreenState();
+  State<GenderView> createState() => _GenderViewState();
 }
 
-class _GenderScreenState extends State<GenderScreen> {
+class _GenderViewState extends State<GenderView> {
   Gender? _selectedGender;
 
   @override

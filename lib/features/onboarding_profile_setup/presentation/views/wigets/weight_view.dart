@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-class WeightScreen extends StatefulWidget {
+class WeightView extends StatefulWidget {
   final Function(double, String) onWeightSelected;
   final double? initialWeight;
   final String initialUnit;
 
-  const WeightScreen({
+  const WeightView({
     super.key,
     required this.onWeightSelected,
     this.initialWeight,
@@ -13,10 +13,10 @@ class WeightScreen extends StatefulWidget {
   });
 
   @override
-  State<WeightScreen> createState() => _WeightScreenState();
+  State<WeightView> createState() => _WeightViewState();
 }
 
-class _WeightScreenState extends State<WeightScreen> {
+class _WeightViewState extends State<WeightView> {
   late double _selectedWeight;
   late String _selectedUnit;
 

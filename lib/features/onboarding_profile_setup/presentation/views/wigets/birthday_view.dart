@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
 
-class BirthdayScreen extends StatefulWidget {
+class BirthdayView extends StatefulWidget {
   final Function(DateTime) onBirthdaySelected;
   final DateTime? initialBirthday;
 
-  const BirthdayScreen({
+  const BirthdayView({
     super.key,
     required this.onBirthdaySelected,
     this.initialBirthday,
   });
 
   @override
-  State<BirthdayScreen> createState() => _BirthdayScreenState();
+  State<BirthdayView> createState() => _BirthdayViewState();
 }
 
-class _BirthdayScreenState extends State<BirthdayScreen> {
+class _BirthdayViewState extends State<BirthdayView> {
   late int _selectedDay;
   late int _selectedMonth;
   late int _selectedYear;

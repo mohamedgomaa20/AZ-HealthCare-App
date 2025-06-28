@@ -48,6 +48,10 @@ class CustomButton extends StatelessWidget {
               style: AppTextStyles.semiBold18.copyWith(
                 fontSize: fontSize ?? 18,
                 letterSpacing: -0.50,
+                color:
+                    onPressed == null
+                        ? AppColors.grayColor
+                        : AppColors.whiteColor,
               ),
             ),
           ),
