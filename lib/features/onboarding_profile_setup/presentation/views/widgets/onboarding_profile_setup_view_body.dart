@@ -37,10 +37,8 @@ class OnboardingProfileSetupViewBody extends StatelessWidget {
         },
       ),
 
-      BirthdayView(
-        key: const PageStorageKey('BirthdayScreen'),
-        initialBirthday: cubit.birthday,
-        onBirthdaySelected: cubit.updateBirthday,
+       const BirthdayView(
+        key: PageStorageKey('BirthdayScreen'),
       ),
       WeightView(
         key: const PageStorageKey('WeightScreen'),

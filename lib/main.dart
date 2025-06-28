@@ -104,6 +104,7 @@ class AZHealthCareApp extends StatelessWidget {
         ),
         floatingActionButtonTheme: FloatingActionButtonThemeData(
           backgroundColor: AppColors.primaryColor,
+          foregroundColor: Colors.white,
         ),
         textTheme: const TextTheme(
           bodyLarge: TextStyle(color: Colors.white),

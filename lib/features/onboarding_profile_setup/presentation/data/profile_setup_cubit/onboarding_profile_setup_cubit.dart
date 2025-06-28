@@ -16,13 +16,12 @@ class OnboardingProfileSetupCubit extends Cubit<OnboardingProfileSetupStates> {
   TimeOfDay? reminderTime;
 
   int currentPage = 0;
-  late PageController pageController=PageController() ;
+  late PageController pageController = PageController();
 
   void updateCurrentPage(int index) {
     currentPage = index;
     emit(OnboardingProfileSetupPageChangedState());
   }
-
 
   void goToNextPage(int pageCount) {
     if (currentPage < pageCount - 1) {
@@ -35,6 +34,7 @@ class OnboardingProfileSetupCubit extends Cubit<OnboardingProfileSetupStates> {
       submitUserData();
     }
   }
+
   void goToPreviousPage() {
     if (currentPage > 0) {
       pageController.previousPage(
@@ -44,6 +44,7 @@ class OnboardingProfileSetupCubit extends Cubit<OnboardingProfileSetupStates> {
       updateCurrentPage(currentPage - 1);
     }
   }
+
   ///gender view
   Gender? get selectedGender {
     switch (gender) {
@@ -58,6 +59,100 @@ class OnboardingProfileSetupCubit extends Cubit<OnboardingProfileSetupStates> {
     }
   }
 
+  /////////////////////////////////////////////////////
+  /////////////////////////////////////////////////////
+
+  /// birthday view
+  /////////////////
+  int currentDayIndex = 0;
+  int currentMonthIndex = 0;
+  int currentYearIndex = 0;
+
+  late FixedExtentScrollController monthController;
+  late FixedExtentScrollController dayController;
+  late FixedExtentScrollController yearController;
+
+  List<String> days = [];
+  final List<String> months = List.generate(
+    12,
+    (i) => (i + 1).toString().padLeft(2, '0'),
+  );
+  final List<String> years = List.generate(
+    100,
+    (i) => (DateTime.now().year - 99 + i).toString(),
+  );
+
+  //
+  void initBirthdayControllers() {
+    birthday = birthday ?? DateTime(2000, 1, 1);
+    int selectedDay = birthday!.day;
+    int selectedMonth = birthday!.month;
+    int selectedYear = birthday!.year;
+
+    days = _calculateDaysInMonth(selectedYear, selectedMonth);
+
+    int monthIndex = selectedMonth - 1;
+    int dayIndex = selectedDay - 1;
+    int yearIndex = years.indexOf(selectedYear.toString());
+
+    monthController = FixedExtentScrollController(initialItem: monthIndex);
+    dayController = FixedExtentScrollController(initialItem: dayIndex);
+    yearController = FixedExtentScrollController(initialItem: yearIndex);
+  }
+
+  List<String> _calculateDaysInMonth(int year, int month) {
+    final totalDays = DateTime(year, month + 1, 0).day;
+    return List.generate(totalDays, (i) => (i + 1).toString().padLeft(2, '0'));
+  }
+
+  //
+  void onMonthChanged(int index) {
+    currentMonthIndex = index; // أضف ده
+    final newMonth = int.parse(months[index]);
+    final current = birthday ?? DateTime.now();
+    birthday = DateTime(current.year, newMonth, current.day);
+
+    days = _calculateDaysInMonth(current.year, newMonth);
+    currentDayIndex = (birthday!.day - 1).clamp(0, days.length - 1);
+    emit(OnboardingProfileSetupSuccessState());
+  }
+
+  void onDayChanged(int index) {
+    currentDayIndex = index; // أضف ده
+    final current = birthday ?? DateTime.now();
+    final newDay = int.parse(days[index]);
+    birthday = DateTime(current.year, current.month, newDay);
+    emit(OnboardingProfileSetupSuccessState());
+  }
+
+  void onYearChanged(int index) {
+    currentYearIndex = index; // أضف ده
+    final newYear = int.parse(years[index]);
+    final current = birthday ?? DateTime.now();
+    birthday = DateTime(newYear, current.month, current.day);
+
+    days = _calculateDaysInMonth(newYear, current.month);
+    currentDayIndex = (birthday!.day - 1).clamp(0, days.length - 1);
+    emit(OnboardingProfileSetupSuccessState());
+  }
+
+  void jumpToSelectedBirthdayItems() {
+    if (birthday != null) {
+      currentDayIndex = birthday!.day - 1;
+      currentMonthIndex = birthday!.month - 1;
+      currentYearIndex = years.indexOf(birthday!.year.toString());
+
+      dayController.jumpToItem(currentDayIndex);
+      monthController.jumpToItem(currentMonthIndex);
+      yearController.jumpToItem(currentYearIndex);
+    }
+  }
+
+  /////////////////////////////////////////////////////
+  /////////////////////////////////////////////////////
+
+  /// weight view
+  /////////////////
 
   /////////////////////////////////////////////////////
   /////////////////////////////////////////////////////
@@ -65,6 +160,7 @@ class OnboardingProfileSetupCubit extends Cubit<OnboardingProfileSetupStates> {
     gender = value;
     emit(OnboardingProfileSetupSuccessState());
   }
+
   void updateBirthday(DateTime date) {
     birthday = date;
     emit(OnboardingProfileSetupSuccessState());

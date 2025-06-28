@@ -22,12 +22,9 @@ class _WeightViewState extends State<WeightView> {
 
   late FixedExtentScrollController _weightController; // استخدم late
 
-  // توليد قائمة الأوزان
-  // يمكنك تغيير النطاق حسب الحاجة، مثلاً من 20 إلى 200
   final List<double> _weights = List.generate(200, (index) => 20.0 + index);
 
-  // لتتبع العنصر المحدد حاليا في الـ ListWheelScrollView
-  int _currentWeightIndex = 0;
+   int _currentWeightIndex = 0;
 
   @override
   void initState() {
@@ -35,12 +32,9 @@ class _WeightViewState extends State<WeightView> {
     _selectedUnit = widget.initialUnit;
     _selectedWeight = widget.initialWeight ?? 70.0; // قيمة افتراضية للوزن
 
-    // حساب الـ index الأولي
-    _currentWeightIndex = _weights.indexOf(_selectedWeight.roundToDouble());
-    // إذا لم يتم العثور على الوزن بالضبط، ابحث عن أقرب وزن أو اضبط قيمة افتراضية
-    if (_currentWeightIndex == -1) {
-      // إذا لم يتم العحديد، قم بتعيين أول عنصر أو قيمة قريبة
-      _selectedWeight = _weights[0]; // أو ابحث عن أقرب قيمة
+     _currentWeightIndex = _weights.indexOf(_selectedWeight.roundToDouble());
+     if (_currentWeightIndex == -1) {
+       _selectedWeight = _weights[0];
       _currentWeightIndex = 0;
     }
 
@@ -104,11 +98,9 @@ class _WeightViewState extends State<WeightView> {
 
   @override
   Widget build(BuildContext context) {
-    // نفس قيم itemHeight و pickerTotalHeight من BirthdayScreen
-    const double itemHeight = 70;
+     const double itemHeight = 70;
     const double pickerTotalHeight = itemHeight * 7;
-    // موضع الخطوط الفاصلة
-    final double lineVerticalPosition = (pickerTotalHeight / 2) - (itemHeight / 2) - 5;
+     final double lineVerticalPosition = (pickerTotalHeight / 2) - (itemHeight / 2) - 5;
 
 
     return Padding(
@@ -124,34 +116,31 @@ class _WeightViewState extends State<WeightView> {
           Center(
             child: _buildUnitToggle(),
           ),
-          const SizedBox(height: 20), // إضافة مسافة بين التوغل والعجلة
-
+          const SizedBox(height: 20),
           Expanded(
             child: Center(
-              child: Stack( // استخدم Stack لوضع الخطوط
+              child: Stack(
                 alignment: Alignment.center,
                 children: [
-                  // الخط العلوي
-                  Positioned(
+                   Positioned(
                     top: lineVerticalPosition,
                     left: 0,
                     right: 0,
                     child: Center(
                       child: Container(
-                        width: 150, // عرض العمود + مسافة إضافية
+                        width: 150,
                         height: 2,
                         color: Theme.of(context).primaryColor,
                       ),
                     ),
                   ),
-                  // الخط السفلي
-                  Positioned(
+                   Positioned(
                     bottom: lineVerticalPosition,
                     left: 0,
                     right: 0,
                     child: Center(
                       child: Container(
-                        width: 150, // عرض العمود + مسافة إضافية
+                        width: 150,
                         height: 2,
                         color: Theme.of(context).primaryColor,
                       ),
@@ -162,19 +151,18 @@ class _WeightViewState extends State<WeightView> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       SizedBox(
-                        width: 100, // عرض عمود الأرقام
-                        height: pickerTotalHeight, // ارتفاع يتسع لـ 7 عناصر
+                        width: 100,
+                        height: pickerTotalHeight,
                         child: ListWheelScrollView.useDelegate(
                           controller: _weightController,
-                          itemExtent: itemHeight, // نفس ارتفاع العنصر
-                          perspective: 0.0000001, // نفس المنظور القليل جدا
+                          itemExtent: itemHeight,
+                          perspective: 0.0000001,
                           physics: const FixedExtentScrollPhysics(),
-                          diameterRatio: 12, // نفس نسبة القطر الكبيرة جدا
+                          diameterRatio: 12,
                           onSelectedItemChanged: (index) {
                             setState(() {
                               _selectedWeight = _weights[index];
-                              _currentWeightIndex = index; // تحديث الاندكس الحالي
-                              widget.onWeightSelected(_selectedWeight, _selectedUnit);
+                              _currentWeightIndex = index;         widget.onWeightSelected(_selectedWeight, _selectedUnit);
                             });
                           },
                           childDelegate: ListWheelChildBuilderDelegate(
@@ -185,8 +173,7 @@ class _WeightViewState extends State<WeightView> {
                               double fontSize;
                               Color textColor;
 
-                              // تدرج حجم الخط والألوان بناءً على المسافة
-                              if (distance == 0) {
+                               if (distance == 0) {
                                 fontSize = 50;
                                 textColor = Theme.of(context).primaryColor;
                               } else if (distance == 1) {
@@ -220,10 +207,10 @@ class _WeightViewState extends State<WeightView> {
                       ),
 
                       Text(
-                        _selectedUnit, // عرض الوحدة المختارة
+                        _selectedUnit,
                         style: Theme.of(context).textTheme.headlineMedium?.copyWith(
                           color: Theme.of(context).primaryColor,
-                          fontSize: 24, // حجم أكبر للوحدة
+                          fontSize: 24,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
