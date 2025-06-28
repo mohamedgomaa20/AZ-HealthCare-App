@@ -98,7 +98,7 @@ class _HeightScreenState extends State<HeightScreen> {
     return Padding(
       padding: const EdgeInsets.all(24.0),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Text(
             "How tall are you?",
@@ -111,14 +111,14 @@ class _HeightScreenState extends State<HeightScreen> {
           const SizedBox(height: 40),
           Expanded(
             child: Center(
-              child: Row( // استخدم Row لاحتواء الـ picker والوحدة
+              child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.baseline,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 textBaseline: TextBaseline.alphabetic,
                 children: [
                   SizedBox(
-                    width: 180, // لتحديد عرض الـ picker (أكبر قليلاً للقدم والبوصة)
-                    height: 200,
+                    width: 120,
+                    height: 300,
                     child: ListWheelScrollView.useDelegate(
                       controller: _heightController,
                       itemExtent: 50,
@@ -158,9 +158,7 @@ class _HeightScreenState extends State<HeightScreen> {
                       ),
                     ),
                   ),
-                  // الوحدة الثابتة
-                  const SizedBox(width: 10), // مسافة بين الرقم والوحدة
-                  if (_selectedUnit == 'cm') // عرض "cm" فقط إذا كانت الوحدة سم
+                    if (_selectedUnit == 'cm')
                     Text(
                       _selectedUnit,
                       style: TextStyle(

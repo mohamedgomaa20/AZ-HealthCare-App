@@ -105,13 +105,13 @@ class _BirthdayScreenState extends State<BirthdayScreen> {
     return Padding(
       padding: const EdgeInsets.all(24.0),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Text(
             'When is your birthday?',
-            style: Theme.of(context).textTheme.headlineLarge,
+             style: Theme.of(context).textTheme.headlineLarge,
           ),
-          const SizedBox(height: 40),
+          const SizedBox(height: 100),
           Expanded(
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,

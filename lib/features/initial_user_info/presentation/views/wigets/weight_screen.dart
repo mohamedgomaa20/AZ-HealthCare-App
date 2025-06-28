@@ -91,7 +91,7 @@ class _WeightScreenState extends State<WeightScreen> {
     return Padding(
       padding: const EdgeInsets.all(24.0),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Text(
             "What's your body weight?",
@@ -101,16 +101,16 @@ class _WeightScreenState extends State<WeightScreen> {
           Center(
             child: _buildUnitToggle(),
           ),
-          const SizedBox(height: 40),
+
           Expanded(
             child: Center(
-              child: Row( // استخدم Row لاحتواء الـ picker والوحدة
+              child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.baseline,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 textBaseline: TextBaseline.alphabetic,
                 children: [
                   SizedBox(
-                    width: 150, // لتحديد عرض الـ picker
+                    width: 100,
                     height: 200,
                     child: ListWheelScrollView.useDelegate(
                       controller: _weightController,
@@ -143,9 +143,8 @@ class _WeightScreenState extends State<WeightScreen> {
                       ),
                     ),
                   ),
-                  // الوحدة الثابتة
-                  const SizedBox(width: 10), // مسافة بين الرقم والوحدة
-                  Text(
+
+                   Text(
                     _selectedUnit, // عرض الوحدة المختارة
                     style: TextStyle(
                       color: Theme.of(context).primaryColor,

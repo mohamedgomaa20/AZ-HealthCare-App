@@ -22,8 +22,14 @@ class _ReminderScreenState extends State<ReminderScreen> {
   late FixedExtentScrollController _hourController;
   late FixedExtentScrollController _minuteController;
 
-  final List<String> _hours = List.generate(12, (index) => (index + 1).toString().padLeft(2, '0')); // 01-12
-  final List<String> _minutes = List.generate(60, (index) => index.toString().padLeft(2, '0')); // 00-59
+  final List<String> _hours = List.generate(
+    12,
+    (index) => (index + 1).toString().padLeft(2, '0'),
+  ); // 01-12
+  final List<String> _minutes = List.generate(
+    60,
+    (index) => index.toString().padLeft(2, '0'),
+  ); // 00-59
 
   @override
   void initState() {
@@ -35,8 +41,12 @@ class _ReminderScreenState extends State<ReminderScreen> {
     _selectedMinute = now.minute;
     _selectedAmPm = now.period == DayPeriod.am ? 'AM' : 'PM';
 
-    int initialHourIndex = _hours.indexOf(_selectedHour.toString().padLeft(2, '0'));
-    int initialMinuteIndex = _minutes.indexOf(_selectedMinute.toString().padLeft(2, '0'));
+    int initialHourIndex = _hours.indexOf(
+      _selectedHour.toString().padLeft(2, '0'),
+    );
+    int initialMinuteIndex = _minutes.indexOf(
+      _selectedMinute.toString().padLeft(2, '0'),
+    );
 
     _hourController = FixedExtentScrollController(
       initialItem: initialHourIndex.clamp(0, _hours.length - 1),
@@ -87,19 +97,25 @@ class _ReminderScreenState extends State<ReminderScreen> {
           diameterRatio: 1.2,
           onSelectedItemChanged: (index) {
             onSelectedItemChanged(index);
-            _updateParentTime(); // Keep this here for user interaction
+            _updateParentTime();
           },
           childDelegate: ListWheelChildBuilderDelegate(
             builder: (context, index) {
               final item = items[index % items.length];
-              final isSelected = item == selectedValue.toString().padLeft(2, '0') || item == selectedValue.toString();
+              final isSelected =
+                  item == selectedValue.toString().padLeft(2, '0') ||
+                  item == selectedValue.toString();
               return Center(
                 child: Text(
                   item,
                   style: Theme.of(context).textTheme.headlineLarge?.copyWith(
-                    color: isSelected ? Theme.of(context).primaryColor : Colors.white54,
+                    color:
+                        isSelected
+                            ? Theme.of(context).primaryColor
+                            : Colors.white54,
                     fontSize: isSelected ? 48 : 36,
-                    fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
+                    fontWeight:
+                        isSelected ? FontWeight.bold : FontWeight.normal,
                   ),
                 ),
               );
@@ -119,10 +135,7 @@ class _ReminderScreenState extends State<ReminderScreen> {
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
-        children: [
-          _buildAmPmButton('AM'),
-          _buildAmPmButton('PM'),
-        ],
+        children: [_buildAmPmButton('AM'), _buildAmPmButton('PM')],
       ),
     );
   }
@@ -139,7 +152,8 @@ class _ReminderScreenState extends State<ReminderScreen> {
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
         decoration: BoxDecoration(
-          color: isSelected ? Theme.of(context).primaryColor : Colors.transparent,
+          color:
+              isSelected ? Theme.of(context).primaryColor : Colors.transparent,
           borderRadius: BorderRadius.circular(10),
         ),
         child: Text(
@@ -157,57 +171,66 @@ class _ReminderScreenState extends State<ReminderScreen> {
     return Padding(
       padding: const EdgeInsets.all(24.0),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Text(
             "When would you like to\nreceive health check reminders?",
+            textAlign: TextAlign.center,
             style: Theme.of(context).textTheme.headlineLarge,
           ),
           const SizedBox(height: 40),
-          Expanded(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                _buildTimePickerColumn(
-                  controller: _hourController,
-                  items: _hours,
-                  selectedValue: _selectedHour,
-                  onSelectedItemChanged: (index) {
-                    setState(() {
-                      _selectedHour = int.parse(_hours[index]);
-                    });
-                  },
-                ),
-                Text(
-                  ':',
-                  style: Theme.of(context).textTheme.headlineLarge?.copyWith(
-                    color: Colors.white,
-                    fontSize: 48,
+          Center(child: _buildAmPmToggle()),
+          const SizedBox(height: 40),
+          Center(
+            child: SizedBox(
+              width: 200,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  _buildTimePickerColumn(
+                    controller: _hourController,
+                    items: _hours,
+                    selectedValue: _selectedHour,
+                    onSelectedItemChanged: (index) {
+                      setState(() {
+                        _selectedHour = int.parse(_hours[index]);
+                      });
+                    },
                   ),
-                ),
-                _buildTimePickerColumn(
-                  controller: _minuteController,
-                  items: _minutes,
-                  selectedValue: _selectedMinute,
-                  onSelectedItemChanged: (index) {
-                    setState(() {
-                      _selectedMinute = int.parse(_minutes[index]);
-                    });
-                  },
-                ),
-                const SizedBox(width: 10),
-                Align(
-                  alignment: Alignment.centerLeft,
-                  child: _buildAmPmToggle(),
-                ),
-              ],
+                  Text(
+                    ':',
+                    style: Theme.of(context).textTheme.headlineLarge?.copyWith(
+                      color: Colors.white,
+                      fontSize: 48,
+                    ),
+                  ),
+                  _buildTimePickerColumn(
+                    controller: _minuteController,
+                    items: _minutes,
+                    selectedValue: _selectedMinute,
+                    onSelectedItemChanged: (index) {
+                      setState(() {
+                        _selectedMinute = int.parse(_minutes[index]);
+                      });
+                    },
+                  ),
+                  // const SizedBox(width: 10),
+                  // Align(
+                  //   alignment: Alignment.centerLeft,
+                  //   child: _buildAmPmToggle(),
+                  // ),
+                ],
+              ),
             ),
           ),
-          const SizedBox(height: 20),
+          Spacer(),
+
           Center(
             child: Text(
               'You can always change this later.',
-              style: Theme.of(context).textTheme.bodySmall?.copyWith(color: Colors.white54),
+              style: Theme.of(
+                context,
+              ).textTheme.bodySmall?.copyWith(color: Colors.white54),
             ),
           ),
         ],
