@@ -199,6 +199,55 @@ class OnboardingProfileSetupCubit extends Cubit<OnboardingProfileSetupStates> {
   }
 
   /////////////////////////////////////////////////////
+
+  // ================= Height View Logic =================
+
+  double selectedHeight = 170.0;
+  int currentHeightIndex = 0;
+  String selectedHeightUnit = 'cm';
+  FixedExtentScrollController? heightController;
+  final List<double> heights = List.generate(151, (index) => 100.0 + index); // 100 to 250 cm
+  bool isHeightPickerInitialized = false;
+
+  void initHeightPicker({double? initialHeight, String initialUnit = 'cm'}) {
+    if (isHeightPickerInitialized) return;
+
+    selectedHeight = initialHeight ?? 170.0;
+    selectedHeightUnit = initialUnit;
+
+    currentHeightIndex = heights.indexOf(selectedHeight.roundToDouble());
+    if (currentHeightIndex == -1) {
+      selectedHeight = heights[0];
+      currentHeightIndex = 0;
+    }
+
+    heightController = FixedExtentScrollController(
+      initialItem: currentHeightIndex.clamp(0, heights.length - 1),
+    );
+
+    isHeightPickerInitialized = true;
+  }
+
+  void onHeightChanged(int index) {
+    selectedHeight = heights[index];
+    currentHeightIndex = index;
+    emit(OnboardingProfileSetupSuccessState());
+  }
+
+  void onHeightUnitChanged(String unit) {
+    if (unit == selectedHeightUnit) return;
+    selectedHeightUnit = unit;
+    emit(OnboardingProfileSetupSuccessState());
+  }
+
+  String convertCmToFeetAndInches(double cm) {
+    final totalInches = cm / 2.54;
+    final feet = (totalInches / 12).floor();
+    final inches = (totalInches % 12).round();
+    return "$feet'$inches\"";
+  }
+
+
   /////////////////////////////////////////////////////
   void updateGender(String value) {
     gender = value;

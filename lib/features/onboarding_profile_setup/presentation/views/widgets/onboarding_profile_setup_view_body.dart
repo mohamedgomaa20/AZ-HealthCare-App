@@ -41,9 +41,7 @@ class OnboardingProfileSetupViewBody extends StatelessWidget {
       WeightView(key: const PageStorageKey('WeightScreen')),
       HeightView(
         key: const PageStorageKey('HeightScreen'),
-        onHeightSelected: (value, unit) {
-          cubit.updateHeight(value.toInt());
-        },
+
       ),
       ReminderView(
         key: const PageStorageKey('ReminderScreen'),

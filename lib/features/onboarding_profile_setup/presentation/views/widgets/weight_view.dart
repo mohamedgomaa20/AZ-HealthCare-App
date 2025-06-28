@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../data/profile_setup_cubit/onboarding_profile_setup_cubit.dart';
 import '../../data/profile_setup_cubit/onboarding_profile_setup_states.dart';
+import 'custom_toggle_selector.dart';
 
 class WeightView extends StatefulWidget {
   const WeightView({super.key});
@@ -42,7 +43,11 @@ class _WeightViewState extends State<WeightView> {
                 style: Theme.of(context).textTheme.headlineLarge,
               ),
               const SizedBox(height: 40),
-              Center(child: _buildUnitToggle(context)),
+              Center(child: CustomToggleSelector(
+                options: ['kg', 'lb'],
+                selectedOption: cubit.selectedWeightUnit,
+                onOptionSelected: cubit.onWeightUnitChanged,
+              ),),
               const SizedBox(height: 20),
               Expanded(
                 child: Center(
@@ -83,42 +88,5 @@ class _WeightViewState extends State<WeightView> {
     );
   }
 
-  Widget _buildUnitToggle(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        color: Colors.grey[800],
-        borderRadius: BorderRadius.circular(12),
-      ),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          _buildUnitButton(context, 'kg'),
-          _buildUnitButton(context, 'lb'),
-        ],
-      ),
-    );
-  }
 
-  Widget _buildUnitButton(BuildContext context, String unit) {
-    final isSelected = cubit.selectedWeightUnit == unit;
-    return GestureDetector(
-      onTap: () {
-        cubit.onWeightUnitChanged(unit);
-      },
-      child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-        decoration: BoxDecoration(
-          color:
-              isSelected ? Theme.of(context).primaryColor : Colors.transparent,
-          borderRadius: BorderRadius.circular(10),
-        ),
-        child: Text(
-          unit.toUpperCase(),
-          style: Theme.of(context).textTheme.titleLarge?.copyWith(
-            color: isSelected ? Colors.white : Colors.white70,
-          ),
-        ),
-      ),
-    );
-  }
-}
+ }
