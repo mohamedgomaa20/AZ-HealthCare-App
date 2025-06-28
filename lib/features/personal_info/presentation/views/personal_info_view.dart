@@ -13,7 +13,8 @@ class PersonalInfoView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.backgroundColor,
-      body: PersonalInfoOnBoarding(),
+      // body: PersonalInfoOnBoarding(),
+      body: Center(),
     );
   }
 }

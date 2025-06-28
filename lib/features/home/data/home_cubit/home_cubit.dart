@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../core/network/end_points.dart';
 import '../../../../shared/network/remote/dio_helper.dart';
 import '../../presentation/views/home_view.dart';
 import '../../presentation/views/notification_view.dart';
@@ -47,7 +48,7 @@ class HomeCubit extends Cubit<HomeStates> {
     emit(UserLoadingState());
 
     print("getUserDataByUserId");
-    DioHelper.getData(url: '/api/Admin/user/by-id/$userId')
+    DioHelper.getData(url: '$GET_USER_BY_ID/$userId')
         .then((value) {
           print(value.data);
           final userResponse = UserResponse.fromJson(value.data);
@@ -72,7 +73,7 @@ class HomeCubit extends Cubit<HomeStates> {
   void getUserDataByUserName({required String userName}) {
     emit(UserLoadingState());
     print("getUserDataByUserName");
-    DioHelper.getData(url: '/api/Admin/user/by-username/$userName')
+    DioHelper.getData(url: '$GET_USER_BY_USERNAME/$userName')
         .then((value) {
           print(value.data);
           final userResponse = UserResponse.fromJson(value.data);
@@ -101,7 +102,7 @@ class HomeCubit extends Cubit<HomeStates> {
   void getAllUsers() {
     emit(UsersLoadingState());
     print("getAllUsers");
-    DioHelper.getData(url: '/api/Admin/users')
+    DioHelper.getData(url: GET_ALL_USERS)
         .then((value) {
           print(value.data);
           final response = AllUsersResponse.fromJson(value.data);
@@ -121,5 +122,6 @@ class HomeCubit extends Cubit<HomeStates> {
           emit(UsersErrorState(error.toString()));
         });
   }
+
   ////
 }
