@@ -20,11 +20,17 @@ class _WeightViewState extends State<WeightView> {
     super.initState();
     cubit = OnboardingProfileSetupCubit.get(context);
     cubit.initWeightPicker();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      cubit.weightController!.jumpToItem(cubit.currentWeightIndex);
+    });
   }
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<OnboardingProfileSetupCubit, OnboardingProfileSetupStates>(
+    return BlocBuilder<
+      OnboardingProfileSetupCubit,
+      OnboardingProfileSetupStates
+    >(
       builder: (context, state) {
         return Padding(
           padding: const EdgeInsets.all(24.0),
@@ -44,21 +50,28 @@ class _WeightViewState extends State<WeightView> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       CustomWheelPicker(
-                        controller: cubit.weightController,
-                        items: cubit.weights.map((w) => w.toStringAsFixed(0)).toList(),
+                        controller: cubit.weightController!,
+                        items:
+                            cubit.weights
+                                .map((w) => w.toStringAsFixed(0))
+                                .toList(),
                         onSelectedItemChangedCallback: cubit.onWeightChanged,
                         currentScrollIndex: cubit.currentWeightIndex,
                         pickerWidth: 100,
-                      ),
-                      const SizedBox(width: 10),
-                      Text(
-                        cubit.selectedWeightUnit,
-                        style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                          color: Theme.of(context).primaryColor,
-                          fontSize: 24,
-                          fontWeight: FontWeight.bold,
+                        additionalPickerWidth: 80,
+                        additionalWidget: Text(
+                          cubit.selectedWeightUnit,
+                          style: Theme.of(
+                            context,
+                          ).textTheme.headlineMedium?.copyWith(
+                            color: Theme.of(context).primaryColor,
+                            fontSize: 24,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ),
+                      //                       const SizedBox(width: 10),
+                      // ,
                     ],
                   ),
                 ),
@@ -95,7 +108,8 @@ class _WeightViewState extends State<WeightView> {
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
         decoration: BoxDecoration(
-          color: isSelected ? Theme.of(context).primaryColor : Colors.transparent,
+          color:
+              isSelected ? Theme.of(context).primaryColor : Colors.transparent,
           borderRadius: BorderRadius.circular(10),
         ),
         child: Text(

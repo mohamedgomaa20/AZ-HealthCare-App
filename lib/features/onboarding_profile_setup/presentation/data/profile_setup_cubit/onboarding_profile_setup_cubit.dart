@@ -151,18 +151,23 @@ class OnboardingProfileSetupCubit extends Cubit<OnboardingProfileSetupStates> {
   /////////////////////////////////////////////////////
   /////////////////////////////////////////////////////
 
-  /// weight view
-  /////////////////
+  /// ================= Weight View Logic =================
+
    double selectedWeight = 70.0;
-  int currentWeightIndex = 0;
+
+   int currentWeightIndex = 0;
 
    String selectedWeightUnit = 'kg';
 
-   late FixedExtentScrollController weightController;
+   FixedExtentScrollController? weightController;
 
    final List<double> weights = List.generate(200, (index) => 20.0 + index);
 
+   bool isWeightPickerInitialized = false;
+
    void initWeightPicker({double? initialWeight, String initialUnit = 'kg'}) {
+    if (isWeightPickerInitialized) return;
+
     selectedWeight = initialWeight ?? 70.0;
     selectedWeightUnit = initialUnit;
 
@@ -175,21 +180,23 @@ class OnboardingProfileSetupCubit extends Cubit<OnboardingProfileSetupStates> {
     weightController = FixedExtentScrollController(
       initialItem: currentWeightIndex.clamp(0, weights.length - 1),
     );
+
+    isWeightPickerInitialized = true;
   }
 
-  /// تغيير الوزن
-  void onWeightChanged(int index) {
+   void onWeightChanged(int index) {
     selectedWeight = weights[index];
     currentWeightIndex = index;
     emit(OnboardingProfileSetupSuccessState());
   }
+  double get convertedWeightInKg =>
+      selectedWeightUnit == 'lb' ? selectedWeight * 0.453592 : selectedWeight;
 
-  /// تغيير الوحدة
-  void onWeightUnitChanged(String unit) {
+   void onWeightUnitChanged(String unit) {
+    if (unit == selectedWeightUnit) return;
     selectedWeightUnit = unit;
     emit(OnboardingProfileSetupSuccessState());
   }
-
 
   /////////////////////////////////////////////////////
   /////////////////////////////////////////////////////

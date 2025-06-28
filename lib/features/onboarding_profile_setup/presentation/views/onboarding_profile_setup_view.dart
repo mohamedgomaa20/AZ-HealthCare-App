@@ -13,7 +13,7 @@ class OnboardingProfileSetupView extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create:
-          (context) => OnboardingProfileSetupCubit()..initBirthdayControllers(),
+          (context) => OnboardingProfileSetupCubit()..initBirthdayControllers()  ..initWeightPicker(),
       child: Scaffold(body: const OnboardingProfileSetupViewBody()),
     );
   }
