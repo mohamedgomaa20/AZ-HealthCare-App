@@ -1,10 +1,12 @@
- import 'package:az_health_care/core/constants.dart';
+import 'package:az_health_care/core/constants.dart';
 import 'package:az_health_care/features/onboarding_profile_setup/presentation/data/profile_setup_cubit/onboarding_profile_setup_cubit.dart';
 import 'package:az_health_care/features/onboarding_profile_setup/presentation/data/profile_setup_cubit/onboarding_profile_setup_states.dart';
 import 'package:az_health_care/features/onboarding_profile_setup/presentation/views/widgets/custom_wheel_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../../core/utils/app_colors.dart';
+import '../../../../../core/utils/app_text_styles.dart';
 import 'custom_toggle_selector.dart';
 
 class HeightView extends StatefulWidget {
@@ -29,24 +31,23 @@ class _HeightViewState extends State<HeightView> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<OnboardingProfileSetupCubit, OnboardingProfileSetupStates>(
+    return BlocBuilder<
+      OnboardingProfileSetupCubit,
+      OnboardingProfileSetupStates
+    >(
       builder: (context, state) {
         return Padding(
           padding: const EdgeInsets.symmetric(horizontal: kHorizontalPadding),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Text(
-                "How tall are you?",
-                style: Theme.of(context).textTheme.headlineLarge,
-              ),
+              Text("How tall are you?", style: AppTextStyles.bold30),
               const SizedBox(height: 40),
               CustomToggleSelector(
                 options: const ['cm', 'ft'],
                 selectedOption: cubit.selectedHeightUnit,
                 onOptionSelected: cubit.onHeightUnitChanged,
               ),
-              const SizedBox(height: 20),
               Expanded(
                 child: Center(
                   child: Row(
@@ -54,21 +55,23 @@ class _HeightViewState extends State<HeightView> {
                     children: [
                       CustomWheelPicker(
                         controller: cubit.heightController!,
-                        items: cubit.heights
-                            .map((h) => cubit.selectedHeightUnit == 'cm'
-                            ? h.toStringAsFixed(0)
-                            : cubit.convertCmToFeetAndInches(h))
-                            .toList(),
+                        items:
+                            cubit.heights
+                                .map(
+                                  (h) =>
+                                      cubit.selectedHeightUnit == 'cm'
+                                          ? h.toStringAsFixed(0)
+                                          : cubit.convertCmToFeetAndInches(h),
+                                )
+                                .toList(),
                         onSelectedItemChangedCallback: cubit.onHeightChanged,
                         currentScrollIndex: cubit.currentHeightIndex,
-                        pickerWidth: 120,
-                        additionalPickerWidth: 80,
+                        pickerWidth: 80,
+                        additionalPickerWidth: 60,
                         additionalWidget: Text(
                           cubit.selectedHeightUnit,
-                          style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                            color: Theme.of(context).primaryColor,
-                            fontSize: 24,
-                            fontWeight: FontWeight.bold,
+                          style: AppTextStyles.bold24.copyWith(
+                            color: AppColors.primaryColor,
                           ),
                         ),
                       ),

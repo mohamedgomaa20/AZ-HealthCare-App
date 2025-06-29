@@ -1,9 +1,12 @@
+import 'package:az_health_care/core/services/show_toast.dart';
+import 'package:az_health_care/core/utils/app_text_styles.dart';
 import 'package:az_health_care/features/onboarding_profile_setup/presentation/views/widgets/reminder_view.dart';
 import 'package:az_health_care/features/onboarding_profile_setup/presentation/views/widgets/weight_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../core/constants.dart';
+import '../../../../../core/utils/app_colors.dart';
 import '../../../../../core/widgets/custom_button.dart';
 import '../../data/profile_setup_cubit/onboarding_profile_setup_cubit.dart';
 import '../../data/profile_setup_cubit/onboarding_profile_setup_states.dart';
@@ -20,13 +23,8 @@ class OnboardingProfileSetupViewBody extends StatelessWidget {
     final cubit = OnboardingProfileSetupCubit.get(context);
 
     return [
-      NameView(
-        key: const PageStorageKey('NameScreen'),
-        initialName: cubit.name,
-        onNameSubmitted: (name) {
-          cubit.updateName(name);
-        },
-      ),
+      NameView(key: const PageStorageKey('NameScreen')),
+
       GenderView(
         key: const PageStorageKey('GenderScreen'),
         selectedGender: cubit.selectedGender,
@@ -64,6 +62,7 @@ class OnboardingProfileSetupViewBody extends StatelessWidget {
         final isLast = cubit.currentPage == pages.length - 1;
 
         return Scaffold(
+          resizeToAvoidBottomInset: false,
           appBar: AppBar(
             leading:
                 cubit.currentPage > 0
@@ -72,30 +71,29 @@ class OnboardingProfileSetupViewBody extends StatelessWidget {
                       onPressed: cubit.goToPreviousPage,
                     )
                     : null,
-            title: Row(
-              children: [
-                const SizedBox(width: 10),
-                Expanded(
-                  child: LinearProgressIndicator(
-                    value: (cubit.currentPage + 1) / pages.length,
-                    backgroundColor: Colors.white12,
-                    color: Theme.of(context).primaryColor,
-                    minHeight: 10,
-                    borderRadius: BorderRadius.circular(15),
-                  ),
+            title: Expanded(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: kHorizontalPadding / 2,
                 ),
-                const SizedBox(width: 40),
-                Text(
-                  '${cubit.currentPage + 1} / ${pages.length}',
-                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                    color: Colors.white,
-                    fontSize: 22,
-                    fontWeight: FontWeight.bold,
-                  ),
+                child: LinearProgressIndicator(
+                  value: (cubit.currentPage + 1) / pages.length,
+                  backgroundColor: Colors.white12,
+                  color: Theme.of(context).primaryColor,
+                  minHeight: 10,
+                  borderRadius: BorderRadius.circular(15),
                 ),
-                const SizedBox(width: 5),
-              ],
+              ),
             ),
+            actions: [
+              Text(
+                '${cubit.currentPage + 1} / ${pages.length}',
+                style: AppTextStyles.bold24.copyWith(
+                  color: AppColors.whiteColor,
+                ),
+              ),
+              const SizedBox(width: 15),
+            ],
           ),
           body: Column(
             children: [
@@ -123,6 +121,24 @@ class OnboardingProfileSetupViewBody extends StatelessWidget {
                   child: CustomButton(
                     text: isLast ? 'Finish' : 'Continue',
                     onPressed: () {
+                      if (cubit.currentPage == 0 && !cubit.isNameValid()) {
+                        ToastHelper.showToast2(
+                          context: context,
+                          msg: "Please enter your name",
+                          state: ToastStates.ERROR,
+                        );
+
+                        return;
+                      }
+                      if (cubit.currentPage == 1 &&
+                          cubit.selectedGender == null) {
+                        ToastHelper.showToast2(
+                          context: context,
+                          msg: "Please select your gender",
+                          state: ToastStates.ERROR,
+                        );
+                        return;
+                      }
                       if (isLast) {
                         cubit.submitUserData();
                         showDialog(

@@ -25,7 +25,7 @@ class CustomTextFormField extends StatelessWidget {
   final String? Function(String?)? validation;
   final IconData prefixIconData;
   final IconData? suffixIconData;
-  final VoidCallback? suffixOnPressed ;
+  final VoidCallback? suffixOnPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -49,12 +49,15 @@ class CustomTextFormField extends StatelessWidget {
         hintText: hintText,
 
         border: OutlineInputBorder(),
-        focusedBorder: buildBorder(),
+
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(4),
+          borderSide: BorderSide(color: AppColors.primaryColor, width: 2),
+        ),
         enabledBorder: buildBorder(),
         disabledBorder: buildBorder(),
-        focusedErrorBorder: buildBorder(),
-
         errorBorder: OutlineInputBorder(),
+        // focusedErrorBorder: buildBorder(),
       ),
     );
   }

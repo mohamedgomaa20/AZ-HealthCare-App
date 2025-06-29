@@ -1,68 +1,12 @@
-// import 'package:flutter/material.dart';
-//
-// import 'features/onboarding_profile_setup/presentation/views/widgets/onboarding_profile_setup_view_body.dart'; // سنقوم بإنشاء هذا الملف
-//
-// void main() {
-//   runApp(const MyApp());
-// }
-//
-// class MyApp extends StatelessWidget {
-//   const MyApp({super.key});
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return MaterialApp(
-//       title: 'Account Setup',
-//       debugShowCheckedModeBanner: false, // لإزالة شارة الـ Debug
-//       theme: ThemeData(
-//         brightness: Brightness.dark, // تفعيل الـ Dark Mode للتطبيق بالكامل
-//         primaryColor: const Color(0xFFFE2B54), // اللون الأحمر الأساسي
-//         hintColor: const Color(0xFFFE2B54), // لتلوين الـ TextField وغيره
-//         scaffoldBackgroundColor: const Color(0xFF1E1E1E), // خلفية داكنة
-//         appBarTheme: const AppBarTheme(
-//           backgroundColor: Colors.transparent, // لجعل الـ AppBar شفاف
-//           elevation: 0, // إزالة الظل
-//           iconTheme: IconThemeData(color: Colors.white), // لون الأيقونات في الـ AppBar
-//           titleTextStyle: TextStyle(
-//             color: Colors.white,
-//             fontSize: 20,
-//             fontWeight: FontWeight.bold,
-//           ),
-//         ),
-//         textTheme: const TextTheme(
-//           bodyLarge: TextStyle(color: Colors.white),
-//           bodyMedium: TextStyle(color: Colors.white70),
-//           headlineLarge: TextStyle(color: Colors.white, fontSize: 30, fontWeight: FontWeight.bold),
-//           headlineMedium: TextStyle(color: Colors.white, fontSize: 24, fontWeight: FontWeight.bold),
-//           titleLarge: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),
-//         ),
-//         elevatedButtonTheme: ElevatedButtonThemeData(
-//           style: ElevatedButton.styleFrom(
-//             backgroundColor: const Color(0xFFFE2B54), // لون زر "Continue"
-//             foregroundColor: Colors.white, // لون النص داخل الزر
-//             padding: const EdgeInsets.symmetric(vertical: 16),
-//             shape: RoundedRectangleBorder(
-//               borderRadius: BorderRadius.circular(12),
-//             ),
-//             textStyle: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-//           ),
-//         ),
-//         // يمكن إضافة المزيد من السمات هنا لتناسب التصميم تمامًا
-//       ),
-//       home: const AccountSetupFlow(),
-//     );
-//   }
-// }
-
 import 'package:az_health_care/core/helper_functions/on_generate_routes.dart';
 import 'package:az_health_care/core/services/cache_helper.dart';
+import 'package:az_health_care/features/get_start/presentation/views/get_start_view.dart';
 import 'package:az_health_care/shared/my_bloc_observer.dart';
 import 'package:az_health_care/shared/network/remote/dio_helper.dart';
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 
 import 'core/utils/app_colors.dart';
-import 'features/splash/presentation/views/splash_view.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -80,49 +24,49 @@ class AZHealthCareApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        brightness: Brightness.light,
-        primaryColor: const Color(0xFFFE2B54),
-        hintColor: const Color(0xFFFE2B54),
+        brightness: Brightness.dark,
+        primaryColor: AppColors.primaryColor,
+        hintColor: AppColors.primaryColor,
         // scaffoldBackgroundColor: const Color(0xFF1E1E1E),
         scaffoldBackgroundColor: AppColors.backgroundColor,
         appBarTheme: const AppBarTheme(
           backgroundColor: Colors.transparent,
           elevation: 0,
-          iconTheme: IconThemeData(color: Colors.white),
+          iconTheme: IconThemeData(color: AppColors.whiteColor),
           titleTextStyle: TextStyle(
-            color: Colors.white,
+            color: AppColors.whiteColor,
             fontSize: 20,
             fontWeight: FontWeight.bold,
           ),
         ),
         floatingActionButtonTheme: FloatingActionButtonThemeData(
           backgroundColor: AppColors.primaryColor,
-          foregroundColor: Colors.white,
+          foregroundColor: AppColors.whiteColor,
         ),
         textTheme: const TextTheme(
-          bodyLarge: TextStyle(color: Colors.white),
-          bodyMedium: TextStyle(color: Colors.white70),
+          bodyLarge: TextStyle(color: AppColors.whiteColor),
+          bodyMedium: TextStyle(color: AppColors.white70Color),
           headlineLarge: TextStyle(
-            color: Colors.white,
+            color: AppColors.whiteColor,
             fontSize: 30,
             fontWeight: FontWeight.bold,
           ),
           headlineMedium: TextStyle(
-            color: Colors.white,
+            color: AppColors.whiteColor,
             fontSize: 24,
             fontWeight: FontWeight.bold,
           ),
           titleLarge: TextStyle(
-            color: Colors.white,
+            color: AppColors.whiteColor,
             fontSize: 20,
             fontWeight: FontWeight.bold,
           ),
         ),
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
-            backgroundColor: const Color(0xFFFE2B54),
-             foregroundColor: Colors.white,
-             padding: const EdgeInsets.symmetric(vertical: 16),
+            backgroundColor: AppColors.primaryColor,
+            foregroundColor: AppColors.whiteColor,
+            padding: const EdgeInsets.symmetric(vertical: 16),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(12),
             ),
@@ -132,11 +76,27 @@ class AZHealthCareApp extends StatelessWidget {
             ),
           ),
         ),
+        inputDecorationTheme: const InputDecorationTheme(
+          filled: true,
+          fillColor: AppColors.white10Color,
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.all(Radius.circular(12)),
+            borderSide: BorderSide.none,
+          ),
+          focusedBorder: InputBorder.none,
+          enabledBorder: InputBorder.none,
+          disabledBorder: InputBorder.none,
+          focusedErrorBorder: InputBorder.none,
+          errorBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.all(Radius.circular(12)),
+            borderSide: BorderSide(color: AppColors.errorColor, width: 1.5),
+          ),
+        ),
       ),
 
       onGenerateRoute: (settings) => onGenerateRoute(settings),
-      initialRoute: SplashView.routeName,
-      // initialRoute: InitialUserInfoView.routeName,
+      // initialRoute: SplashView.routeName,
+      initialRoute: GetStartView.routeName,
     );
   }
 }

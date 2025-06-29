@@ -1,22 +1,46 @@
 import 'package:flutter/material.dart';
 
+import 'app_colors.dart';
+
 abstract class AppTextStyles {
+  static const TextStyle regular14 = TextStyle(fontSize: 14);
+
   static const TextStyle regular16 = TextStyle(fontSize: 16);
-
-
+  static const TextStyle bold16 = TextStyle(
+    fontSize: 16,
+    fontWeight: FontWeight.bold,
+    color: AppColors.whiteColor,
+  );
+  static const TextStyle bold20 = TextStyle(
+    fontSize: 20,
+    fontWeight: FontWeight.bold,
+    color: AppColors.whiteColor,
+  );
   static const TextStyle bold24 = TextStyle(
     fontSize: 24,
     fontWeight: FontWeight.bold,
   );
-  static const TextStyle regular14 = TextStyle(
-    fontSize: 14,
-   );
+  static const TextStyle bold26 = TextStyle(
+    fontSize: 26,
+    fontWeight: FontWeight.bold,
+  );
+  static const TextStyle bold48 = TextStyle(
+    fontSize: 48,
+    fontWeight: FontWeight.bold,
+    color: AppColors.whiteColor,
+  );
+
   static const TextStyle semiBold28 = TextStyle(
     fontSize: 28,
     fontWeight: FontWeight.w600,
   );
   static const TextStyle bold28 = TextStyle(
     fontSize: 28,
+    fontWeight: FontWeight.bold,
+  );
+  static const TextStyle bold30 = TextStyle(
+    fontSize: 30,
+    color: AppColors.whiteColor,
     fontWeight: FontWeight.bold,
   );
 
@@ -79,4 +103,31 @@ abstract class AppTextStyles {
     textBaseline: TextBaseline.alphabetic,
   ); // يُستخدم كنص توضيحي في شاشة Welcome أسفل العنوان
 
+  static const TextStyle bold50PrimaryColor = TextStyle(
+    fontSize: 50,
+    fontWeight: FontWeight.bold,
+    color: AppColors.primaryColor,
+  );
+
+  static const TextStyle regular38White70 = TextStyle(
+    fontSize: 38,
+    fontWeight: FontWeight.normal,
+    color: AppColors.white70Color,
+  );
+  static const TextStyle regular30White60 = TextStyle(
+    fontSize: 30,
+    fontWeight: FontWeight.normal,
+    color: AppColors.white60Color,
+  );
+
+  static const TextStyle regular25White54 = TextStyle(
+    fontSize: 25,
+    fontWeight: FontWeight.normal,
+    color: AppColors.white54Color,
+  );
+  static const TextStyle regular20White30 = TextStyle(
+    fontSize: 20,
+    fontWeight: FontWeight.normal,
+    color: AppColors.white30Color,
+  );
 }

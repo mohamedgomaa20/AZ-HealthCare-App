@@ -16,10 +16,10 @@ class OnboardingProfileSetupView extends StatelessWidget {
           (context) =>
               OnboardingProfileSetupCubit()
                 ..initBirthdayControllers()
-                ..initWeightPicker(),
-      child: Scaffold(
-          resizeToAvoidBottomInset: false,
-          body: const OnboardingProfileSetupViewBody()),
+                ..initWeightPicker()
+                ..initNameController(null),
+      child:   const OnboardingProfileSetupViewBody(),
+
     );
   }
 }

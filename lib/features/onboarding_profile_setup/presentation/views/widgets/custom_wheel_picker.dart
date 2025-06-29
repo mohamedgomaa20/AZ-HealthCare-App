@@ -1,3 +1,5 @@
+import 'package:az_health_care/core/utils/app_colors.dart';
+import 'package:az_health_care/core/utils/app_text_styles.dart';
 import 'package:flutter/material.dart';
 
 class CustomWheelPicker extends StatelessWidget {
@@ -16,7 +18,8 @@ class CustomWheelPicker extends StatelessWidget {
     required this.onSelectedItemChangedCallback,
     required this.currentScrollIndex,
     required this.pickerWidth,
-    this.additionalPickerWidth, this.additionalWidget,
+    this.additionalPickerWidth,
+    this.additionalWidget,
   });
 
   @override
@@ -27,7 +30,7 @@ class CustomWheelPicker extends StatelessWidget {
         (pickerTotalHeight / 2) - (itemHeight / 2) - 5;
 
     return SizedBox(
-      width: pickerWidth + 5+ (additionalPickerWidth ?? 0),
+      width: pickerWidth + 5 + (additionalPickerWidth ?? 0),
       child: Stack(
         alignment: Alignment.center,
         children: [
@@ -40,7 +43,7 @@ class CustomWheelPicker extends StatelessWidget {
 
               width: pickerWidth + 15,
               height: 2,
-              color: Theme.of(context).primaryColor,
+              color: AppColors.primaryColor,
             ),
           ),
           Positioned(
@@ -51,7 +54,7 @@ class CustomWheelPicker extends StatelessWidget {
               margin: EdgeInsets.symmetric(horizontal: 5),
               width: pickerWidth + 15,
               height: 2,
-              color: Theme.of(context).primaryColor,
+              color: AppColors.primaryColor,
             ),
           ),
           Row(
@@ -72,48 +75,27 @@ class CustomWheelPicker extends StatelessWidget {
                     builder: (context, index) {
                       final item = items[index];
                       final int distance = (index - currentScrollIndex).abs();
-                      double fontSize;
-                      Color textColor;
+
+                      TextStyle textStyle;
 
                       if (distance == 0) {
-                        fontSize = 50;
-                        textColor = Theme.of(context).primaryColor;
+                        textStyle = AppTextStyles.bold50PrimaryColor;
                       } else if (distance == 1) {
-                        fontSize = 38;
-                        textColor = Colors.white70;
+                        textStyle = AppTextStyles.regular38White70;
                       } else if (distance == 2) {
-                        fontSize = 30;
-                        textColor = Colors.white60;
+                        textStyle = AppTextStyles.regular30White60;
                       } else if (distance == 3) {
-                        fontSize = 25;
-                        textColor = Colors.white54;
+                        textStyle = AppTextStyles.regular25White54;
                       } else {
-                        fontSize = 20;
-                        textColor = Colors.white30;
+                        textStyle = AppTextStyles.regular20White30;
                       }
 
-                      return Center(
-                        child: Text(
-                          item,
-                          style: Theme.of(
-                            context,
-                          ).textTheme.headlineLarge?.copyWith(
-                            color: textColor,
-                            fontSize: fontSize,
-                            fontWeight:
-                                distance == 0 ? FontWeight.bold : FontWeight.normal,
-                          ),
-                        ),
-                      );
+                      return Center(child: Text(item, style: textStyle));
                     },
                   ),
                 ),
               ),
-              if (additionalWidget != null)
-                SizedBox(
-
-                  child: additionalWidget,
-                ),
+              if (additionalWidget != null) SizedBox(child: additionalWidget),
             ],
           ),
         ],

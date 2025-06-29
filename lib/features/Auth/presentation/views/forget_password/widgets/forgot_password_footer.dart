@@ -3,7 +3,7 @@ import 'package:conditional_builder_null_safety/conditional_builder_null_safety.
 import 'package:az_health_care/core/widgets/custom_button.dart';
 import 'package:az_health_care/core/widgets/customLoadingButton.dart';
 
-import '../forget_password_cubit/forget_password_cubit.dart';
+ import '../forget_password_cubit/forget_password_cubit.dart';
 
 
 class ForgotPasswordFooter extends StatelessWidget {

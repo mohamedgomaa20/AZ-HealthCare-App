@@ -45,12 +45,22 @@ class OnboardingProfileSetupCubit extends Cubit<OnboardingProfileSetupStates> {
     }
   }
 
-  /// ================= birthday View Logic =================
-  String? name;
+  /// ================= name View Logic =================
+  final TextEditingController nameController = TextEditingController();
+  String name = '';
+
+  void initNameController(String? initialName) {
+    nameController.text = initialName ?? '';
+    name = initialName ?? '';
+  }
 
   void updateName(String newName) {
-    name = newName;
+    name = newName.trim();
     emit(OnboardingProfileSetupSuccessState());
+  }
+
+  bool isNameValid() {
+    return name.isNotEmpty;
   }
 
   /// ================= gender View Logic =================
@@ -264,7 +274,7 @@ class OnboardingProfileSetupCubit extends Cubit<OnboardingProfileSetupStates> {
   /// ================= Reminder View Logic =================
 
   TimeOfDay selectedReminderTime = TimeOfDay.now();
-  String selectedPeriod = 'AM'; // AM or PM
+  String selectedPeriod = 'AM';
 
   int selectedHour = 9;
   int selectedMinute = 0;
@@ -278,13 +288,17 @@ class OnboardingProfileSetupCubit extends Cubit<OnboardingProfileSetupStates> {
   final List<String> hours = List.generate(
     12,
     (i) => (i + 1).toString().padLeft(2, '0'),
-  ); // 01-12
+  );
   final List<String> minutes = List.generate(
     60,
     (i) => i.toString().padLeft(2, '0'),
-  ); // 00-59
+  );
 
   bool isReminderInitialized = false;
+
+  List<String> periods = ['AM', 'PM'];
+  int currentPeriodIndex = 0;
+  FixedExtentScrollController? periodController;
 
   void initReminderPicker({TimeOfDay? initialTime}) {
     if (isReminderInitialized) return;
@@ -295,17 +309,13 @@ class OnboardingProfileSetupCubit extends Cubit<OnboardingProfileSetupStates> {
     selectedMinute = time.minute;
     selectedPeriod = time.period == DayPeriod.am ? 'AM' : 'PM';
 
-    currentHourIndex = hours
-        .indexOf(selectedHour.toString().padLeft(2, '0'))
-        .clamp(0, hours.length - 1);
-    currentMinuteIndex = minutes
-        .indexOf(selectedMinute.toString().padLeft(2, '0'))
-        .clamp(0, minutes.length - 1);
+    currentHourIndex = hours.indexOf(selectedHour.toString().padLeft(2, '0')).clamp(0, hours.length - 1);
+    currentMinuteIndex = minutes.indexOf(selectedMinute.toString().padLeft(2, '0')).clamp(0, minutes.length - 1);
+    currentPeriodIndex = periods.indexOf(selectedPeriod);
 
     hourController = FixedExtentScrollController(initialItem: currentHourIndex);
-    minuteController = FixedExtentScrollController(
-      initialItem: currentMinuteIndex,
-    );
+    minuteController = FixedExtentScrollController(initialItem: currentMinuteIndex);
+    periodController = FixedExtentScrollController(initialItem: currentPeriodIndex);
 
     isReminderInitialized = true;
   }
@@ -313,27 +323,30 @@ class OnboardingProfileSetupCubit extends Cubit<OnboardingProfileSetupStates> {
   void onHourChanged(int index) {
     selectedHour = int.parse(hours[index]);
     currentHourIndex = index;
-    _updateSelectedReminderTime();
+    updateSelectedReminderTime();
   }
 
   void onMinuteChanged(int index) {
     selectedMinute = int.parse(minutes[index]);
     currentMinuteIndex = index;
-    _updateSelectedReminderTime();
+    updateSelectedReminderTime();
   }
 
-  void onAmPmChanged(String period) {
-    selectedPeriod = period;
-    _updateSelectedReminderTime();
+  void onPeriodChanged(int index) {
+    currentPeriodIndex = index;
+    selectedPeriod = periods[index];
+    updateSelectedReminderTime();
+    emit(ReminderPeriodChangedState());
   }
 
-  void _updateSelectedReminderTime() {
+  void updateSelectedReminderTime() {
     int hour24 = selectedHour;
     if (selectedPeriod == 'PM' && selectedHour != 12) hour24 += 12;
     if (selectedPeriod == 'AM' && selectedHour == 12) hour24 = 0;
     selectedReminderTime = TimeOfDay(hour: hour24, minute: selectedMinute);
     emit(OnboardingProfileSetupSuccessState());
   }
+
 
   /////////////////////////////////////////////////////
   /////////////////////////////////////////////////////

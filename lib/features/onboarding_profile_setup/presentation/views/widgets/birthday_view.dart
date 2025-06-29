@@ -1,4 +1,5 @@
 import 'package:az_health_care/core/constants.dart';
+import 'package:az_health_care/core/utils/app_text_styles.dart';
 import 'package:az_health_care/features/onboarding_profile_setup/presentation/views/widgets/custom_wheel_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -40,9 +41,9 @@ class _BirthdayViewState extends State<BirthdayView> {
             children: [
               Text(
                 "When is your birthday?",
-                style: Theme.of(context).textTheme.headlineLarge,
+                style: AppTextStyles.bold30,
               ),
-              const SizedBox(height: 40),
+
               Expanded(
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -75,6 +76,7 @@ class _BirthdayViewState extends State<BirthdayView> {
                   ],
                 ),
               ),
+
             ],
           ),
         );

@@ -1,3 +1,5 @@
+import 'package:az_health_care/core/utils/app_colors.dart';
+import 'package:az_health_care/core/utils/app_text_styles.dart';
 import 'package:flutter/material.dart';
 
 class CustomToggleSelector extends StatelessWidget {
@@ -6,8 +8,7 @@ class CustomToggleSelector extends StatelessWidget {
   final void Function(String) onOptionSelected;
   final double horizontalPadding;
   final double verticalPadding;
-  final TextStyle? selectedTextStyle;
-  final TextStyle? unselectedTextStyle;
+
   final Color? backgroundColor;
   final Color? selectedColor;
 
@@ -18,8 +19,7 @@ class CustomToggleSelector extends StatelessWidget {
     required this.onOptionSelected,
     this.horizontalPadding = 24,
     this.verticalPadding = 12,
-    this.selectedTextStyle,
-    this.unselectedTextStyle,
+
     this.backgroundColor,
     this.selectedColor,
   });
@@ -33,36 +33,35 @@ class CustomToggleSelector extends StatelessWidget {
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
-        children: options.map((option) {
-          final isSelected = option == selectedOption;
-          return GestureDetector(
-            onTap: () => onOptionSelected(option),
-            child: Container(
-              padding: EdgeInsets.symmetric(
-                horizontal: horizontalPadding,
-                vertical: verticalPadding,
-              ),
-              decoration: BoxDecoration(
-                color: isSelected
-                    ? (selectedColor ?? Theme.of(context).primaryColor)
-                    : Colors.transparent,
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: Text(
-                option.toUpperCase(),
-                style: isSelected
-                    ? (selectedTextStyle ??
-                    Theme.of(context).textTheme.titleLarge?.copyWith(
-                      color: Colors.white,
-                    ))
-                    : (unselectedTextStyle ??
-                    Theme.of(context).textTheme.titleLarge?.copyWith(
-                      color: Colors.white70,
-                    )),
-              ),
-            ),
-          );
-        }).toList(),
+        children:
+            options.map((option) {
+              final isSelected = option == selectedOption;
+              return GestureDetector(
+                onTap: () => onOptionSelected(option),
+                child: Container(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: horizontalPadding,
+                    vertical: verticalPadding,
+                  ),
+                  decoration: BoxDecoration(
+                    color:
+                        isSelected
+                            ? (selectedColor ?? AppColors.primaryColor)
+                            : AppColors.transparentColor,
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: Text(
+                    option.toUpperCase(),
+                    style:
+                        isSelected
+                            ? AppTextStyles.bold20
+                            : AppTextStyles.bold20.copyWith(
+                              color: Colors.white70,
+                            ),
+                  ),
+                ),
+              );
+            }).toList(),
       ),
     );
   }

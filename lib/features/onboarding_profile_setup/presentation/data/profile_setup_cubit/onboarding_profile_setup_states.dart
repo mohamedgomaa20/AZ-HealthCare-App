@@ -5,6 +5,7 @@ class OnboardingProfileSetupInitialState extends OnboardingProfileSetupStates {}
 class OnboardingProfileSetupLoadingState extends OnboardingProfileSetupStates {}
 
 class OnboardingProfileSetupSuccessState extends OnboardingProfileSetupStates {}
+class ReminderPeriodChangedState extends OnboardingProfileSetupStates {}
 class OnboardingProfileSetupPageChangedState extends OnboardingProfileSetupStates {}
 
 class OnboardingProfileSetupErrorState extends OnboardingProfileSetupStates {

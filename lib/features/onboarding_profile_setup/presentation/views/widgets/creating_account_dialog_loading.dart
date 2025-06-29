@@ -7,25 +7,30 @@ class CreatingAccountDialogLoading extends StatefulWidget {
   const CreatingAccountDialogLoading({super.key});
 
   @override
-  State<CreatingAccountDialogLoading> createState() => _CreatingAccountDialogLoadingState();
+  State<CreatingAccountDialogLoading> createState() =>
+      _CreatingAccountDialogLoadingState();
 }
 
-class _CreatingAccountDialogLoadingState extends State<CreatingAccountDialogLoading> {
+class _CreatingAccountDialogLoadingState
+    extends State<CreatingAccountDialogLoading> {
   @override
   void initState() {
     super.initState();
-     _simulateAccountCreation();
+    _simulateAccountCreation();
   }
 
   void _simulateAccountCreation() async {
-
     // await cubit.createAccount();
 
     await Future.delayed(const Duration(seconds: 3));
 
     if (mounted) {
       Navigator.of(context).pop();
-      ToastHelper.showToast(msg: "Account creation simulated and dialog closed.", state: ToastStates.SUCCESS);
+      ToastHelper.showToast2(
+        context: context,
+        msg: "Account creation successful.",
+        state: ToastStates.SUCCESS,
+      );
 
       // Navigator.pushReplacement(
       //   context,
@@ -69,7 +74,7 @@ class _CreatingAccountDialogLoadingState extends State<CreatingAccountDialogLoad
                 mainAxisAlignment: MainAxisAlignment.center,
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                   SizedBox(
+                  SizedBox(
                     width: 40,
                     height: 40,
                     child: CircularProgressIndicator(

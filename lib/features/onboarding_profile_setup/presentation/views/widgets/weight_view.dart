@@ -1,4 +1,6 @@
 import 'package:az_health_care/core/constants.dart';
+import 'package:az_health_care/core/utils/app_colors.dart';
+import 'package:az_health_care/core/utils/app_text_styles.dart';
 import 'package:az_health_care/features/onboarding_profile_setup/presentation/views/widgets/custom_wheel_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -41,7 +43,7 @@ class _WeightViewState extends State<WeightView> {
             children: [
               Text(
                 "What's your body weight?",
-                style: Theme.of(context).textTheme.headlineLarge,
+                style: AppTextStyles.bold30,
               ),
               const SizedBox(height: 40),
               Center(child: CustomToggleSelector(
@@ -49,7 +51,7 @@ class _WeightViewState extends State<WeightView> {
                 selectedOption: cubit.selectedWeightUnit,
                 onOptionSelected: cubit.onWeightUnitChanged,
               ),),
-              const SizedBox(height: 20),
+
               Expanded(
                 child: Center(
                   child: Row(
@@ -63,16 +65,12 @@ class _WeightViewState extends State<WeightView> {
                                 .toList(),
                         onSelectedItemChangedCallback: cubit.onWeightChanged,
                         currentScrollIndex: cubit.currentWeightIndex,
-                        pickerWidth: 100,
-                        additionalPickerWidth: 80,
+                        pickerWidth: 80,
+                        additionalPickerWidth: 60,
                         additionalWidget: Text(
                           cubit.selectedWeightUnit,
-                          style: Theme.of(
-                            context,
-                          ).textTheme.headlineMedium?.copyWith(
-                            color: Theme.of(context).primaryColor,
-                            fontSize: 24,
-                            fontWeight: FontWeight.bold,
+                          style: AppTextStyles.bold24.copyWith(
+                            color: AppColors.primaryColor
                           ),
                         ),
                       ),

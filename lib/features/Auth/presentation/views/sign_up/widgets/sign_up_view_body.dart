@@ -9,6 +9,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../../core/constants.dart';
 import '../../../../../../core/services/show_toast.dart';
+import '../../../../../../core/widgets/custom_password_form_field.dart';
 import '../register_cubit/register_cubit.dart';
 import 'agree_with_action_text.dart';
 
@@ -72,6 +73,16 @@ class SignUpViewBody extends StatelessWidget {
                   emailController: emailController,
                   createPasswordController: createPasswordController,
                   confirmPasswordController: confirmPasswordController,
+                ),
+                SizedBox(height: 10),
+                CustomPasswordFormField(
+                  label: "Current Password",
+                  hintText: "current password",
+                  controller: emailController,
+                  isPassword: cubit.isConfirmPassword,
+                  suffixIcon: cubit.suffixIconConfirmPassword,
+                  onChanged: (value) => cubit.onConfirmPasswordChanged(value),
+                  onToggleVisibility: cubit.toggleConfirmPasswordVisibility,
                 ),
 
                 const SizedBox(height: 10),

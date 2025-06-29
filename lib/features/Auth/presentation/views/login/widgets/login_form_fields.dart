@@ -2,6 +2,7 @@ import 'package:az_health_care/features/Auth/presentation/views/login/widgets/re
 import 'package:flutter/material.dart';
 
 import '../../../../../../core/utils/app_text_styles.dart';
+import '../../../../../../core/widgets/custom_password_form_field.dart';
 import '../../../../../../core/widgets/custom_text_form_field.dart';
 import '../login_cubit/login_cubit.dart';
 
@@ -93,6 +94,8 @@ class LoginFormFields extends StatelessWidget {
               return null;
             },
           ),
+
+
           const SizedBox(height: 10),
           RememberMeAndForgetPasswordRow(
             isRememberMe: cubit.isRememberMe,

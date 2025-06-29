@@ -1,5 +1,6 @@
 import 'package:az_health_care/core/constants.dart';
 import 'package:az_health_care/core/utils/app_colors.dart';
+import 'package:az_health_care/core/utils/app_text_styles.dart';
 import 'package:flutter/material.dart';
 
 enum Gender { male, female, preferNotToSay }
@@ -30,14 +31,11 @@ class GenderView extends StatelessWidget {
             width: 120,
             height: 120,
             decoration: BoxDecoration(
-              color: isSelected
-                  ? Theme.of(context).primaryColor
-                  : Colors.transparent,
+              color: isSelected ? AppColors.primaryColor : Colors.transparent,
               shape: BoxShape.circle,
               border: Border.all(
-                color: isSelected
-                    ? Theme.of(context).primaryColor
-                    : AppColors.grayColor,
+                color:
+                    isSelected ? AppColors.primaryColor : AppColors.grayColor,
                 width: 1,
               ),
             ),
@@ -51,9 +49,7 @@ class GenderView extends StatelessWidget {
           Text(
             label,
             style: Theme.of(context).textTheme.titleLarge?.copyWith(
-              color: isSelected
-                  ? Theme.of(context).primaryColor
-                  : Colors.white,
+              color: isSelected ? Theme.of(context).primaryColor : Colors.white,
               fontWeight: FontWeight.bold,
               fontSize: 25,
             ),
@@ -73,7 +69,7 @@ class GenderView extends StatelessWidget {
           Text(
             "What's your gender?",
             textAlign: TextAlign.center,
-            style: Theme.of(context).textTheme.headlineLarge,
+            style: AppTextStyles.bold30,
           ),
           const SizedBox(height: 150),
           Row(
@@ -96,24 +92,26 @@ class GenderView extends StatelessWidget {
           const SizedBox(height: 50),
           TextButton(
             style: ElevatedButton.styleFrom(
-              backgroundColor: selectedGender == Gender.preferNotToSay
-                  ? Theme.of(context).primaryColor
-                  : Colors.transparent,
-              shape: selectedGender != Gender.preferNotToSay
-                  ? RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(20),
-                side: BorderSide(color: AppColors.grayColor),
-              )
-                  : null,
+              backgroundColor:
+                  selectedGender == Gender.preferNotToSay
+                      ? AppColors.primaryColor
+                      : Colors.transparent,
+              shape:
+                  selectedGender != Gender.preferNotToSay
+                      ? RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20),
+                        side: BorderSide(color: AppColors.grayColor),
+                      )
+                      : null,
             ),
             onPressed: () => onGenderSelected(Gender.preferNotToSay),
             child: Text(
               'Prefer not to say',
-              style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                color: selectedGender == Gender.preferNotToSay
-                    ? AppColors.whiteColor
-                    : Colors.white70,
-                fontWeight: FontWeight.bold,
+              style: AppTextStyles.bold16.copyWith(
+                color:
+                    selectedGender == Gender.preferNotToSay
+                        ? AppColors.whiteColor
+                        : AppColors.white70Color,
               ),
             ),
           ),
