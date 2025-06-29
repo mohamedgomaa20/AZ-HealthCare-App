@@ -17,6 +17,7 @@ import '../../features/home/presentation/views/vip_view.dart';
 import '../../features/onboarding_profile_setup/presentation/views/onboarding_profile_setup_view.dart';
 import '../../features/personal_info/presentation/views/personal_info_view.dart';
 import '../../features/settings/presentation/views/change_password/change_password_view.dart';
+import '../../features/settings/presentation/views/send_email/send_email_view.dart';
 
 Route<dynamic> onGenerateRoute(RouteSettings settings) {
   switch (settings.name) {
@@ -74,6 +75,9 @@ Route<dynamic> onGenerateRoute(RouteSettings settings) {
     case ChangePasswordView.routeName:
       return MaterialPageRoute(
         builder: (context) => const ChangePasswordView(),
+      );    case SendEmailView.routeName:
+      return MaterialPageRoute(
+        builder: (context) => const SendEmailView(),
       );
     default:
       return MaterialPageRoute(builder: (context) => const Scaffold());

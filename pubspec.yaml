@@ -28,6 +28,7 @@ dependencies:
   smooth_page_indicator: ^1.2.1
   carousel_slider: ^5.0.0
   skeletonizer: ^1.4.3
+  file_picker: ^8.0.0+1
 
 
   photo_view: ^0.15.0

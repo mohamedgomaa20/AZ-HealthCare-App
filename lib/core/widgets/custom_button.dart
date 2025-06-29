@@ -14,8 +14,9 @@ class CustomButton extends StatelessWidget {
     this.fontSize,
     this.height,
     this.width,
+    this.icon,
   });
-
+final IconData? icon;
   final String text;
   final VoidCallback? onPressed;
   final Color? backgroundColor;
@@ -43,16 +44,33 @@ class CustomButton extends StatelessWidget {
                 borderRadius: BorderRadius.circular(kDefaultRadius),
               ),
             ),
-            child: Text(
-              text,
-              style: AppTextStyles.semiBold18.copyWith(
-                fontSize: fontSize ?? 18,
-                letterSpacing: -0.50,
-                color:
-                    onPressed == null
-                        ? AppColors.grayColor
-                        : AppColors.whiteColor,
-              ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+
+                Text(
+                  text,
+                  style: AppTextStyles.semiBold18.copyWith(
+                    fontSize: fontSize ?? 18,
+                    letterSpacing: -0.50,
+                    color:
+                        onPressed == null
+                            ? AppColors.grayColor
+                            : AppColors.whiteColor,
+                  ),
+                ),
+                if (icon != null)
+                  Padding(
+                    padding: const EdgeInsets.only(left: 8.0),
+                    child: Icon(
+                      icon,
+                      color: onPressed == null
+                          ? AppColors.grayColor
+                          : AppColors.whiteColor,
+                      size: 22,
+                    ),
+                  ),
+              ],
             ),
           ),
         ),

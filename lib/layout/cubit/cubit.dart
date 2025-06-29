@@ -1,5 +1,5 @@
 import 'package:az_health_care/layout/cubit/states.dart';
- import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../models/home_model.dart';
@@ -93,39 +93,40 @@ class ShopCubit extends Cubit<ShopStates> {
     required String phone,
     required String email,
   }) {
-    emit(ShopLoadingUpdateUserState());
-    DioHelper.putData(
-          path: UPDATE_PROFILE,
-          token: token,
-          data: {'name': name, 'phone': phone, 'email': email},
-        )
-        .then((value) {
-          if (value.data['status'] == true) {
-            userModel = ShopLoginModel.fromJson(value.data);
-            emit(ShopSuccessUpdateUserState(userModel!));
-          } else {
-            String errorMessage =
-                value.data['message'] ??
-                'Something went wrong while updating your profile';
-            emit(ShopErrorUpdateUserState(errorMessage));
-          }
-          print(
-            '==================Update Profile Model========================',
-          );
-          print(userModel?.status);
-          print(userModel?.message);
-          print(userModel?.data!.name);
-          print(userModel?.data!.phone);
-          print(userModel?.data!.email);
-          print('============================================================');
-        })
-        .catchError((error) {
-          print(
-            '==================Update Profile Error========================',
-          );
-          emit(ShopErrorUpdateUserState(error.toString()));
-          print('============================================================');
-        });
+    print("object");
+    // emit(ShopLoadingUpdateUserState());
+    // DioHelper.putData(
+    //       path: UPDATE_PROFILE,
+    //       token: token,
+    //       data: {'name': name, 'phone': phone, 'email': email},
+    //     )
+    //     .then((value) {
+    //       if (value.data['status'] == true) {
+    //         userModel = ShopLoginModel.fromJson(value.data);
+    //         emit(ShopSuccessUpdateUserState(userModel!));
+    //       } else {
+    //         String errorMessage =
+    //             value.data['message'] ??
+    //             'Something went wrong while updating your profile';
+    //         emit(ShopErrorUpdateUserState(errorMessage));
+    //       }
+    //       print(
+    //         '==================Update Profile Model========================',
+    //       );
+    //       print(userModel?.status);
+    //       print(userModel?.message);
+    //       print(userModel?.data!.name);
+    //       print(userModel?.data!.phone);
+    //       print(userModel?.data!.email);
+    //       print('============================================================');
+    //     })
+    //       .catchError((error) {
+    //         print(
+    //           '==================Update Profile Error========================',
+    //         );
+    //         emit(ShopErrorUpdateUserState(error.toString()));
+    //         print('============================================================');
+    //       });
   }
 
   int currentCarouselIndex = 0;
@@ -141,11 +142,4 @@ class ShopCubit extends Cubit<ShopStates> {
     currentCarouselIndices[productId] = index;
     emit(ShopChangeCarouselIndexState());
   }
-
-
-
-
-
-
-
 }

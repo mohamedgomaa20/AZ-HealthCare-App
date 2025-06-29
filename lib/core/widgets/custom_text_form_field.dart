@@ -14,8 +14,10 @@ class CustomTextFormField extends StatelessWidget {
     required this.prefixIconData,
     this.suffixIconData,
     this.suffixOnPressed,
+    this.maxLines,
   });
 
+  final int? maxLines;
   final String hintText;
   final TextInputType keyboardType;
   final TextEditingController controller;
@@ -30,6 +32,7 @@ class CustomTextFormField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      maxLines: maxLines ?? 1,
       cursorColor: AppColors.whiteColor,
       keyboardType: keyboardType,
       controller: controller,
