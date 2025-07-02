@@ -4,11 +4,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/network/end_points.dart';
 import '../../../../shared/network/remote/dio_helper.dart';
-import '../../presentation/views/home_view.dart';
-import '../../presentation/views/notification_view.dart';
-import '../../presentation/views/profile_view.dart';
-import '../../presentation/views/tracker_view.dart';
-import '../../presentation/views/vip_view.dart';
+import '../../presentation/views/home/home_view.dart';
+import '../../presentation/views/notification/notification_view.dart';
+ import '../../presentation/views/profile/profile_view.dart';
+import '../../presentation/views/tracker/tracker_view.dart';
+import '../../presentation/views/vip/vip_view.dart';
 import '../../presentation/views/widget/bottom_nav_bar_item.dart';
 import '../models/get_all_user_model.dart';
 import '../models/get_user_model.dart';

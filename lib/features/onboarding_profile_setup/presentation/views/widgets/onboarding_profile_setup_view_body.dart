@@ -8,10 +8,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../core/constants.dart';
 import '../../../../../core/utils/app_colors.dart';
 import '../../../../../core/widgets/custom_button.dart';
+import '../../../../../layout/app_layout.dart';
 import '../../data/profile_setup_cubit/onboarding_profile_setup_cubit.dart';
 import '../../data/profile_setup_cubit/onboarding_profile_setup_states.dart';
 import 'birthday_view.dart';
-import 'creating_account_dialog_loading.dart';
+import '../../../../../core/widgets/custom_loading_dialog.dart';
 import 'gender_view.dart';
 import 'height_view.dart';
 import 'name_view.dart';
@@ -141,11 +142,36 @@ class OnboardingProfileSetupViewBody extends StatelessWidget {
                       }
                       if (isLast) {
                         cubit.submitUserData();
+
                         showDialog(
                           context: context,
                           barrierDismissible: false,
-                          builder: (_) => const CreatingAccountDialogLoading(),
+                          builder:
+                              (_) => CustomLoadingDialog(
+                                message: 'Creating your account...',
+                                onComplete: () async {
+                                  ToastHelper.showToast2(
+                                    context: context,
+                                    msg: 'Account creation successful.',
+                                    state: ToastStates.SUCCESS,
+                                  );
+
+                                  Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => const HomeLayout(),
+                                    ),
+                                  );
+                                },
+                              ),
                         );
+
+                        // cubit.submitUserData();
+                        // showDialog(
+                        //   context: context,
+                        //   barrierDismissible: false,
+                        //   builder: (_) => const CreatingAccountDialogLoading(),
+                        // );
                       } else {
                         cubit.goToNextPage(pages.length);
                       }

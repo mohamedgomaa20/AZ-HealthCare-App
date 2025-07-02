@@ -1,12 +1,14 @@
 import 'package:az_health_care/core/helper_functions/on_generate_routes.dart';
 import 'package:az_health_care/core/services/cache_helper.dart';
 import 'package:az_health_care/features/get_start/presentation/views/get_start_view.dart';
-import 'package:az_health_care/shared/my_bloc_observer.dart';
+import 'package:az_health_care/core/services/my_bloc_observer.dart';
+import 'package:az_health_care/features/home/presentation/views/home_layout.dart';
 import 'package:az_health_care/shared/network/remote/dio_helper.dart';
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 
 import 'core/utils/app_colors.dart';
+import 'features/home/presentation/views/home/home_view.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -96,7 +98,7 @@ class AZHealthCareApp extends StatelessWidget {
 
       onGenerateRoute: (settings) => onGenerateRoute(settings),
       // initialRoute: SplashView.routeName,
-      initialRoute: GetStartView.routeName,
+      initialRoute: HomeLayout.routeName,
     );
   }
 }

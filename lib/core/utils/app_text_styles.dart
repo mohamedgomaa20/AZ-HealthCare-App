@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'app_colors.dart';
 
 abstract class AppTextStyles {
+  static const TextStyle regular10 = TextStyle(fontSize: 10);
   static const TextStyle regular14 = TextStyle(fontSize: 14);
 
   static const TextStyle regular16 = TextStyle(fontSize: 16);
@@ -11,10 +12,21 @@ abstract class AppTextStyles {
     fontWeight: FontWeight.bold,
     color: AppColors.whiteColor,
   );
+
   static const TextStyle bold20 = TextStyle(
     fontSize: 20,
     fontWeight: FontWeight.bold,
     color: AppColors.whiteColor,
+  );
+  static const TextStyle semiBold18 = TextStyle(
+    fontSize: 18,
+    fontWeight: FontWeight.w600,
+    color: AppColors.whiteColor,
+  );
+  static const TextStyle bold18 = TextStyle(
+    fontSize: 18,
+    fontWeight: FontWeight.bold,
+    color: AppColors.white54Color,
   );
   static const TextStyle bold24 = TextStyle(
     fontSize: 24,
@@ -44,10 +56,6 @@ abstract class AppTextStyles {
     fontWeight: FontWeight.bold,
   );
 
-  static const TextStyle semiBold18 = TextStyle(
-    fontSize: 18,
-    fontWeight: FontWeight.w600,
-  ); // يُستخدم في شاشة SignUp لعنوان "UserName" و "Email" و "Create Password"
 
   static const TextStyle semiBold16 = TextStyle(
     fontSize: 16,

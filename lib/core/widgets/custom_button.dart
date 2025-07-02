@@ -31,7 +31,7 @@ final IconData? icon;
       children: [
         SizedBox(
           width: width ?? double.infinity,
-          height: height ?? 45,
+          height: height ?? 50,
           child: TextButton(
             onPressed: onPressed,
             style: TextButton.styleFrom(
@@ -74,7 +74,7 @@ final IconData? icon;
             ),
           ),
         ),
-        SizedBox(height: 10),
+        SizedBox(height: 5),
       ],
     );
   }

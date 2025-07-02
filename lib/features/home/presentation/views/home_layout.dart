@@ -1,9 +1,7 @@
-import 'package:az_health_care/core/constants.dart';
 import 'package:az_health_care/core/utils/app_colors.dart';
- import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../core/services/cache_helper.dart';
 import '../../data/home_cubit/home_cubit.dart';
 import '../../data/home_cubit/home_states.dart';
 
@@ -40,22 +38,6 @@ class HomeLayout extends StatelessWidget {
                 cubit.changeBottomNav(index);
               },
               selectedIndex: cubit.currentIndex,
-            ),
-            floatingActionButton: FloatingActionButton(
-              onPressed: () {
-                // cubit.getUserDataByUserName(userName:"mo_gomaa_m" );
-                // print("===============================================");
-                // print("===============================================");
-                // cubit.getUserDataByUserId(userId:"d9fe7ac7-9075-4885-b272-53af9e963c96" );
-                // cubit.getAllUsers();
-                // Navigator.pushReplacementNamed(context, GetStartView.routeName);
-
-                CacheHelper.removeData(key: kToken );
-                print("===============================================");
-                print(CacheHelper.getData(key: kToken));
-                print("===============================================");
-              },
-              child: Icon(Icons.cloud_download),
             ),
           );
         },
