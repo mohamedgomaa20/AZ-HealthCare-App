@@ -22,6 +22,10 @@ abstract class AppTextStyles {
     fontSize: 18,
     fontWeight: FontWeight.w600,
     color: AppColors.whiteColor,
+  );  static const TextStyle semiBold14 = TextStyle(
+    fontSize: 14,
+    fontWeight: FontWeight.w600,
+    color: AppColors.whiteColor,
   );
   static const TextStyle bold18 = TextStyle(
     fontSize: 18,
@@ -31,6 +35,10 @@ abstract class AppTextStyles {
   static const TextStyle bold24 = TextStyle(
     fontSize: 24,
     fontWeight: FontWeight.bold,
+  );static const TextStyle bold22 = TextStyle(
+    fontSize: 22,
+    fontWeight: FontWeight.bold,
+    color: AppColors.white70Color,
   );
   static const TextStyle bold26 = TextStyle(
     fontSize: 26,
@@ -60,6 +68,7 @@ abstract class AppTextStyles {
   static const TextStyle semiBold16 = TextStyle(
     fontSize: 16,
     fontWeight: FontWeight.w600,
+    color: AppColors.whiteColor
   ); // يُستخدم في الحقول مثل Label الحقول أو الأزرار الثانوية
 
   static const TextStyle medium14 = TextStyle(

@@ -15,6 +15,7 @@ void main() async {
   Bloc.observer = MyBlocObserver();
   await CacheHelper.init();
   DioHelper.init();
+
   runApp(AZHealthCareApp());
 }
 

@@ -36,6 +36,9 @@ dependencies:
   dartz: ^0.10.1
   flutter_svg: ^2.2.0
   flutter_blur: 0.0.2
+  font_awesome_flutter: ^10.8.0
+  line_icons: ^2.0.3
+  icons_plus: ^5.0.0
 
 
 

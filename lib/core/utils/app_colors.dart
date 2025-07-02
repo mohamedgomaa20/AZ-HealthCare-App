@@ -93,10 +93,21 @@ abstract class AppColors {
            Color(0xFF0F1419),
    */
 
-  static const Color redAccent = Color(0xFFEF4444);       // أحمر مائل للأحمر الفاتح
-  static const Color blueAccent = Color(0xFF3B82F6);      // أزرق فاتح
-  static const Color amberAccent = Color(0xFFF59E0B);     // كهرماني/برتقالي ذهبي
-  static const Color greenAccent = Color(0xFF10B981);     // أخضر زمردي
-  static const Color purpleAccent = Color(0xFF8B5CF6);    // بنفسجي فاتح
+  static const Color redAccent = Color(0xFFEF4444);
+  static const Color blueAccent = Color(0xFF3B82F6);
+  static const Color amberAccent = Color(0xFFF59E0B);
+  static const Color greenAccent = Color(0xFF10B981);
+  static const Color purpleAccent = Color(0xFF8B5CF6);
   static const Color pinkAccent = Color(0xFFEC4899);
+
+  /*
+  good!!
+     backgroundColor: const Color(0xFF12151C)
+      card
+          color: const Color(0xFF1D2029),
+          /////////////////////////////////
+                    color: Color(0xFF111827),
+
+
+   */
 }
