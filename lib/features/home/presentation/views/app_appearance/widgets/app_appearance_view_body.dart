@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../../core/constants.dart';
+import '../../../../../../core/helper_functions/display_helpers.dart';
 import '../../../../../../core/utils/app_colors.dart';
 import '../../../../../upgrade/presentation/views/choose_payment/widgets/payment_app_bar.dart';
-import '../../profile/widgets/build_menu_item.dart';
+ import '../../profile/widgets/build_menu_item.dart';
+import '../app_settings_cubit/app_settings_cubit.dart';
+import 'custom_language_bottom_sheet.dart';
 import 'custom_theme_bottom_sheet.dart';
 
 class AppAppearanceViewBody extends StatelessWidget {
@@ -28,7 +32,9 @@ class AppAppearanceViewBody extends StatelessWidget {
                   BuildMenuItem(
                     title: 'Theme',
                     trailingWidget: Text(
-                      "Light",
+                      DisplayHelpers.getThemeLabel(
+                        context.watch<AppSettingsCubit>().state.themeMode,
+                      ),
                       style: TextStyle(
                         color: Colors.white70,
                         fontSize: 16,
@@ -41,20 +47,16 @@ class AppAppearanceViewBody extends StatelessWidget {
                         context: context,
                         backgroundColor: Colors.transparent,
                         isScrollControlled: true,
-                        builder: (context) => CustomThemeBottomSheet(
-                          selectedTheme: currentTheme,
-                          onThemeChanged: (newTheme) {
-                            Navigator.pop(context);
-                           },
-                        ),
+                        builder: (context) => CustomThemeBottomSheet(),
                       );
-
                     },
                   ),
                   BuildMenuItem(
                     title: 'App Language',
                     trailingWidget: Text(
-                      "English",
+                      DisplayHelpers.getLanguageLabel(
+                        context.watch<AppSettingsCubit>().state.language,
+                      ),
                       style: TextStyle(
                         color: Colors.white70,
                         fontSize: 16,
@@ -62,7 +64,14 @@ class AppAppearanceViewBody extends StatelessWidget {
                       ),
                     ),
 
-                    onTap: () {},
+                    onTap: () {
+                      showModalBottomSheet(
+                        context: context,
+                        backgroundColor: Colors.transparent,
+                        isScrollControlled: true,
+                        builder: (context) => CustomLanguageBottomSheet(),
+                      );
+                    },
                   ),
                 ],
               ),

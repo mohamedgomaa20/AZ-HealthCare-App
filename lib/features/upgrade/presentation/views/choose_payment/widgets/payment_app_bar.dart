@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 class CustomAppBar extends StatelessWidget {
   final String title;
 
-  final IconData? leadingIcon;
+  final Widget? trailingWidget;
 
   const CustomAppBar({
     super.key,
     required this.title,
-     this.leadingIcon,
+     this.trailingWidget,
   });
 
   @override
@@ -37,14 +37,8 @@ class CustomAppBar extends StatelessWidget {
               ),
             ),
           ),
-          if (leadingIcon!=null)
-            GestureDetector(
-              onTap: () {},
-              child: Container(
-                padding: EdgeInsets.all(8),
-                child: Icon(leadingIcon, color: Colors.white, size: 24),
-              ),
-            )
+          if (trailingWidget!=null)
+            trailingWidget!
           else
             SizedBox(width: 40),
         ],

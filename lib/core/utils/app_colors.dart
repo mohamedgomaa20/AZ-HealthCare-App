@@ -100,6 +100,15 @@ abstract class AppColors {
   static const Color purpleAccent = Color(0xFF8B5CF6);
   static const Color pinkAccent = Color(0xFFEC4899);
 
+  //Colors for payment methods
+  static const Color mastercardColor = Color(0xFFEB001B);
+  static const Color visaColor = Color(0xFF1A1F71);
+  static const Color amazonPayColor = Color(0xFFFF9900);
+  static const Color amexColor = Color(0xFF006FCF);
+  static const Color jcbColor = Color(0xFF00AA44);
+  static const Color paypalColor = Color(0xFF0070BA);
+  static const Color googlePayColor = Color(0xFF4285F4);
+  static const Color applePayColor = Colors.white;
   /*
   good!!
      backgroundColor: const Color(0xFF12151C)

@@ -22,7 +22,8 @@ abstract class AppTextStyles {
     fontSize: 18,
     fontWeight: FontWeight.w600,
     color: AppColors.whiteColor,
-  );  static const TextStyle semiBold14 = TextStyle(
+  );
+  static const TextStyle semiBold14 = TextStyle(
     fontSize: 14,
     fontWeight: FontWeight.w600,
     color: AppColors.whiteColor,
@@ -35,7 +36,8 @@ abstract class AppTextStyles {
   static const TextStyle bold24 = TextStyle(
     fontSize: 24,
     fontWeight: FontWeight.bold,
-  );static const TextStyle bold22 = TextStyle(
+  );
+  static const TextStyle bold22 = TextStyle(
     fontSize: 22,
     fontWeight: FontWeight.bold,
     color: AppColors.white70Color,
@@ -64,53 +66,52 @@ abstract class AppTextStyles {
     fontWeight: FontWeight.bold,
   );
 
-
   static const TextStyle semiBold16 = TextStyle(
     fontSize: 16,
     fontWeight: FontWeight.w600,
-    color: AppColors.whiteColor
-  ); // يُستخدم في الحقول مثل Label الحقول أو الأزرار الثانوية
+    color: AppColors.whiteColor,
+  );
 
   static const TextStyle medium14 = TextStyle(
     fontSize: 14,
     fontWeight: FontWeight.w500,
-  ); // يُستخدم في النصوص التوضيحية داخل الحقول أو أسفلها
+  );
 
   static const TextStyle regular12 = TextStyle(
     fontSize: 12,
     fontWeight: FontWeight.w400,
-  ); // يُستخدم للنصوص الصغيرة مثل "or continue with"
+  );
 
   static const TextStyle regular14Grey = TextStyle(
     fontSize: 14,
     fontWeight: FontWeight.w400,
     color: Colors.grey,
-  ); // يُستخدم في Placeholder داخل الحقول مثل "Email" و "Create Password"
+  );
 
   static const TextStyle titleWhite24 = TextStyle(
     fontSize: 24,
     fontWeight: FontWeight.bold,
     color: Colors.white,
-  ); // يُستخدم في شاشة Welcome لعنوان "Welcome to A2Z Care!"
+  );
 
   static const TextStyle redLink14 = TextStyle(
     fontSize: 14,
     color: Colors.red,
     fontWeight: FontWeight.bold,
     decoration: TextDecoration.underline,
-  ); // يُستخدم في شاشة SignUp لرابط "Sign in" و "Terms & Conditions"
+  );
 
   static const TextStyle inputLabelWhite = TextStyle(
     fontSize: 16,
     fontWeight: FontWeight.w500,
     color: Colors.white,
-  ); // يُستخدم لتسميات الحقول في نموذج التسجيل مثل "Email"
+  );
 
   static const TextStyle welcomeHeadline = TextStyle(
     fontSize: 22,
     fontWeight: FontWeight.bold,
     color: Colors.white,
-  ); // يُستخدم كعنوان رئيسي في شاشة الترحيب
+  );
 
   static const TextStyle welcomeSubtitle = TextStyle(
     fontSize: 16,
@@ -118,7 +119,7 @@ abstract class AppTextStyles {
     fontWeight: FontWeight.w500,
     height: 1.4,
     textBaseline: TextBaseline.alphabetic,
-  ); // يُستخدم كنص توضيحي في شاشة Welcome أسفل العنوان
+  );
 
   static const TextStyle bold50PrimaryColor = TextStyle(
     fontSize: 50,

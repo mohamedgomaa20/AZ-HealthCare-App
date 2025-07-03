@@ -1,11 +1,13 @@
 import 'package:az_health_care/core/constants.dart';
+import 'package:az_health_care/features/Auth/presentation/views/login/login_view.dart';
 import 'package:az_health_care/features/help_and_support/presentation/views/help_and_support/help_and_support_view.dart';
-import 'package:flutter/material.dart';
+ import 'package:flutter/material.dart';
 
 import '../../../../../../../../core/utils/app_colors.dart';
 import '../../../../../../core/utils/app_text_styles.dart';
 import '../../../../../../core/widgets/custom_modal_controller.dart';
-import '../../app_appearance/app_appearance_view.dart';
+ import '../../../../../payment_methods/presentation/views/payment_methods_view.dart';
+ import '../../app_appearance/app_appearance_view.dart';
 import 'build_logout_button.dart';
 import 'build_menu_item.dart';
 
@@ -39,7 +41,12 @@ class SettingsMenuSection extends StatelessWidget {
           BuildMenuItem(
             icon: Icons.credit_card_outlined,
             title: 'Payment Methods',
-            onTap: () {},
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => PaymentMethodsView()),
+              );
+            },
           ),
           BuildMenuItem(
             icon: Icons.receipt_outlined,
@@ -54,7 +61,14 @@ class SettingsMenuSection extends StatelessWidget {
           BuildMenuItem(
             icon: Icons.analytics_outlined,
             title: 'Data & Analytics',
-            onTap: () {},
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => PaymentMethodsView()),
+              );
+
+
+            },
           ),
           BuildMenuItem(
             icon: Icons.palette_outlined,
@@ -79,7 +93,12 @@ class SettingsMenuSection extends StatelessWidget {
           BuildMenuItem(
             icon: Icons.star_outline,
             title: 'Rate us',
-            onTap: () {},
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => LoginView()),
+              );
+            },
           ),
 
           BuildLogoutButton(
@@ -94,7 +113,7 @@ class SettingsMenuSection extends StatelessWidget {
                   ),
                 ),
                 title: 'Logout',
-                 confirmText: 'Yes, Logout',
+                confirmText: 'Yes, Logout',
                 onCancel: () => Navigator.pop(context),
                 onConfirm: () {
                   Navigator.pop(context);

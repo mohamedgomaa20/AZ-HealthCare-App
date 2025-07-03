@@ -1,11 +1,12 @@
+import 'package:az_health_care/core/utils/app_text_styles.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
-import '../../../shared/styles/colors.dart';
-import '../../../shared/styles/constants.dart';
+import '../../../core/utils/app_colors.dart';
 
 class CustomTextField extends StatelessWidget {
   final String label;
-  final String hint;
+  final String? hint;
   final TextEditingController controller;
   final TextInputType keyboardType;
   final bool isPassword;
@@ -13,11 +14,12 @@ class CustomTextField extends StatelessWidget {
   final VoidCallback? togglePassword;
   final String? errorText;
   final Widget? suffixIcon;
+  final List<TextInputFormatter>? inputFormatters;
 
   const CustomTextField({
     super.key,
     required this.label,
-    required this.hint,
+    this.hint,
     required this.controller,
     this.keyboardType = TextInputType.text,
     this.isPassword = false,
@@ -25,6 +27,7 @@ class CustomTextField extends StatelessWidget {
     this.togglePassword,
     this.errorText,
     this.suffixIcon,
+    this.inputFormatters,
   });
 
   @override
@@ -32,31 +35,36 @@ class CustomTextField extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(label, style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+        Text(
+          label,
+          style: AppTextStyles.bold16.copyWith(color: AppColors.white60Color),
+        ),
         SizedBox(height: 5),
         TextField(
           controller: controller,
           keyboardType: keyboardType,
+          cursorColor: AppColors.white54Color,
+
           obscureText: isPassword && !isPasswordVisible,
+          inputFormatters: inputFormatters,
+
           decoration: InputDecoration(
             hintText: hint,
-            filled: true,
-            fillColor: kPrimaryColor.withValues(alpha: .1),
-            border: OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
-            suffixIcon: isPassword
-                ? IconButton(
-              icon: Icon(isPasswordVisible ? Icons.visibility : Icons.visibility_off),
-              onPressed: togglePassword,
-            )
-                : suffixIcon,
-
-            contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 18),
-            focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(8),
-              borderSide: BorderSide(color: Colors.black, width: 2),
+            hintStyle: AppTextStyles.regular16.copyWith(
+              color: AppColors.white60Color,
             ),
+            suffixIcon:
+                isPassword
+                    ? IconButton(
+                      icon: Icon(
+                        isPasswordVisible
+                            ? Icons.visibility
+                            : Icons.visibility_off,
+                      ),
+                      onPressed: togglePassword,
+                    )
+                    : suffixIcon,
           ),
-
         ),
         if (errorText != null)
           Padding(
@@ -70,7 +78,6 @@ class CustomTextField extends StatelessWidget {
             ),
           ),
       ],
-
     );
   }
 }

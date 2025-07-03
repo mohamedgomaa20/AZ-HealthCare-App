@@ -15,8 +15,10 @@ class CustomButton extends StatelessWidget {
     this.height,
     this.width,
     this.icon,
+    this.isLeftIcon,
   });
-final IconData? icon;
+
+  final IconData? icon;
   final String text;
   final VoidCallback? onPressed;
   final Color? backgroundColor;
@@ -24,6 +26,7 @@ final IconData? icon;
   final double? fontSize;
   final double? height;
   final double? width;
+  final bool? isLeftIcon;
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +50,18 @@ final IconData? icon;
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-
+                if (icon != null && isLeftIcon == true)
+                  Padding(
+                    padding: const EdgeInsets.only(right: 8.0),
+                    child: Icon(
+                      icon,
+                      color:
+                          onPressed == null
+                              ? AppColors.grayColor
+                              : AppColors.whiteColor,
+                      size: 22,
+                    ),
+                  ),
                 Text(
                   text,
                   style: AppTextStyles.semiBold18.copyWith(
@@ -59,14 +73,15 @@ final IconData? icon;
                             : AppColors.whiteColor,
                   ),
                 ),
-                if (icon != null)
+                if (icon != null && isLeftIcon == false)
                   Padding(
                     padding: const EdgeInsets.only(left: 8.0),
                     child: Icon(
                       icon,
-                      color: onPressed == null
-                          ? AppColors.grayColor
-                          : AppColors.whiteColor,
+                      color:
+                          onPressed == null
+                              ? AppColors.grayColor
+                              : AppColors.whiteColor,
                       size: 22,
                     ),
                   ),

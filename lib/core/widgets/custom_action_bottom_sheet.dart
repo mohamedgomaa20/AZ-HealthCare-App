@@ -36,8 +36,8 @@ class CustomActionBottomSheet extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           Container(
-            width: 50,
-            height: 3,
+            width: 36,
+            height: 4,
             margin: const EdgeInsets.only(bottom: 16),
             decoration: BoxDecoration(
               color: Colors.white24,
@@ -53,7 +53,7 @@ class CustomActionBottomSheet extends StatelessWidget {
           const Divider(color: Colors.white10, thickness: 1),
           const SizedBox(height: 16),
           centerWidget,
-          const SizedBox(height: 24),
+          const SizedBox(height: 16),
           const Divider(color: Colors.white10, thickness: 1),
           SizedBox(height: 20),
           Row(

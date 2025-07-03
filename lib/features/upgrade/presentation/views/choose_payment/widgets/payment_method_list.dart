@@ -1,71 +1,80 @@
-import 'package:az_health_care/features/upgrade/presentation/views/choose_payment/widgets/payment_method_item.dart';
-import 'package:flutter/material.dart';
+ import 'package:flutter/material.dart';
 
-import '../choose_payment_view.dart';
+import '../../../../../payment_methods/data/models/payment_method_model.dart';
+import 'custom_payment_method_tile.dart';
+
+final List<PaymentMethod> availableMethods = [
+  PaymentMethod(
+    id: 'paypal',
+    name: 'PayPal',
+    subtitle: 'mohamed.gomaa@gmail.com',
+    icon: Icons.payment,
+    isLinked: true,
+    iconColor: const Color(0xFF0070BA),
+  ),
+  PaymentMethod(
+    id: 'google_pay',
+    name: 'Google Pay',
+    subtitle: 'mohamed.gomaa@gmail.com',
+    icon: Icons.g_mobiledata,
+    isLinked: true,
+    iconColor: const Color(0xFF4285F4),
+  ),
+  PaymentMethod(
+    id: 'apple_pay',
+    name: 'Apple Pay',
+    subtitle: 'mohamed.gomaa@gmail.com',
+    icon: Icons.apple,
+    isLinked: true,
+    iconColor: Colors.white,
+  ),
+  PaymentMethod(
+    id: 'mastercard',
+    name: 'Mastercard',
+    subtitle: '•••• •••• •••• 4679',
+    icon: Icons.credit_card,
+    isLinked: true,
+    iconColor: const Color(0xFFEB001B),
+  ),
+  PaymentMethod(
+    id: 'visa',
+    name: 'Visa',
+    subtitle: '•••• •••• •••• 5567',
+    icon: Icons.credit_card,
+    isLinked: true,
+    iconColor: const Color(0xFF1A1F71),
+  ),
+  PaymentMethod(
+    id: 'amex',
+    name: 'American Express',
+    subtitle: '•••• •••• •••• 8456',
+    icon: Icons.credit_card,
+    isLinked: true,
+    iconColor: const Color(0xFF006FCF),
+  ),
+];
 
 class PaymentMethodList extends StatelessWidget {
-  final String? selectedMethod;
+  final String? selectedMethodId;
   final Function(String) onMethodSelected;
 
   const PaymentMethodList({
     super.key,
-    required this.selectedMethod,
+    required this.selectedMethodId,
     required this.onMethodSelected,
   });
 
   @override
   Widget build(BuildContext context) {
     return Column(
-      children: [
-        PaymentMethodItem(
-          icon: 'assets/paypal_icon.png',
-          title: 'PayPal',
-          subtitle: 'mohamed.gomaa@gmail.com',
-          isSelected: selectedMethod == 'PayPal',
-          onTap: () => onMethodSelected('PayPal'),
-        ),
-
-        PaymentMethodItem(
-          icon: 'assets/google_pay_icon.png',
-          title: 'Google Pay',
-          subtitle: 'mohamed.gomaa@gmail.com',
-          isSelected: selectedMethod == 'Google Pay',
-          onTap: () => onMethodSelected('Google Pay'),
-        ),
-
-        PaymentMethodItem(
-          icon: 'assets/apple_pay_icon.png',
-          title: 'Apple Pay',
-          subtitle: 'mohamed.gomaa@gmail.com',
-          isSelected: selectedMethod == 'Apple Pay',
-          onTap: () => onMethodSelected('Apple Pay'),
-        ),
-
-        // Credit Cards
-        PaymentMethodItem(
-          icon: 'assets/mastercard_icon.png',
-          title: 'Mastercard',
-          subtitle: '**** **** **** 4679',
-          isSelected: selectedMethod == 'Mastercard',
-          onTap: () => onMethodSelected('Mastercard'),
-        ),
-
-        PaymentMethodItem(
-          icon: 'assets/visa_icon.png',
-          title: 'Visa',
-          subtitle: '**** **** **** 5567',
-          isSelected: selectedMethod == 'Visa',
-          onTap: () => onMethodSelected('Visa'),
-        ),
-
-        PaymentMethodItem(
-          icon: 'assets/amex_icon.png',
-          title: 'American Express',
-          subtitle: '**** **** **** 8456',
-          isSelected: selectedMethod == 'American Express',
-          onTap: () => onMethodSelected('American Express'),
-        ),
-      ],
+      children: availableMethods.map((method) {
+        return CustomPaymentMethodTile(
+          paymentMethod: method,
+          isSelected: selectedMethodId == method.id,
+          showCheckMark: true,
+          onTap: () => onMethodSelected(method.id),
+        );
+      }).toList(),
     );
   }
 }

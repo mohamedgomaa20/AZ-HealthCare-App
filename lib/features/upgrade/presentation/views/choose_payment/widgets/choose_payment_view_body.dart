@@ -1,4 +1,4 @@
- import 'package:az_health_care/features/upgrade/presentation/views/choose_payment/widgets/payment_app_bar.dart';
+import 'package:az_health_care/features/upgrade/presentation/views/choose_payment/widgets/payment_app_bar.dart';
 import 'package:az_health_care/features/upgrade/presentation/views/choose_payment/widgets/payment_method_list.dart';
 import 'package:flutter/material.dart';
 
@@ -31,17 +31,13 @@ class _ChoosePaymentViewBodyState extends State<ChoosePaymentViewBody> {
 
                 Expanded(
                   child: SingleChildScrollView(
-                    child: Column(
-                      children: [
-                        PaymentMethodList(
-                          selectedMethod: selectedPaymentMethod,
-                          onMethodSelected: (method) {
-                            setState(() {
-                              selectedPaymentMethod = method;
-                            });
-                          },
-                        ),
-                      ],
+                    child: PaymentMethodList(
+                      selectedMethodId: selectedPaymentMethod,
+                      onMethodSelected: (id) {
+                        setState(() {
+                          selectedPaymentMethod = id;
+                        });
+                      },
                     ),
                   ),
                 ),
@@ -49,7 +45,6 @@ class _ChoosePaymentViewBodyState extends State<ChoosePaymentViewBody> {
             ),
           ),
         ),
-
         PrimaryBottomButton(
           text: "Continue",
           onTap:

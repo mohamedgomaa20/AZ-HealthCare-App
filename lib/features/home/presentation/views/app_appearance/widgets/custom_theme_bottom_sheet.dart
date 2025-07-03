@@ -1,24 +1,39 @@
+import 'package:az_health_care/features/home/presentation/views/app_appearance/widgets/theme_option.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-enum AppThemeMode { light, dark, system }
+import '../../../../../../core/utils/app_colors.dart';
+import '../../../../../../core/utils/app_text_styles.dart';
+import '../../../../../../core/widgets/custom_button.dart';
+import '../../../../data/enums/enums.dart';
+import '../app_settings_cubit/app_settings_cubit.dart';
 
-class CustomThemeBottomSheet extends StatelessWidget {
-  final AppThemeMode selectedTheme;
-  final ValueChanged<AppThemeMode> onThemeChanged;
+class CustomThemeBottomSheet extends StatefulWidget {
+  const CustomThemeBottomSheet({super.key});
 
-  const CustomThemeBottomSheet({
-    super.key,
-    required this.selectedTheme,
-    required this.onThemeChanged,
-  });
+  @override
+  State<CustomThemeBottomSheet> createState() => _CustomThemeBottomSheetState();
+}
+
+class _CustomThemeBottomSheetState extends State<CustomThemeBottomSheet> {
+  late AppThemeMode _tempSelectedTheme;
+
+  @override
+  void initState() {
+    super.initState();
+    _tempSelectedTheme = context.read<AppSettingsCubit>().state.themeMode;
+  }
 
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 20),
       decoration: const BoxDecoration(
-        color: Color(0xFF111111),
-        borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
+        color: AppColors.backgroundColor,
+        borderRadius: BorderRadius.vertical(top: Radius.circular(10)),
+        border: Border(
+          top: BorderSide(color: AppColors.white10Color, width: 1),
+        ),
       ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -32,71 +47,155 @@ class CustomThemeBottomSheet extends StatelessWidget {
               borderRadius: BorderRadius.circular(2),
             ),
           ),
-          const Text(
+          Text(
             'Choose Theme',
-            style: TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.bold,
-              color: Colors.white,
-            ),
+            style: AppTextStyles.bold22.copyWith(color: AppColors.primaryColor),
           ),
           const SizedBox(height: 16),
-
-          _ThemeOption(
+          const Divider(color: Colors.white10, thickness: 1),
+          ThemeOption(
             label: 'Light Theme',
             value: AppThemeMode.light,
-            selected: selectedTheme == AppThemeMode.light,
-            onTap: () => onThemeChanged(AppThemeMode.light),
+            selected: _tempSelectedTheme == AppThemeMode.light,
+            onTap: () {
+              setState(() {
+                _tempSelectedTheme = AppThemeMode.light;
+              });
+            },
           ),
-          _ThemeOption(
+          ThemeOption(
             label: 'Dark Theme',
             value: AppThemeMode.dark,
-            selected: selectedTheme == AppThemeMode.dark,
-            onTap: () => onThemeChanged(AppThemeMode.dark),
+            selected: _tempSelectedTheme == AppThemeMode.dark,
+            onTap: () {
+              setState(() {
+                _tempSelectedTheme = AppThemeMode.dark;
+              });
+            },
           ),
-          _ThemeOption(
+          ThemeOption(
             label: 'System Default',
             value: AppThemeMode.system,
-            selected: selectedTheme == AppThemeMode.system,
-            onTap: () => onThemeChanged(AppThemeMode.system),
+            selected: _tempSelectedTheme == AppThemeMode.system,
+            onTap: () {
+              setState(() {
+                _tempSelectedTheme = AppThemeMode.system;
+              });
+            },
           ),
-
-          const SizedBox(height: 16),
+          const Divider(color: Colors.white10, thickness: 1),
+          const SizedBox(height: 20),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Expanded(
+                child: CustomButton(
+                  text: "Cancel",
+                  backgroundColor: AppColors.darkGray,
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                ),
+              ),
+              const SizedBox(width: 16),
+              Expanded(
+                child: CustomButton(
+                  text: "Ok",
+                  onPressed: () {
+                    context.read<AppSettingsCubit>().changeTheme(
+                      _tempSelectedTheme,
+                    );
+                    Navigator.of(context).pop();
+                  },
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 20),
         ],
       ),
     );
   }
 }
 
-class _ThemeOption extends StatelessWidget {
-  final String label;
-  final AppThemeMode value;
-  final bool selected;
-  final VoidCallback onTap;
-
-  const _ThemeOption({
-    required this.label,
-    required this.value,
-    required this.selected,
-    required this.onTap,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return ListTile(
-      onTap: onTap,
-      contentPadding: EdgeInsets.zero,
-      leading: Icon(
-        selected ? Icons.radio_button_checked : Icons.radio_button_off,
-        color: selected ? Colors.white : Colors.white54,
-      ),
-      title: Text(
-        label,
-        style: TextStyle(
-          color: selected ? Colors.white : Colors.white70,
-          fontWeight: selected ? FontWeight.bold : FontWeight.normal,
-        ),
-      ),
-    );
-  }
-}
+//دون الازرار في الشيتب
+// class CustomThemeBottomSheet extends StatelessWidget {
+//   final AppThemeMode selectedTheme;
+//   final ValueChanged<AppThemeMode> onThemeChanged;
+//
+//   const CustomThemeBottomSheet({
+//     super.key,
+//     required this.selectedTheme,
+//     required this.onThemeChanged,
+//   });
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return Container(
+//       padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 20),
+//       decoration: const BoxDecoration(
+//         color: AppColors.backgroundColor,
+//         borderRadius: BorderRadius.vertical(top: Radius.circular(10)),
+//         border: Border(
+//           top: BorderSide(color: AppColors.white10Color, width: 1),
+//         ),
+//       ),
+//       child: Column(
+//         mainAxisSize: MainAxisSize.min,
+//         children: [
+//           Container(
+//             width: 36,
+//             height: 4,
+//             margin: const EdgeInsets.only(bottom: 16),
+//             decoration: BoxDecoration(
+//               color: Colors.white24,
+//               borderRadius: BorderRadius.circular(2),
+//             ),
+//           ),
+//           Text(
+//             'Choose Theme',
+//             style: AppTextStyles.bold22.copyWith(color: AppColors.primaryColor),
+//           ),
+//           const SizedBox(height: 16),
+//           const Divider(color: Colors.white10, thickness: 1),
+//
+//           _ThemeOption(
+//             label: 'Light Theme',
+//             value: AppThemeMode.light,
+//             selected: selectedTheme == AppThemeMode.light,
+//             onTap: () => onThemeChanged(AppThemeMode.light),
+//           ),
+//           _ThemeOption(
+//             label: 'Dark Theme',
+//             value: AppThemeMode.dark,
+//             selected: selectedTheme == AppThemeMode.dark,
+//             onTap: () => onThemeChanged(AppThemeMode.dark),
+//           ),
+//           _ThemeOption(
+//             label: 'System Default',
+//             value: AppThemeMode.system,
+//             selected: selectedTheme == AppThemeMode.system,
+//             onTap: () => onThemeChanged(AppThemeMode.system),
+//           ),
+//           const Divider(color: Colors.white10, thickness: 1),
+//           SizedBox(height: 20),
+//           Row(
+//             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+//             children: [
+//               Expanded(
+//                 child: CustomButton(
+//                   text: "Cancel",
+//                   backgroundColor: AppColors.darkGray,
+//                   onPressed: () {},
+//                 ),
+//               ),
+//               const SizedBox(width: 16),
+//               Expanded(child: CustomButton(text: "Ok", onPressed: () {})),
+//             ],
+//           ),
+//           const SizedBox(height: 20),
+//         ],
+//       ),
+//     );
+//   }
+// }

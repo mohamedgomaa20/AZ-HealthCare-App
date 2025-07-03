@@ -1,5 +1,8 @@
 import 'package:az_health_care/core/utils/app_colors.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+
+import '../utils/app_text_styles.dart';
 
 class CustomTextFormField extends StatelessWidget {
   const CustomTextFormField({
@@ -11,10 +14,11 @@ class CustomTextFormField extends StatelessWidget {
     this.onChanged,
     this.onSaved,
     this.validation,
-    required this.prefixIconData,
+    this.prefixIconData,
     this.suffixIconData,
     this.suffixOnPressed,
     this.maxLines,
+    this.inputFormatters,
   });
 
   final int? maxLines;
@@ -25,9 +29,10 @@ class CustomTextFormField extends StatelessWidget {
   final void Function(String)? onChanged;
   final void Function(String?)? onSaved;
   final String? Function(String?)? validation;
-  final IconData prefixIconData;
+  final IconData? prefixIconData;
   final IconData? suffixIconData;
   final VoidCallback? suffixOnPressed;
+  final List<TextInputFormatter>? inputFormatters;
 
   @override
   Widget build(BuildContext context) {
@@ -37,29 +42,30 @@ class CustomTextFormField extends StatelessWidget {
       keyboardType: keyboardType,
       controller: controller,
       obscureText: isPassword ?? false,
+      inputFormatters: inputFormatters,
+
       onChanged: onChanged,
       validator: validation,
       onSaved: onSaved,
 
       decoration: InputDecoration(
-        filled: true,
-        fillColor: AppColors.buttonColor,
-        prefixIcon: Icon(prefixIconData),
+        prefixIcon: prefixIconData == null ? null : Icon(prefixIconData),
         suffixIcon: IconButton(
           onPressed: suffixOnPressed,
           icon: Icon(suffixIconData),
         ),
         hintText: hintText,
-
-        border: OutlineInputBorder(),
-
-        focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(4),
-          borderSide: BorderSide(color: AppColors.primaryColor, width: 2),
+        hintStyle: AppTextStyles.regular16.copyWith(
+          color: AppColors.white60Color,
         ),
-        enabledBorder: buildBorder(),
-        disabledBorder: buildBorder(),
-        errorBorder: OutlineInputBorder(),
+        // border: OutlineInputBorder(),
+        // focusedBorder: OutlineInputBorder(
+        //   borderRadius: BorderRadius.circular(4),
+        //   borderSide: BorderSide(color: AppColors.primaryColor, width: 2),
+        // ),
+        // enabledBorder: buildBorder(),
+        // disabledBorder: buildBorder(),
+        // errorBorder: OutlineInputBorder(),
         // focusedErrorBorder: buildBorder(),
       ),
     );
