@@ -28,8 +28,8 @@ class HomeLayout extends StatelessWidget {
                 }
                 return null;
               }),
-              labelBehavior:
-                  NavigationDestinationLabelBehavior.onlyShowSelected,
+              // labelBehavior:
+              //     NavigationDestinationLabelBehavior.onlyShowSelected,
               backgroundColor: AppColors.backgroundColor,
               indicatorColor: AppColors.blackColor,
               overlayColor: WidgetStateProperty.all(AppColors.primaryColor),

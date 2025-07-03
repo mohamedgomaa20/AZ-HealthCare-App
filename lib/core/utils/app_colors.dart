@@ -22,9 +22,11 @@ abstract class AppColors {
   static const Color darkNavyColor = Color(0xFF111827);
 
   static const Color blackColor = Colors.black;
-  static const Color almostBlackColor = Color(0xFF1A1A1A);
+  static const Color black87Color = Colors.black87;
+   static const Color almostBlackColor = Color(0xFF1A1A1A);
   static const Color cardDarkGrayColor = Color(0xFF2A2A2A);
   static const Color amberColor = Colors.amber;
+  static   Color grayShade200Color = Colors.grey.shade200;
   static const Color primaryBlueColor = Color(0xFF2196F3);
   static const Color primaryGreenColor = Color(0xFF4CAF50);
   static const Color primaryGreenColor2 = Color(0xFF45A049);
@@ -35,7 +37,6 @@ abstract class AppColors {
   static const Color white60Color = Colors.white60;
   static const Color white54Color = Colors.white54;
   static const Color white30Color = Colors.white30;
-  static const Color black87Color = Colors.black87;
 
   static const Color yellowColor = Colors.yellow;
   static const Color grayColor = Colors.grey;
@@ -109,6 +110,11 @@ abstract class AppColors {
   static const Color paypalColor = Color(0xFF0070BA);
   static const Color googlePayColor = Color(0xFF4285F4);
   static const Color applePayColor = Colors.white;
+
+  // Social media colors
+  static const Color googleColor = Color(0xFFEA4335);
+  static const Color facebookColor = Color(0xFF1877F2);
+  static const Color twitterColor = Color(0xFF1DA1F2);
   /*
   good!!
      backgroundColor: const Color(0xFF12151C)

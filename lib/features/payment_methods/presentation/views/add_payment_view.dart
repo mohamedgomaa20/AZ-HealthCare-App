@@ -1,6 +1,7 @@
 import 'package:az_health_care/core/services/show_toast.dart';
 import 'package:az_health_care/core/utils/app_colors.dart';
 import 'package:flutter/material.dart';
+import 'package:icons_plus/icons_plus.dart';
 
 import '../../../home/presentation/views/profile/widgets/primary_bottom_button.dart';
 import '../../../upgrade/presentation/views/choose_payment/widgets/payment_app_bar.dart';
@@ -88,7 +89,10 @@ class _AddPaymentViewState extends State<AddPaymentView> {
             CustomAppBar(
               title: "Add New Payment",
               trailingWidget: IconButton(
-                icon: const Icon(Icons.refresh, color: Colors.white),
+                icon: const Icon(
+                  Iconsax.scan_outline,
+                  color: AppColors.whiteColor,
+                ),
                 onPressed: _resetFields,
               ),
             ),

@@ -1,10 +1,10 @@
+import 'package:az_health_care/features/upgrade/presentation/views/choose_payment/widgets/payment_app_bar.dart';
 import 'package:az_health_care/features/upgrade/presentation/views/upgrade_plan/widgets/plan_toggle_switch.dart';
 import 'package:az_health_care/features/upgrade/presentation/views/upgrade_plan/widgets/subscription_plan_card.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../home/presentation/views/profile/widgets/primary_bottom_button.dart';
 import '../../choose_payment/choose_payment_view.dart';
-import 'custom_appBar.dart';
 
 class UpgradePanViewBody extends StatefulWidget {
   const UpgradePanViewBody({super.key});
@@ -21,7 +21,8 @@ class _UpgradePanViewBodyState extends State<UpgradePanViewBody> {
     return SafeArea(
       child: Column(
         children: [
-          CustomAppBar(),
+          CustomAppBar(title: 'Upgrade Plan',),
+          SizedBox(height: 15,),
           Expanded(
             child: Padding(
               padding: EdgeInsets.symmetric(horizontal: 20),

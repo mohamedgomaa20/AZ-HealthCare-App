@@ -1,4 +1,6 @@
 import 'package:az_health_care/core/constants.dart';
+import 'package:az_health_care/core/utils/app_colors.dart';
+import 'package:az_health_care/core/utils/app_text_styles.dart';
 import 'package:flutter/material.dart';
 
 class BuildMenuItem extends StatelessWidget {
@@ -9,6 +11,7 @@ class BuildMenuItem extends StatelessWidget {
     required this.onTap,
     this.leadingIconColor,
     this.trailingWidget,
+    this.verticalPadding,
   });
 
   final String title;
@@ -16,6 +19,7 @@ class BuildMenuItem extends StatelessWidget {
   final VoidCallback onTap;
   final Color? leadingIconColor;
   final Widget? trailingWidget;
+  final double? verticalPadding;
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +29,7 @@ class BuildMenuItem extends StatelessWidget {
         onTap: onTap,
         borderRadius: BorderRadius.circular(kPrimaryBorderRadius),
         child: Container(
-          padding: EdgeInsets.symmetric(horizontal: 16, vertical: 18),
+          padding: EdgeInsets.symmetric(horizontal: 16, vertical: verticalPadding??18),
           child: Row(
             children: [
               if (icon != null)
@@ -40,11 +44,8 @@ class BuildMenuItem extends StatelessWidget {
               Expanded(
                 child: Text(
                   title,
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 18,
-                    fontWeight: FontWeight.w500,
-                  ),
+                  style: AppTextStyles.semiBold16.copyWith(
+                      color: AppColors.white70Color),
                 ),
               ),
               if (trailingWidget != null) trailingWidget!,

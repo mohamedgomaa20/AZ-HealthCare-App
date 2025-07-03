@@ -5,8 +5,7 @@ import 'package:flutter/material.dart';
 import '../../../../core/utils/app_colors.dart';
 import '../../data/models/payment_method_model.dart';
 import '../../../upgrade/presentation/views/choose_payment/widgets/custom_payment_method_tile.dart';
-import '../widgets/payment_method_tile.dart';
-import 'add_payment_view.dart';
+ import 'add_payment_view.dart';
 
 class PaymentMethodsView extends StatefulWidget {
   const PaymentMethodsView({super.key});

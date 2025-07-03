@@ -1,3 +1,4 @@
+import 'package:az_health_care/core/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:az_health_care/core/utils/app_colors.dart';
 import 'package:az_health_care/core/utils/app_text_styles.dart';
@@ -27,7 +28,7 @@ class CustomPaymentMethodTile extends StatelessWidget {
       margin: const EdgeInsets.only(bottom: 12),
       decoration: BoxDecoration(
         color: AppColors.blueGrayBackground2,
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: BorderRadius.circular(kPrimaryBorderRadius),
         border: isSelected != null && isSelected == true
             ? Border.all(color: AppColors.primaryColor, width: 2)
             : Border.all(color: AppColors.blueGrayBackground2, width: 2),
@@ -35,7 +36,7 @@ class CustomPaymentMethodTile extends StatelessWidget {
       child: Material(
         color: Colors.transparent,
         child: InkWell(
-          borderRadius: BorderRadius.circular(16),
+          borderRadius: BorderRadius.circular(kPrimaryBorderRadius),
           onTap: onTap,
           child: Padding(
             padding: const EdgeInsets.all(16),
