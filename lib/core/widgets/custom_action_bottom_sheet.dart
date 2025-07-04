@@ -10,6 +10,7 @@ class CustomActionBottomSheet extends StatelessWidget {
   final VoidCallback onConfirm;
   final VoidCallback onCancel;
   final Widget centerWidget;
+  final bool? isHasButtons;
 
   const CustomActionBottomSheet({
     super.key,
@@ -18,6 +19,7 @@ class CustomActionBottomSheet extends StatelessWidget {
     required this.onConfirm,
     required this.onCancel,
     required this.centerWidget,
+    this.isHasButtons,
   });
 
   @override
@@ -53,25 +55,36 @@ class CustomActionBottomSheet extends StatelessWidget {
           const Divider(color: Colors.white10, thickness: 1),
           const SizedBox(height: 16),
           centerWidget,
-          const SizedBox(height: 16),
-          const Divider(color: Colors.white10, thickness: 1),
-          SizedBox(height: 20),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Expanded(
-                child: CustomButton(
-                  text: "Cancel",
-                  backgroundColor: AppColors.darkGray,
-                  onPressed: onCancel,
+          if (isHasButtons != null && !isHasButtons!)
+            const Divider(color: Colors.white10, thickness: 1),
+          if (isHasButtons != null && isHasButtons!)
+            Column(
+              children: [
+                const SizedBox(height: 16),
+                const Divider(color: Colors.white10, thickness: 1),
+                SizedBox(height: 20),
+
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Expanded(
+                      child: CustomButton(
+                        text: "Cancel",
+                        backgroundColor: AppColors.darkGray,
+                        onPressed: onCancel,
+                      ),
+                    ),
+                    const SizedBox(width: 16),
+                    Expanded(
+                      child: CustomButton(
+                        text: confirmText,
+                        onPressed: onConfirm,
+                      ),
+                    ),
+                  ],
                 ),
-              ),
-              const SizedBox(width: 16),
-              Expanded(
-                child: CustomButton(text: confirmText, onPressed: onConfirm),
-              ),
-            ],
-          ),
+              ],
+            ),
           SizedBox(height: 20),
         ],
       ),

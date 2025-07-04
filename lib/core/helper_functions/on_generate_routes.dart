@@ -11,11 +11,11 @@ import '../../features/Auth/presentation/views/welcome_to_a2z_care/welcome_to_a2
 import '../../features/home/presentation/views/home_layout.dart';
 import '../../features/home/presentation/views/home/home_view.dart';
 import '../../features/home/presentation/views/notification/notification_view.dart';
+import '../../features/home/presentation/views/personal_info/personal_info_view.dart';
 import '../../features/home/presentation/views/profile/profile_view.dart';
- import '../../features/home/presentation/views/tracker/tracker_view.dart';
+import '../../features/home/presentation/views/tracker/tracker_view.dart';
 import '../../features/home/presentation/views/vip/vip_view.dart';
 import '../../features/onboarding_profile_setup/presentation/views/onboarding_profile_setup_view.dart';
-import '../../features/personal_info/presentation/views/personal_info_view.dart';
 import '../../features/settings/presentation/views/change_password/change_password_view.dart';
 import '../../features/settings/presentation/views/send_email/send_email_view.dart';
 
@@ -64,8 +64,7 @@ Route<dynamic> onGenerateRoute(RouteSettings settings) {
       return MaterialPageRoute(
         builder: (context) => const OnboardingProfileSetupView(),
       );
-    // case AccountSetupFlow.routeName:
-    //   return MaterialPageRoute(builder: (context) => const AccountSetupFlow());
+
     case AllSetPasswordView.routeName:
       return MaterialPageRoute(
         builder: (context) => const AllSetPasswordView(),
@@ -75,10 +74,9 @@ Route<dynamic> onGenerateRoute(RouteSettings settings) {
     case ChangePasswordView.routeName:
       return MaterialPageRoute(
         builder: (context) => const ChangePasswordView(),
-      );    case SendEmailView.routeName:
-      return MaterialPageRoute(
-        builder: (context) => const SendEmailView(),
       );
+    case SendEmailView.routeName:
+      return MaterialPageRoute(builder: (context) => const SendEmailView());
     default:
       return MaterialPageRoute(builder: (context) => const Scaffold());
   }

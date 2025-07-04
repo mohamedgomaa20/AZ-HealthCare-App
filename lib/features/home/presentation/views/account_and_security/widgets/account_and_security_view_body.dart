@@ -1,10 +1,18 @@
 import 'package:az_health_care/core/constants.dart';
- import 'package:az_health_care/features/home/presentation/views/account_and_security/widgets/security_switch_tile.dart';
+import 'package:az_health_care/core/widgets/custom_loading_dialog.dart';
+import 'package:az_health_care/features/get_start/presentation/views/get_start_view.dart';
+import 'package:az_health_care/features/home/presentation/views/account_and_security/widgets/security_switch_tile.dart';
+import 'package:az_health_care/features/home/presentation/views/home/home_view.dart';
+import 'package:az_health_care/features/settings/presentation/views/change_password/change_password_view.dart';
+import 'package:az_health_care/modules/get_started/get_started_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:az_health_care/features/upgrade/presentation/views/choose_payment/widgets/payment_app_bar.dart';
 
+import '../../../../../../core/services/show_toast.dart';
 import '../../../../../../core/utils/app_colors.dart';
 import '../../../../../../core/widgets/build_switch_item.dart';
+import '../../../../../../core/widgets/custom_confirmation_dialog.dart';
+import '../../../../../../layout/app_layout.dart';
 import '../../data_and_analytics/widgets/settings_tile.dart';
 import '../../profile/widgets/build_menu_item.dart';
 
@@ -28,12 +36,12 @@ class _AccountAndSecurityViewBodyState
     return SafeArea(
       child: Column(
         children: [
-          const CustomAppBar(title: 'Security'),
+          const CustomAppBar(title: 'Account & Security'),
           const SizedBox(height: 15),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
             child: Container(
-              padding: const EdgeInsets.all(5),
+              // padding: const EdgeInsets.all(5),
               decoration: BoxDecoration(
                 color: AppColors.blueGrayBackground2,
                 borderRadius: BorderRadius.circular(kPrimaryBorderRadius),
@@ -62,7 +70,17 @@ class _AccountAndSecurityViewBodyState
                     onChanged: (v) => setState(() => googleAuth = v),
                   ),
 
-                  BuildMenuItem(title: 'Change Password', onTap: () {}),
+                  BuildMenuItem(
+                    title: 'Change Password',
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => ChangePasswordView(),
+                        ),
+                      );
+                    },
+                  ),
                   SettingsTile(
                     title: 'Device Management',
                     subtitle:
@@ -80,11 +98,74 @@ class _AccountAndSecurityViewBodyState
 
                   SettingsTile(
                     isDanger: true,
-                    title: 'Data Usage',
+                    title: 'Delete Account',
                     subtitle:
-                        'Control how your data is used for analytics. Customize your preferences.',
+                        'Permanently remove your account and data. Proceed with caution.',
                     onTap: () {
-                      // navigate or show dialog
+                      showCustomConfirmationDialog(
+                        content: "",
+                        context: context,
+                        title: 'Delete Account',
+                        contentWidget: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              children: [
+                                Icon(
+                                  Icons.warning_amber_rounded,
+                                  color: AppColors.errorColor, // أو Colors.red
+                                  size: 30,
+                                ),
+                                const SizedBox(width: 5),
+                                Expanded(
+                                  child: Text(
+                                    'This action is irreversible!',
+                                    style: TextStyle(
+                                      color: AppColors.errorColor,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 16,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            const SizedBox(height: 15),
+                            Text(
+                              'Are you sure you want to delete your account? This will permanently remove all your data and cannot be undone.',
+                              style: TextStyle(color: AppColors.white70Color),
+                            ),
+                          ],
+                        ),
+                        confirmText: 'Delete',
+                        onConfirm: () {
+                          ///TODO : delete account
+                          showDialog(
+                            context: context,
+                            barrierDismissible: false,
+                            builder:
+                                (_) => CustomLoadingDialog(
+                                  message: 'Deleting Account...',
+                                  onComplete: () async {
+                                    ToastHelper.showToast2(
+                                      context: context,
+                                      msg: 'Account deleted successfully',
+                                      state: ToastStates.SUCCESS,
+                                    );
+                                    Navigator.pushAndRemoveUntil(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder:
+                                            (context) => const GetStartView(),
+                                      ),
+                                      (route) => false,
+                                    );
+                                  },
+                                ),
+                          );
+                        },
+                      );
                     },
                   ),
                 ],

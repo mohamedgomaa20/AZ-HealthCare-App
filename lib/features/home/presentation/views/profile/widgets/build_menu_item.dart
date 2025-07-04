@@ -12,6 +12,7 @@ class BuildMenuItem extends StatelessWidget {
     this.leadingIconColor,
     this.trailingWidget,
     this.verticalPadding,
+    this.hasArrow,
   });
 
   final String title;
@@ -20,6 +21,7 @@ class BuildMenuItem extends StatelessWidget {
   final Color? leadingIconColor;
   final Widget? trailingWidget;
   final double? verticalPadding;
+  final bool? hasArrow;
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +31,10 @@ class BuildMenuItem extends StatelessWidget {
         onTap: onTap,
         borderRadius: BorderRadius.circular(kPrimaryBorderRadius),
         child: Container(
-          padding: EdgeInsets.symmetric(horizontal: 16, vertical: verticalPadding??18),
+          padding: EdgeInsets.symmetric(
+            horizontal: 16,
+            vertical: verticalPadding ?? 18,
+          ),
           child: Row(
             children: [
               if (icon != null)
@@ -45,16 +50,18 @@ class BuildMenuItem extends StatelessWidget {
                 child: Text(
                   title,
                   style: AppTextStyles.semiBold16.copyWith(
-                      color: AppColors.white70Color),
+                    color: AppColors.white70Color,
+                  ),
                 ),
               ),
               if (trailingWidget != null) trailingWidget!,
               if (trailingWidget != null) SizedBox(width: 5),
-              Icon(
-                Icons.chevron_right,
-                color: Colors.white.withValues(alpha: 0.6),
-                size: 24,
-              ),
+              if (hasArrow == true)
+                Icon(
+                  Icons.chevron_right,
+                  color: Colors.white.withValues(alpha: 0.6),
+                  size: 24,
+                ),
             ],
           ),
         ),

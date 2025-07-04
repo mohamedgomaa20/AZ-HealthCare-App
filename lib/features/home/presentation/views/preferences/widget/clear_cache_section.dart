@@ -20,6 +20,7 @@ class ClearCacheSection extends StatelessWidget {
       value: cacheSize,
       onTap:
           () => showCustomConfirmationDialog(
+
         context: context,
         title: 'Clear Cache',
         content: 'Clear $cacheSize of cached data?',

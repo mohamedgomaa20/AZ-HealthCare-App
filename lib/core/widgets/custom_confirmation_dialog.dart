@@ -6,6 +6,8 @@ Future<void> showCustomConfirmationDialog({
   required BuildContext context,
   required String title,
   required String content,
+    Widget? contentWidget,
+
   required String confirmText,
   required VoidCallback onConfirm,
   String cancelText = 'Cancel',
@@ -30,10 +32,12 @@ Future<void> showCustomConfirmationDialog({
             title,
             style: TextStyle(color: titleColor ?? AppColors.whiteColor),
           ),
-          content: Text(
-            content,
-            style: TextStyle(color: contentColor ?? AppColors.white54Color),
-          ),
+          content:
+              contentWidget ??
+              Text(
+                content,
+                style: TextStyle(color: contentColor ?? AppColors.white54Color),
+              ),
           actions: [
             TextButton(
               onPressed: () => Navigator.pop(context),

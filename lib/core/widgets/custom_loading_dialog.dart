@@ -1,7 +1,7 @@
 import 'dart:ui';
+import 'package:az_health_care/core/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:az_health_care/core/utils/app_colors.dart';
-
 
 class CustomLoadingDialog extends StatefulWidget {
   final String message;
@@ -54,7 +54,7 @@ class _CustomLoadingDialogState extends State<CustomLoadingDialog> {
 
               decoration: BoxDecoration(
                 color: AppColors.blueGrayBackground,
-                borderRadius: BorderRadius.circular(20),
+                borderRadius: BorderRadius.circular(kPrimaryBorderRadius),
                 boxShadow: [
                   BoxShadow(
                     color: Colors.black.withValues(alpha: 0.3),

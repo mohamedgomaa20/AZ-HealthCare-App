@@ -10,15 +10,6 @@ class ChangePasswordView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: ChangePasswordViewBody(),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          // Navigator.pushNamed(context, AccountSetupFlow.routeName);
-          Navigator.pushNamed(context, SendEmailView.routeName);
-        },
-        child: Icon(Icons.send),
-      ),
-    );
+    return Scaffold(body: ChangePasswordViewBody());
   }
 }

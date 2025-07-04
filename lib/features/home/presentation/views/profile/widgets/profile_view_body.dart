@@ -4,7 +4,8 @@ import 'package:az_health_care/features/home/presentation/views/profile/widgets/
 
 import 'package:flutter/material.dart';
 
-import '../../../../../upgrade/presentation/views/upgrade_plan/upgrade_plan_view.dart';
+ import '../../../../../upgrade/presentation/views/upgrade_plan/upgrade_plan_view.dart';
+import '../../personal_info/personal_info_view.dart';
 import 'build_profile_app_bar.dart';
 import 'build_user_profile_card.dart';
 
@@ -40,7 +41,12 @@ class ProfileViewBody extends StatelessWidget {
 
                     BuildUserProfileCard(
                       onTap: () {
-                        print("object");
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => PersonalInfoView(),
+                          ),
+                        );
                       },
                       name: "Mohamed Gomaa",
                       email: 'mohamed.gomaa@gmail.com',

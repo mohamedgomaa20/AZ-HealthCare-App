@@ -3,7 +3,8 @@ import 'package:az_health_care/features/Auth/presentation/views/welcome_to_a2z_c
 import 'package:az_health_care/features/Auth/presentation/views/welcome_to_a2z_care/widgets/welcome_header.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../../personal_info/presentation/views/personal_info_view.dart';
+import '../../../../../home/presentation/views/personal_info/personal_info_view.dart';
+
 
 class WelcomeToA2zCareViewBody extends StatelessWidget {
   const WelcomeToA2zCareViewBody({super.key});

@@ -9,6 +9,7 @@ Future<dynamic> showCustomModalBottomSheet({
   required VoidCallback onCancel,
   required VoidCallback onConfirm,
   required Widget centerWidget,
+  bool? isHasButtons,
 }) {
   {
     return showModalBottomSheet(
@@ -22,6 +23,7 @@ Future<dynamic> showCustomModalBottomSheet({
           confirmText: confirmText,
           onCancel: onCancel,
           onConfirm: onConfirm,
+          isHasButtons: isHasButtons,
         );
       },
     );
