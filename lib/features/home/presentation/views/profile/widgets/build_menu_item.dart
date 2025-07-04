@@ -13,12 +13,14 @@ class BuildMenuItem extends StatelessWidget {
     this.trailingWidget,
     this.verticalPadding,
     this.hasArrow,
+    this.titleColor,
   });
 
   final String title;
   final IconData? icon;
   final VoidCallback onTap;
   final Color? leadingIconColor;
+  final Color? titleColor;
   final Widget? trailingWidget;
   final double? verticalPadding;
   final bool? hasArrow;
@@ -50,7 +52,7 @@ class BuildMenuItem extends StatelessWidget {
                 child: Text(
                   title,
                   style: AppTextStyles.semiBold16.copyWith(
-                    color: AppColors.white70Color,
+                    color: titleColor ?? AppColors.white70Color,
                   ),
                 ),
               ),

@@ -75,15 +75,6 @@ class SignUpViewBody extends StatelessWidget {
                   confirmPasswordController: confirmPasswordController,
                 ),
                 SizedBox(height: 10),
-                CustomPasswordFormField(
-                  label: "Current Password",
-                  hintText: "current password",
-                  controller: emailController,
-                  isPassword: cubit.isConfirmPassword,
-                  suffixIcon: cubit.suffixIconConfirmPassword,
-                  onChanged: (value) => cubit.onConfirmPasswordChanged(value),
-                  onToggleVisibility: cubit.toggleConfirmPasswordVisibility,
-                ),
 
                 const SizedBox(height: 10),
                 AgreeWithActionText(

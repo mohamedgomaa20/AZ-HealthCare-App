@@ -147,6 +147,7 @@ class SettingsMenuSection extends StatelessWidget {
                 ),
                 title: 'Logout',
                 confirmText: 'Yes, Logout',
+                isHasButtons: true,
                 onCancel: () => Navigator.pop(context),
                 onConfirm: () {
                   Navigator.pop(context);

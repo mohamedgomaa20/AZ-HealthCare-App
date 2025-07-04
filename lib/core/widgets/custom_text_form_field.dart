@@ -19,6 +19,8 @@ class CustomTextFormField extends StatelessWidget {
     this.suffixOnPressed,
     this.maxLines,
     this.inputFormatters,
+    this.readOnly,
+    this.onTap
   });
 
   final int? maxLines;
@@ -32,7 +34,9 @@ class CustomTextFormField extends StatelessWidget {
   final IconData? prefixIconData;
   final IconData? suffixIconData;
   final VoidCallback? suffixOnPressed;
+  final VoidCallback? onTap;
   final List<TextInputFormatter>? inputFormatters;
+  final bool? readOnly;
 
   @override
   Widget build(BuildContext context) {
@@ -43,11 +47,11 @@ class CustomTextFormField extends StatelessWidget {
       controller: controller,
       obscureText: isPassword ?? false,
       inputFormatters: inputFormatters,
-
+      readOnly: readOnly ?? false,
       onChanged: onChanged,
       validator: validation,
       onSaved: onSaved,
-
+      onTap: onTap,
       decoration: InputDecoration(
         prefixIcon: prefixIconData == null ? null : Icon(prefixIconData),
         suffixIcon: IconButton(

@@ -6,20 +6,20 @@ import 'custom_button.dart';
 
 class CustomActionBottomSheet extends StatelessWidget {
   final String title;
-  final String confirmText;
-  final VoidCallback onConfirm;
-  final VoidCallback onCancel;
+  final String? confirmText;
+  final VoidCallback? onConfirm;
+  final VoidCallback? onCancel;
   final Widget centerWidget;
   final bool? isHasButtons;
 
   const CustomActionBottomSheet({
     super.key,
     required this.title,
-    required this.confirmText,
-    required this.onConfirm,
-    required this.onCancel,
+    this.confirmText,
+    this.onConfirm,
+    this.onCancel,
     required this.centerWidget,
-    this.isHasButtons,
+    this.isHasButtons = true,
   });
 
   @override
@@ -77,7 +77,7 @@ class CustomActionBottomSheet extends StatelessWidget {
                     const SizedBox(width: 16),
                     Expanded(
                       child: CustomButton(
-                        text: confirmText,
+                        text: confirmText ?? "Save",
                         onPressed: onConfirm,
                       ),
                     ),
