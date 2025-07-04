@@ -23,7 +23,7 @@ void main() async {
     MultiBlocProvider(
       providers: [
         BlocProvider(create: (context) => AppSettingsCubit()),
-        BlocProvider(create: (context) => WaterTrackingCubit()),
+        BlocProvider(create: (context) => WaterTrackingCubit()..loadData(), ),
       ],
       child: AZHealthCareApp(),
     ),

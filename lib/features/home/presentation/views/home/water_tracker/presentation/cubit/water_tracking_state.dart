@@ -5,6 +5,8 @@ import '../models/water_intake_entry_model.dart';
 abstract class WaterTrackingState {}
 
 class WaterTrackingInitial extends WaterTrackingState {}
+class WaterTrackingUpdated extends WaterTrackingState {}
+class WaterTrackingChangeGoal extends WaterTrackingState {}
 
 class WaterTrackingLoading extends WaterTrackingState {}
 class WaterTrackingLoaded extends WaterTrackingState {

@@ -19,6 +19,17 @@ class DailyWaterGoalModel {
       'achievedAmount': achievedAmount,
     };
   }
+  DailyWaterGoalModel copyWith({
+    String? date,
+    int? targetAmount,
+    int? achievedAmount,
+  }) {
+    return DailyWaterGoalModel(
+      date: date ?? this.date,
+      targetAmount: targetAmount ?? this.targetAmount,
+      achievedAmount: achievedAmount ?? this.achievedAmount,
+    );
+  }
 
   factory DailyWaterGoalModel.fromMap(Map<String, dynamic> map) {
     return DailyWaterGoalModel(

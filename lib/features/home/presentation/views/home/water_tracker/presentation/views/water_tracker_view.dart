@@ -5,9 +5,6 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 import 'dart:math' as math;
 
-import 'package:flutter_bloc/flutter_bloc.dart';
-
-import '../cubit/water_tracking_cubit.dart';
 
 class WaterTrackerHome extends StatefulWidget {
   const WaterTrackerHome({super.key});
@@ -186,10 +183,7 @@ class _WaterTrackerHomeState extends State<WaterTrackerHome>
       ),
       floatingActionButton: FloatingActionButton(onPressed: () {
         Navigator.push(context, MaterialPageRoute(builder: (context) =>
-            BlocProvider(
-                create: (context) => WaterTrackingCubit(),
-                child: WaterTrackingScreen(),
-            ),));
+            WaterTrackingScreen(),));
       }),
     );
   }
