@@ -1,4 +1,4 @@
-import 'package:az_health_care/features/home/presentation/views/profile/widgets/primary_bottom_button.dart';
+import 'package:az_health_care/core/widgets/primary_bottom_button.dart';
 import 'package:az_health_care/features/upgrade/presentation/views/choose_payment/widgets/payment_app_bar.dart';
 import 'package:flutter/material.dart';
 

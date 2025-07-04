@@ -125,7 +125,7 @@ class PersonalInfoCubit extends Cubit<PersonalInfoState> {
     emit(PersonalInfoLoadingState());
 
     Future.delayed(const Duration(seconds: 2), () {
-      emit(PersonalInfoSuccessState());
+      // emit(PersonalInfoSuccessState());
     });
   }
 

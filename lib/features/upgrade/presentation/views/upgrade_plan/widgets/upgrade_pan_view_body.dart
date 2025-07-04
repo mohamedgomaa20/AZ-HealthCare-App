@@ -3,7 +3,7 @@ import 'package:az_health_care/features/upgrade/presentation/views/upgrade_plan/
 import 'package:az_health_care/features/upgrade/presentation/views/upgrade_plan/widgets/subscription_plan_card.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../../home/presentation/views/profile/widgets/primary_bottom_button.dart';
+import '../../../../../../core/widgets/primary_bottom_button.dart';
 import '../../choose_payment/choose_payment_view.dart';
 
 class UpgradePanViewBody extends StatefulWidget {

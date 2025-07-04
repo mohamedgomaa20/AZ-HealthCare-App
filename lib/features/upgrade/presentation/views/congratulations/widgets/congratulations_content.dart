@@ -2,7 +2,7 @@ import 'package:az_health_care/features/home/presentation/views/home_layout.dart
 import 'package:flutter/material.dart';
  import 'package:az_health_care/core/utils/app_text_styles.dart';
 
-import '../../../../../home/presentation/views/profile/widgets/primary_bottom_button.dart';
+import '../../../../../../core/widgets/primary_bottom_button.dart';
 import '../../review_summary/widgets/features_summary_list.dart';
 
 class CongratulationsContent extends StatelessWidget {

@@ -3,7 +3,7 @@ import 'package:az_health_care/core/utils/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:icons_plus/icons_plus.dart';
 
-import '../../../home/presentation/views/profile/widgets/primary_bottom_button.dart';
+import '../../../../core/widgets/primary_bottom_button.dart';
 import '../../../upgrade/presentation/views/choose_payment/widgets/payment_app_bar.dart';
 import '../../data/models/payment_method_model.dart';
 import '../widgets/add_payment_form.dart';

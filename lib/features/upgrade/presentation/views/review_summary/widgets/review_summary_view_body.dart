@@ -2,7 +2,7 @@ import 'package:az_health_care/features/upgrade/presentation/views/review_summar
 import 'package:flutter/material.dart';
 import 'package:az_health_care/core/widgets/custom_loading_dialog.dart';
 
-import '../../../../../home/presentation/views/profile/widgets/primary_bottom_button.dart';
+import '../../../../../../core/widgets/primary_bottom_button.dart';
 import '../../choose_payment/widgets/payment_app_bar.dart';
 import '../../congratulations/congratulations_view.dart';
 import '../../upgrade_plan/widgets/subscription_plan_card.dart';

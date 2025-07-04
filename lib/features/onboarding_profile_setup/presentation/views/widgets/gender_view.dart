@@ -21,11 +21,13 @@ extension GenderExtension on Gender {
 class GenderView extends StatelessWidget {
   final Gender? selectedGender;
   final Function(Gender) onGenderSelected;
+  final bool? showTitle;
 
   const GenderView({
     super.key,
     required this.selectedGender,
     required this.onGenderSelected,
+    this.showTitle=true,
   });
 
   Widget _buildGenderOption({
@@ -79,12 +81,13 @@ class GenderView extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Text(
-            "What's your gender?",
-            textAlign: TextAlign.center,
-            style: AppTextStyles.bold30,
-          ),
-          const SizedBox(height: 150),
+          if (showTitle == true)
+            Text(
+              "What's your gender?",
+              textAlign: TextAlign.center,
+              style: AppTextStyles.bold30,
+            ),
+          if (showTitle == true) const SizedBox(height: 150),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [

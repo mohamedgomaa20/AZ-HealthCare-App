@@ -1,8 +1,13 @@
 import 'package:az_health_care/core/services/show_toast.dart';
 import 'package:az_health_care/core/utils/app_colors.dart';
+import 'package:az_health_care/features/home/presentation/views/home/water_tracker/presentation/views/water_tracking_screen.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'dart:math' as math;
+
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../cubit/water_tracking_cubit.dart';
 
 class WaterTrackerHome extends StatefulWidget {
   const WaterTrackerHome({super.key});
@@ -56,11 +61,10 @@ class _WaterTrackerHomeState extends State<WaterTrackerHome>
 
   void _startReminderTimer() {
     reminderTimer?.cancel();
-    reminderTimer = Timer.periodic(Duration(minutes: selectedReminderMinutes), (
-      timer,
-    ) {
-      _showReminderNotification();
-    });
+    reminderTimer =
+        Timer.periodic(Duration(minutes: selectedReminderMinutes), (timer,) {
+          _showReminderNotification();
+        });
   }
 
   void _showReminderNotification() {
@@ -101,9 +105,9 @@ class _WaterTrackerHomeState extends State<WaterTrackerHome>
     ToastHelper.showToast2(
       context: context,
       msg:
-          encouragingMessages[math.Random().nextInt(
-            encouragingMessages.length,
-          )],
+      encouragingMessages[math.Random().nextInt(
+        encouragingMessages.length,
+      )],
       state: ToastStates.SUCCESS,
     );
   }
@@ -180,6 +184,13 @@ class _WaterTrackerHomeState extends State<WaterTrackerHome>
           ],
         ),
       ),
+      floatingActionButton: FloatingActionButton(onPressed: () {
+        Navigator.push(context, MaterialPageRoute(builder: (context) =>
+            BlocProvider(
+                create: (context) => WaterTrackingCubit(),
+                child: WaterTrackingScreen(),
+            ),));
+      }),
     );
   }
 }
@@ -345,44 +356,44 @@ class GlassSizeSelector extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children:
-                glassOptions.map((option) {
-                  bool isSelected = option.size == selectedSize;
-                  return GestureDetector(
-                    onTap: () => onSizeSelected(option.size),
-                    child: AnimatedContainer(
-                      duration: Duration(milliseconds: 200),
-                      padding: EdgeInsets.all(16),
-                      decoration: BoxDecoration(
-                        color:
-                            isSelected
-                                ? option.color
-                                : AppColors.transparentColor,
-                        borderRadius: BorderRadius.circular(16),
-                        border: Border.all(
-                          color: isSelected ? option.color : Colors.transparent,
-                          width: 2,
+            glassOptions.map((option) {
+              bool isSelected = option.size == selectedSize;
+              return GestureDetector(
+                onTap: () => onSizeSelected(option.size),
+                child: AnimatedContainer(
+                  duration: Duration(milliseconds: 200),
+                  padding: EdgeInsets.all(16),
+                  decoration: BoxDecoration(
+                    color:
+                    isSelected
+                        ? option.color
+                        : AppColors.transparentColor,
+                    borderRadius: BorderRadius.circular(16),
+                    border: Border.all(
+                      color: isSelected ? option.color : Colors.transparent,
+                      width: 2,
+                    ),
+                  ),
+                  child: Column(
+                    children: [
+                      Text(option.icon, style: TextStyle(fontSize: 30)),
+                      SizedBox(height: 8),
+                      Text(
+                        '${option.size}ml',
+                        style: TextStyle(
+                          color: AppColors.whiteColor,
+                          fontSize: 14,
+                          fontWeight:
+                          isSelected
+                              ? FontWeight.w600
+                              : FontWeight.normal,
                         ),
                       ),
-                      child: Column(
-                        children: [
-                          Text(option.icon, style: TextStyle(fontSize: 30)),
-                          SizedBox(height: 8),
-                          Text(
-                            '${option.size}ml',
-                            style: TextStyle(
-                              color: AppColors.whiteColor,
-                              fontSize: 14,
-                              fontWeight:
-                                  isSelected
-                                      ? FontWeight.w600
-                                      : FontWeight.normal,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  );
-                }).toList(),
+                    ],
+                  ),
+                ),
+              );
+            }).toList(),
           ),
         ],
       ),
@@ -493,42 +504,42 @@ class ReminderIntervalSelector extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children:
-                intervals.map((interval) {
-                  bool isSelected = interval == selectedInterval;
-                  return GestureDetector(
-                    onTap: () => onIntervalSelected(interval),
-                    child: AnimatedContainer(
-                      duration: Duration(milliseconds: 200),
-                      padding: EdgeInsets.symmetric(
-                        horizontal: 16,
-                        vertical: 12,
-                      ),
-                      decoration: BoxDecoration(
-                        color:
-                            isSelected
-                                ? AppColors.primaryGreenColor
-                                : AppColors.buttonColor,
-                        borderRadius: BorderRadius.circular(20),
-                        border: Border.all(
-                          color:
-                              isSelected
-                                  ? AppColors.primaryGreenColor
-                                  : Colors.grey.withOpacity(0.3),
-                          width: 1,
-                        ),
-                      ),
-                      child: Text(
-                        _getIntervalText(interval),
-                        style: TextStyle(
-                          color: AppColors.whiteColor,
-                          fontSize: 14,
-                          fontWeight:
-                              isSelected ? FontWeight.w600 : FontWeight.normal,
-                        ),
-                      ),
+            intervals.map((interval) {
+              bool isSelected = interval == selectedInterval;
+              return GestureDetector(
+                onTap: () => onIntervalSelected(interval),
+                child: AnimatedContainer(
+                  duration: Duration(milliseconds: 200),
+                  padding: EdgeInsets.symmetric(
+                    horizontal: 16,
+                    vertical: 12,
+                  ),
+                  decoration: BoxDecoration(
+                    color:
+                    isSelected
+                        ? AppColors.primaryGreenColor
+                        : AppColors.buttonColor,
+                    borderRadius: BorderRadius.circular(20),
+                    border: Border.all(
+                      color:
+                      isSelected
+                          ? AppColors.primaryGreenColor
+                          : Colors.grey.withOpacity(0.3),
+                      width: 1,
                     ),
-                  );
-                }).toList(),
+                  ),
+                  child: Text(
+                    _getIntervalText(interval),
+                    style: TextStyle(
+                      color: AppColors.whiteColor,
+                      fontSize: 14,
+                      fontWeight:
+                      isSelected ? FontWeight.w600 : FontWeight.normal,
+                    ),
+                  ),
+                ),
+              );
+            }).toList(),
           ),
         ],
       ),
@@ -546,7 +557,10 @@ class CongratulationsCard extends StatelessWidget {
       padding: EdgeInsets.all(20),
       decoration: BoxDecoration(
         gradient: LinearGradient(
-          colors: [AppColors.buttonColor, AppColors.buttonColor.withValues(alpha: 0.8)],
+          colors: [
+            AppColors.buttonColor,
+            AppColors.buttonColor.withValues(alpha: 0.8)
+          ],
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         ),

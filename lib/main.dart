@@ -1,8 +1,5 @@
-
-
+import 'package:az_health_care/features/home/presentation/views/home/water_tracker/presentation/cubit/water_tracking_cubit.dart';
 import 'package:az_health_care/shared/network/remote/dio_helper.dart';
-import 'package:bloc/bloc.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -19,12 +16,16 @@ import 'features/home/presentation/views/home_layout.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   Bloc.observer = MyBlocObserver();
+
   await CacheHelper.init();
   DioHelper.init();
   runApp(
-    BlocProvider(
-      create: (_) => AppSettingsCubit(),
-      child: const AZHealthCareApp(),
+    MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (context) => AppSettingsCubit()),
+        BlocProvider(create: (context) => WaterTrackingCubit()),
+      ],
+      child: AZHealthCareApp(),
     ),
   );
 }
