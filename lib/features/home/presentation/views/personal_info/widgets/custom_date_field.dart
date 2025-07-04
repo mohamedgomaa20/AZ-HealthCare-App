@@ -31,7 +31,9 @@ class CustomDateField extends StatelessWidget {
                   onSurface: AppColors.whiteColor,
                 ),
                 textButtonTheme: TextButtonThemeData(
-                  style: TextButton.styleFrom(foregroundColor: AppColors.primaryColor),
+                  style: TextButton.styleFrom(
+                    foregroundColor: AppColors.primaryColor,
+                  ),
                 ),
                 dialogTheme: DialogThemeData(
                   backgroundColor: AppColors.blueGrayBackground2,

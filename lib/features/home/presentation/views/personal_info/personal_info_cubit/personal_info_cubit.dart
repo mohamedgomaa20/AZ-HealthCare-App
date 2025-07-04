@@ -19,6 +19,8 @@ class PersonalInfoCubit extends Cubit<PersonalInfoState> {
   final formKey = GlobalKey<FormState>();
 
   Gender selectedGender = Gender.male;
+  Gender tempSelectedGender = Gender.male;
+
   File? selectedImage;
   String selectedCountryCode = '+1';
   final ImagePicker _picker = ImagePicker();
@@ -43,6 +45,15 @@ class PersonalInfoCubit extends Cubit<PersonalInfoState> {
     } catch (e) {
       emit(PersonalInfoErrorState());
     }
+  }
+  void setTempGender(Gender gender) {
+    tempSelectedGender = gender;
+    emit(PersonalInfoTempGenderChangedState());
+  }
+
+  void confirmTempGender() {
+    selectedGender = tempSelectedGender;
+    emit(PersonalInfoGenderChangedState());
   }
 
   Future<void> pickImageFromCamera() async {

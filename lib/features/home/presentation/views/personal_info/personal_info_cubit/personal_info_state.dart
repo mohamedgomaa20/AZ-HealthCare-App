@@ -19,6 +19,7 @@ class PersonalInfoLoadingState extends PersonalInfoState {}
 class PersonalInfoSuccessState extends PersonalInfoState {}
 
 class PersonalInfoErrorState extends PersonalInfoState {}
+class PersonalInfoTempGenderChangedState extends PersonalInfoState {}
 class PersonalInfoImageRemovedState extends PersonalInfoState {}
 
 

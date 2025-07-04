@@ -1,10 +1,7 @@
 import 'package:az_health_care/core/constants.dart';
 import 'package:az_health_care/core/widgets/custom_loading_dialog.dart';
 import 'package:az_health_care/features/get_start/presentation/views/get_start_view.dart';
-import 'package:az_health_care/features/home/presentation/views/account_and_security/widgets/security_switch_tile.dart';
-import 'package:az_health_care/features/home/presentation/views/home/home_view.dart';
 import 'package:az_health_care/features/settings/presentation/views/change_password/change_password_view.dart';
-import 'package:az_health_care/modules/get_started/get_started_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:az_health_care/features/upgrade/presentation/views/choose_payment/widgets/payment_app_bar.dart';
 
@@ -12,7 +9,6 @@ import '../../../../../../core/services/show_toast.dart';
 import '../../../../../../core/utils/app_colors.dart';
 import '../../../../../../core/widgets/build_switch_item.dart';
 import '../../../../../../core/widgets/custom_confirmation_dialog.dart';
-import '../../../../../../layout/app_layout.dart';
 import '../../data_and_analytics/widgets/settings_tile.dart';
 import '../../profile/widgets/build_menu_item.dart';
 

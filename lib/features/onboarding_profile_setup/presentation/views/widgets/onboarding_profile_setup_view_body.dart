@@ -1,5 +1,6 @@
 import 'package:az_health_care/core/services/show_toast.dart';
 import 'package:az_health_care/core/utils/app_text_styles.dart';
+import 'package:az_health_care/features/home/presentation/views/home_layout.dart';
 import 'package:az_health_care/features/onboarding_profile_setup/presentation/views/widgets/reminder_view.dart';
 import 'package:az_health_care/features/onboarding_profile_setup/presentation/views/widgets/weight_view.dart';
 import 'package:flutter/material.dart';
@@ -8,8 +9,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../core/constants.dart';
 import '../../../../../core/utils/app_colors.dart';
 import '../../../../../core/widgets/custom_button.dart';
-import '../../../../../layout/app_layout.dart';
-import '../../data/profile_setup_cubit/onboarding_profile_setup_cubit.dart';
+ import '../../data/profile_setup_cubit/onboarding_profile_setup_cubit.dart';
 import '../../data/profile_setup_cubit/onboarding_profile_setup_states.dart';
 import 'birthday_view.dart';
 import '../../../../../core/widgets/custom_loading_dialog.dart';
