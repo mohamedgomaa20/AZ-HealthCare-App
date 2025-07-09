@@ -5,8 +5,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:az_health_care/core/widgets/auth_nested_scroll_view.dart';
 import 'package:az_health_care/core/services/show_toast.dart';
 
-import '../send_email_cubit/send_email_cubit.dart';
-import '../send_email_cubit/send_email_states.dart';
+import '../../../../manager/send_email_cubit/send_email_cubit.dart';
+import '../../../../manager/send_email_cubit/send_email_states.dart';
 
 class SendEmailViewBody extends StatelessWidget {
   SendEmailViewBody({super.key});

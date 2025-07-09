@@ -48,7 +48,7 @@ class _LastSeenStatusState extends State<LastSeenStatus> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Container(
+        SizedBox(
           width: 85,
           child: Row(
             children: [

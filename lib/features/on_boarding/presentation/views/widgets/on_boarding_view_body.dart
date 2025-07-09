@@ -1,7 +1,7 @@
 import 'package:az_health_care/features/on_boarding/presentation/views/widgets/custom_indicator.dart';
 import 'package:flutter/material.dart';
 
-import '../../../domain/models/boarding_model.dart';
+import '../../../data/models/boarding_model.dart';
 import 'on_boarding_actions_section.dart';
 import 'on_boarding_page_view.dart';
 

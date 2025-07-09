@@ -8,6 +8,8 @@ abstract class AppImages {
   static const String onboardImage3 = 'assets/images/onboard_3.png';
   static const String onboardImage4 = 'assets/images/onboard_4.jng';
 
+  static const String smartWatch = 'assets/images/smart_watch.png';
+
   static const String avatarBoy = 'assets/images/avatar_boy.png';
   static const String avatarGirl = 'assets/images/avatar_girl.png';
   static const String avatarDarkNull = 'assets/images/avatar_dark_null.png';
@@ -20,6 +22,10 @@ abstract class AppImages {
   static const String hearRateGood = 'assets/images/heart_rate_good.gif';
   static const String heartRateNotGood =
       'assets/images/heart_rate_not_good.gif';
+
+  static const String bloodPressureProblem =
+      'assets/images/blood_pressure_problem.gif';
+  static const String bloodPressure = 'assets/images/blood_pressure.gif';
 
   static const String proIcon = 'assets/images/pro_icon.png';
   static const String shoes = 'assets/images/shoes.png';

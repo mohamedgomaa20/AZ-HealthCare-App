@@ -6,9 +6,10 @@ class AppTheme {
   static ThemeData get lightTheme {
     return ThemeData.light().copyWith(
       primaryColor: AppColors.primaryColor,
-      scaffoldBackgroundColor: AppColors.whiteColor,
+      scaffoldBackgroundColor: AppColors.backgroundColor,
       appBarTheme: const AppBarTheme(
         backgroundColor: AppColors.whiteColor,
+        surfaceTintColor: AppColors.transparentColor,
         elevation: 0,
         iconTheme: IconThemeData(color: AppColors.blackColor),
         titleTextStyle: TextStyle(
@@ -52,6 +53,7 @@ class AppTheme {
       scaffoldBackgroundColor: AppColors.backgroundColor,
       appBarTheme: const AppBarTheme(
         backgroundColor: Colors.transparent,
+        surfaceTintColor: AppColors.transparentColor,
         elevation: 0,
         iconTheme: IconThemeData(color: AppColors.whiteColor),
         titleTextStyle: TextStyle(

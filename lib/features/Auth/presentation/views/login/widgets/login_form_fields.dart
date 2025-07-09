@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import '../../../../../../core/utils/app_text_styles.dart';
 import '../../../../../../core/widgets/custom_password_form_field.dart';
 import '../../../../../../core/widgets/custom_text_form_field.dart';
-import '../login_cubit/login_cubit.dart';
+import '../../../../manger/login_cubit/login_cubit.dart';
 
 class LoginFormFields extends StatelessWidget {
   final GlobalKey<FormState> formKey;
@@ -66,15 +66,9 @@ class LoginFormFields extends StatelessWidget {
               if (value.length < 8) {
                 return 'Password must be at least 8 characters';
               }
-              final hasUppercase = value.contains(
-                RegExp(r'[A-Z]'),
-              );
-              final hasLowercase = value.contains(
-                RegExp(r'[a-z]'),
-              );
-              final hasDigit = value.contains(
-                RegExp(r'[0-9]'),
-              );
+              final hasUppercase = value.contains(RegExp(r'[A-Z]'));
+              final hasLowercase = value.contains(RegExp(r'[a-z]'));
+              final hasDigit = value.contains(RegExp(r'[0-9]'));
               final hasSpecialChar = value.contains(
                 RegExp(r'[!@#$%^&*(),.?":{}|<>]'),
               );
@@ -94,7 +88,6 @@ class LoginFormFields extends StatelessWidget {
               return null;
             },
           ),
-
 
           const SizedBox(height: 10),
           RememberMeAndForgetPasswordRow(

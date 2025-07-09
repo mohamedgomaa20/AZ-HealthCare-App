@@ -1,12 +1,14 @@
 import 'package:az_health_care/core/constants.dart';
 import 'package:az_health_care/core/widgets/auth_nested_scroll_view.dart';
+import 'package:az_health_care/features/home/manager/personal_info_cubit/personal_info_cubit.dart';
 import 'package:az_health_care/features/home/presentation/views/home_layout.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
- import '../../../../../../core/services/show_toast.dart';
- import '../login_cubit/login_cubit.dart';
-import '../login_cubit/login_states.dart';
+ import '../../../../../../core/services/cache_helper.dart';
+import '../../../../../../core/services/show_toast.dart';
+import '../../../../manger/login_cubit/login_cubit.dart';
+import '../../../../manger/login_cubit/login_states.dart';
 import 'login_footer.dart';
 import 'login_form_fields.dart';
 
@@ -24,6 +26,9 @@ class LoginViewBody extends StatelessWidget {
       child: BlocConsumer<LoginCubit, LoginStates>(
         listener: (context, state) {
           if (state is LoginSuccessState) {
+            var id=CacheHelper.getData(key: "id");
+            context.read<PersonalInfoCubit>().fetchUserData();
+
             ToastHelper.showToast(
               msg: "Login successful",
               state: ToastStates.SUCCESS,
@@ -69,62 +74,3 @@ class LoginViewBody extends StatelessWidget {
     );
   }
 }
-
-/*
-
-          NestedScrollView(
-            headerSliverBuilder:
-                (context, innerBoxIsScrolled) => [
-                  const CustomSliverAppBar(title: 'Welcome Back! 👋'),
-                ],
-            body: Builder(
-              builder:
-                  (context) => CustomScrollView(
-                    slivers: [
-                      SliverOverlapInjector(
-                        handle: NestedScrollView.sliverOverlapAbsorberHandleFor(
-                          context,
-                        ),
-                      ),
-                      SliverToBoxAdapter(
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: kHorizontalPadding,
-                          ),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              const SizedBox(height: 10),
-                              Text(
-                                "Log in to continue your health journey",
-                                style: AppTextStyles.medium14,
-                              ),
-                              const SizedBox(height: 45),
-                              LoginFormFields(
-                                formKey: formKey,
-                                emailController: emailController,
-                                passwordController: passwordController,
-                              ),
-                              const SizedBox(height: 10),
-                              LoginFooter(
-                                isValid: isValid,
-                                condition: state is! LoginLoadingState,
-                                formKey: formKey,
-                                emailController: emailController,
-                                passwordController: passwordController,
-                                onLoginPressed: (email, password) {
-                                  cubit.userLogin(
-                                    email: email,
-                                    password: password,
-                                  );
-                                },
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-            ),
-          );
- */

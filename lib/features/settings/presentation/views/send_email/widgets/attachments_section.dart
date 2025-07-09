@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:az_health_care/core/utils/app_text_styles.dart';
 import 'package:az_health_care/core/utils/app_colors.dart';
 import 'package:file_picker/file_picker.dart';
-import '../send_email_cubit/send_email_cubit.dart';
+
+import '../../../../manager/send_email_cubit/send_email_cubit.dart';
 
 class AttachmentsSection extends StatelessWidget {
   const AttachmentsSection({super.key});

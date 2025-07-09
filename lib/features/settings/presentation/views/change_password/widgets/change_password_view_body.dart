@@ -1,14 +1,17 @@
 import 'package:az_health_care/core/services/show_toast.dart';
 import 'package:az_health_care/core/widgets/custom_password_form_field.dart';
+import 'package:az_health_care/features/Auth/presentation/views/all_set_password/widgets/all_set_password_widget.dart';
+import 'package:az_health_care/features/home/presentation/views/home_layout.dart';
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../../../core/widgets/auth_nested_scroll_view.dart';
+import '../../../../../../core/constants.dart';
 import '../../../../../../core/widgets/customLoadingButton.dart';
 import '../../../../../../core/widgets/custom_button.dart';
-import '../change_password_cubit/change_password_cubit.dart';
-import '../change_password_cubit/change_password_states.dart';
+ import '../../../../manager/change_password_cubit/change_password_cubit.dart';
+import '../../../../manager/change_password_cubit/change_password_states.dart';
 
 class ChangePasswordViewBody extends StatelessWidget {
   ChangePasswordViewBody({super.key});
@@ -30,7 +33,22 @@ class ChangePasswordViewBody extends StatelessWidget {
               msg: "Change password done successfully",
               state: ToastStates.SUCCESS,
             );
-            Navigator.pop(context);
+
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder:
+                    (context) => AllSetPasswordWidget(
+                      onOkGreatPressed: () {
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(builder: (context) => HomeLayout()),
+                        );
+                      },
+                    ),
+              ),
+            );
+            // Navigator.pop(context);
           } else if (state is ChangePasswordErrorState) {
             ToastHelper.showToast2(
               context: context,
@@ -99,8 +117,9 @@ class ChangePasswordViewBody extends StatelessWidget {
                                       print(
                                         "-----------------formKey.currentState!.validate() -----------------",
                                       );
+
                                       cubit.changePassword(
-                                        email: "20mogomaa@gmail.com",
+                                        email: userModel!.email!,
                                         currentPassword:
                                             currentPasswordController.text,
                                         newPassword: newPasswordController.text,
@@ -111,13 +130,6 @@ class ChangePasswordViewBody extends StatelessWidget {
                         ),
                     fallback: (context) => const CustomLoadingButton(),
                   ),
-
-                  // ChangePasswordFooter(
-                  //   formKey: formKey,
-                  //   emailController: emailController,
-                  //   condition: state is! ChangePasswordLoadingState,
-                  //   onPressed: (email) => cubit.sendResetEmail(email),
-                  // ),
                 ],
               ),
             ),

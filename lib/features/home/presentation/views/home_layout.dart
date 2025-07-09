@@ -2,8 +2,8 @@ import 'package:az_health_care/core/utils/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../data/home_cubit/home_cubit.dart';
-import '../../data/home_cubit/home_states.dart';
+import '../../manager/home_cubit/home_cubit.dart';
+import '../../manager/home_cubit/home_states.dart';
 
 class HomeLayout extends StatelessWidget {
   static const routeName = "homeLayout";

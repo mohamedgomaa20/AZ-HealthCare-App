@@ -1,7 +1,8 @@
 import 'package:az_health_care/core/widgets/custom_text_form_field.dart';
 import 'package:flutter/material.dart';
 
-import '../forget_password_cubit/forget_password_cubit.dart';
+import '../../../../manger/forget_password_cubit/forget_password_cubit.dart';
+
 
 class ForgotPasswordFormField extends StatelessWidget {
   const ForgotPasswordFormField({super.key, required this.controller,required this.formKey});

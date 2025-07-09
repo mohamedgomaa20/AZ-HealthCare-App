@@ -1,19 +1,24 @@
 import 'package:az_health_care/core/constants.dart';
 import 'package:az_health_care/features/Auth/presentation/views/login/login_view.dart';
+import 'package:az_health_care/features/get_start/presentation/views/get_start_view.dart';
 import 'package:az_health_care/features/help_and_support/presentation/views/help_and_support/help_and_support_view.dart';
-import 'package:az_health_care/features/home/presentation/views/data_and_analytics/data_and_analytics_view.dart';
-import 'package:az_health_care/features/home/presentation/views/linked_accounts/linked_accounts_view.dart';
-import 'package:az_health_care/features/home/presentation/views/preferences/preferences_view.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../../../../core/utils/app_colors.dart';
+import '../../../../../../core/services/cache_helper.dart';
 import '../../../../../../core/utils/app_text_styles.dart';
 import '../../../../../../core/widgets/custom_modal_controller.dart';
+import '../../../../../Account/presentation/account_and_security/account_and_security_view.dart';
+import '../../../../../Account/presentation/app_appearance/app_appearance_view.dart';
+import '../../../../../Account/presentation/billing_and_subscriptions/billing_and_subscriptions_view.dart';
+import '../../../../../Account/presentation/data_and_analytics/data_and_analytics_view.dart';
+import '../../../../../Account/presentation/linked_accounts/linked_accounts_view.dart';
+import '../../../../../Account/presentation/preferences/preferences_view.dart';
+import '../../../../../Account/presentation/reminder/reminder_setting_view.dart';
+import '../../../../../onboarding_profile_setup/manager/profile_setup_cubit/onboarding_profile_setup_cubit.dart';
+import '../../../../../onboarding_profile_setup/manager/sensor_upload_cubit/sensor_upload_cubit.dart';
 import '../../../../../payment_methods/presentation/views/payment_methods_view.dart';
-import '../../account_and_security/account_and_security_view.dart';
-import '../../app_appearance/app_appearance_view.dart';
-import '../../billing_and_subscriptions/billing_and_subscriptions_view.dart';
-import '../../reminder/reminder_setting_view.dart';
 import 'build_logout_button.dart';
 import 'build_menu_item.dart';
 
@@ -150,7 +155,19 @@ class SettingsMenuSection extends StatelessWidget {
                 isHasButtons: true,
                 onCancel: () => Navigator.pop(context),
                 onConfirm: () {
-                  Navigator.pop(context);
+                  CacheHelper.removeData(key: 'id').then((value) {
+                    print(CacheHelper.getData(key: 'id'));
+                    context.read<OnboardingProfileSetupCubit>().resetCubit();
+                    context.read<SensorUploadCubit>().reset();
+                    print(CacheHelper.getData(key: 'id'));
+
+                    Navigator.pushAndRemoveUntil(
+                      context,
+                      MaterialPageRoute(builder: (context) => GetStartView()),
+                      (route) => false,
+                    );
+                  });
+
                   // Logout logic here
                 },
               );
@@ -160,4 +177,16 @@ class SettingsMenuSection extends StatelessWidget {
       ),
     );
   }
+}
+
+void logout(BuildContext context) {
+  CacheHelper.removeData(key: "token");
+  CacheHelper.removeData(key: "id");
+
+  context.read<OnboardingProfileSetupCubit>().resetCubit();
+
+  Navigator.of(context).pushAndRemoveUntil(
+    MaterialPageRoute(builder: (context) => GetStartView()),
+    (Route<dynamic> route) => false,
+  );
 }

@@ -41,28 +41,33 @@ class OnBoardingActionsSection extends StatelessWidget {
             (context) => Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                CustomButton(
-                  width: MediaQuery.sizeOf(context).width / 2 - 25,
-                  text: 'Skip',
-                  backgroundColor: AppColors.darkGray,
-                  onPressed: () {
-                    CacheHelper.saveData(key: kIsOnBoardingScreen, value: true);
-                    Navigator.pushReplacementNamed(
-                      context,
-                      GetStartView.routeName,
-                    );
-                  },
+                Expanded(
+                  child: CustomButton(
+                    text: 'Skip',
+                    backgroundColor: AppColors.darkGray,
+                    onPressed: () {
+                      CacheHelper.saveData(
+                        key: kIsOnBoardingScreen,
+                        value: true,
+                      );
+                      Navigator.pushReplacementNamed(
+                        context,
+                        GetStartView.routeName,
+                      );
+                    },
+                  ),
                 ),
                 SizedBox(width: 10),
-                CustomButton(
-                  width: MediaQuery.sizeOf(context).width / 2 - 25,
-                  text: 'Continue',
-                  onPressed: () {
-                    pageController.nextPage(
-                      duration: Duration(milliseconds: 900),
-                      curve: Curves.fastLinearToSlowEaseIn,
-                    );
-                  },
+                Expanded(
+                  child: CustomButton(
+                    text: 'Continue',
+                    onPressed: () {
+                      pageController.nextPage(
+                        duration: Duration(milliseconds: 900),
+                        curve: Curves.fastLinearToSlowEaseIn,
+                      );
+                    },
+                  ),
                 ),
               ],
             ),

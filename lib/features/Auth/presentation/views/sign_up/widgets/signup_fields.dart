@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../../../core/utils/app_text_styles.dart';
 import '../../../../../../core/widgets/custom_text_form_field.dart';
-import '../register_cubit/register_cubit.dart';
+import '../../../../manger/register_cubit/register_cubit.dart';
 
 class SignUpFormFields extends StatelessWidget {
   final GlobalKey<FormState> formKey;

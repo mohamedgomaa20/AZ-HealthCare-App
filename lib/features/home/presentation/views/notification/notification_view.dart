@@ -1,5 +1,4 @@
-import 'package:az_health_care/features/home/presentation/views/home/widgets/home_view_body.dart';
-import 'package:az_health_care/features/home/presentation/views/notification/widgets/notification_view_body.dart';
+ import 'package:az_health_care/features/home/presentation/views/notification/widgets/notification_view_body.dart';
 import 'package:flutter/material.dart';
 
 class NotificationView extends StatelessWidget {

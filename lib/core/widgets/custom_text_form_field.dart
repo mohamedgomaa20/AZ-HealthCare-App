@@ -20,11 +20,13 @@ class CustomTextFormField extends StatelessWidget {
     this.maxLines,
     this.inputFormatters,
     this.readOnly,
-    this.onTap
+    this.onTap,
+    this.labelText,
   });
 
   final int? maxLines;
   final String hintText;
+  final String? labelText;
   final TextInputType keyboardType;
   final TextEditingController controller;
   final bool? isPassword;
@@ -42,6 +44,7 @@ class CustomTextFormField extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextFormField(
       maxLines: maxLines ?? 1,
+
       cursorColor: AppColors.whiteColor,
       keyboardType: keyboardType,
       controller: controller,
@@ -53,6 +56,7 @@ class CustomTextFormField extends StatelessWidget {
       onSaved: onSaved,
       onTap: onTap,
       decoration: InputDecoration(
+        label: labelText != null ? Text(labelText!) : null,
         prefixIcon: prefixIconData == null ? null : Icon(prefixIconData),
         suffixIcon: IconButton(
           onPressed: suffixOnPressed,

@@ -1,10 +1,10 @@
-import 'package:az_health_care/features/home/data/models/user_model.dart';
+import '../../../Auth/data/models/register_result.dart';
 
 class UserResponse {
   final int statusCode;
   final bool isSuccess;
   final List<dynamic> errors;
-  final UserModel? result;
+  final ResultModel? result;
 
   UserResponse({
     required this.statusCode,
@@ -19,7 +19,7 @@ class UserResponse {
       isSuccess: json['isSuccess'],
       errors: json['errors'],
       result:
-          json['result'] != null ? UserModel.fromJson(json['result']) : null,
+          json['result'] != null ? ResultModel.fromJson(json['result']) : null,
     );
   }
 }

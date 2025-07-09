@@ -1,115 +1,130 @@
 import 'dart:math';
 
 import 'package:az_health_care/core/utils/app_colors.dart';
-import 'package:az_health_care/features/home/presentation/views/home/step_tracker/step_tracker_view.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../../core/utils/app_text_styles.dart';
+import '../../../../../step_tracker_v2/manager/step_tracker_cubit/step_tracker_cubit.dart';
+import '../../../../../step_tracker_v2/manager/step_tracker_cubit/step_tracker_state.dart';
+import '../../../../../step_tracker_v2/views/tracker_view.dart';
 
 class StepsWidget extends StatelessWidget {
   const StepsWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
-    double progress = 0.50;
-    return Container(
-      height: 140,
-      margin: const EdgeInsets.all(8),
-      padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-      decoration: BoxDecoration(
-        color: AppColors.backgroundStepColor,
-        borderRadius: BorderRadius.circular(16),
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Column(
+    return BlocBuilder<StepTrackerCubit, StepTrackerState>(
+      builder: (context, state) {
+        int steps = 0;
+        int goal = BlocProvider.of<StepTrackerCubit>(context).dailyGoal ?? 1000;
+
+        if (state is StepTrackerLoaded && state.todayData != null) {
+          steps = state.todayData!.steps;
+        }
+
+        double progress = (steps / goal).clamp(0.0, 1.0);
+
+        return Container(
+          height: 140,
+          margin: const EdgeInsets.all(8),
+          padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+          decoration: BoxDecoration(
+            color: AppColors.backgroundStepColor,
+            borderRadius: BorderRadius.circular(16),
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text("Steps", style: AppTextStyles.bold18),
-              SizedBox(height: 10),
-              SizedBox(
-                width: 90,
-                height: 85,
-                child: Stack(
-                  alignment: Alignment.center,
-                  children: [
-                    CustomPaint(
-                      size: const Size(100, 90),
-                      painter: StepProgressPainter(
-                        progress: progress,
-                        backgroundColor: AppColors.unselectedColor,
-                        progressColor: AppColors.selectedColor,
-                      ),
-                    ),
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
+              Column(
+                children: [
+                  Text("Steps", style: AppTextStyles.bold18),
+                  const SizedBox(height: 10),
+                  SizedBox(
+                    width: 90,
+                    height: 85,
+                    child: Stack(
+                      alignment: Alignment.center,
                       children: [
-                        Text(
-                          "Today's steps",
-                          style: AppTextStyles.regular10.copyWith(
-                            color: AppColors.selectedColor,
+                        CustomPaint(
+                          size: const Size(100, 90),
+                          painter: StepProgressPainter(
+                            progress: progress,
+                            backgroundColor: AppColors.unselectedColor,
+                            progressColor: AppColors.selectedColor,
                           ),
                         ),
-                        SizedBox(height: 5),
-                        Text(
-                          "0",
-                          style: AppTextStyles.bold20.copyWith(
-                            color: AppColors.greenLightColor,
-                            fontSize: 16,
-                          ),
-                        ),
-                        SizedBox(height: 5),
-                        Text(
-                          "/10000",
-                          style: AppTextStyles.regular10.copyWith(
-                            color: AppColors.selectedColor,
-                          ),
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              "Today's steps",
+                              style: AppTextStyles.regular10.copyWith(
+                                color: AppColors.selectedColor,
+                              ),
+                            ),
+                            const SizedBox(height: 5),
+                            Text(
+                              "$steps",
+                              style: AppTextStyles.bold20.copyWith(
+                                color: AppColors.greenLightColor,
+                                fontSize: 16,
+                              ),
+                            ),
+                            const SizedBox(height: 5),
+                            Text(
+                              "/$goal",
+                              style: AppTextStyles.regular10.copyWith(
+                                color: AppColors.selectedColor,
+                              ),
+                            ),
+                          ],
                         ),
                       ],
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(
+                height: 130,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Icon(
+                      Icons.directions_walk,
+                      color: AppColors.whiteColor,
+                      size: 40,
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const TrackerScreen(),
+                          ),
+                        );
+                      },
+                      child: Container(
+                        width: 32,
+                        height: 32,
+                        decoration: const BoxDecoration(
+                          color: AppColors.backgroundArrowColor,
+                          shape: BoxShape.circle,
+                        ),
+                        child: const Icon(
+                          Icons.arrow_forward,
+                          color: Colors.white,
+                          size: 16,
+                        ),
+                      ),
                     ),
                   ],
                 ),
               ),
             ],
           ),
-          SizedBox(
-            height: 130,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const Icon(
-                  Icons.directions_walk,
-                  color: AppColors.whiteColor,
-                  size: 40,
-                ),
-                GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => StepsTrackerScreen(),
-                      ),
-                    );
-                  },
-                  child: Container(
-                    width: 32,
-                    height: 32,
-                    decoration: const BoxDecoration(
-                      color: AppColors.backgroundArrowColor,
-                      shape: BoxShape.circle,
-                    ),
-                    child: const Icon(
-                      Icons.arrow_forward,
-                      color: Colors.white,
-                      size: 16,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
+        );
+      },
     );
   }
 }

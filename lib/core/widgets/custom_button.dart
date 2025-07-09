@@ -34,7 +34,7 @@ class CustomButton extends StatelessWidget {
       children: [
         SizedBox(
           width: width ?? double.infinity,
-          height: height ?? 50,
+          height: height ?? 47,
           child: TextButton(
             onPressed: onPressed,
             style: TextButton.styleFrom(
@@ -65,7 +65,7 @@ class CustomButton extends StatelessWidget {
                 Text(
                   text,
                   style: AppTextStyles.semiBold18.copyWith(
-                    fontSize: fontSize ?? 18,
+                    fontSize: fontSize ?? 17,
                     letterSpacing: -0.50,
                     color:
                         onPressed == null

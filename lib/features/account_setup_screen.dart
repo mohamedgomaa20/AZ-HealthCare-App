@@ -101,7 +101,7 @@ class _AccountSetupScreenState extends State<AccountSetupScreen> {
               curve: Curves.easeInOut,
             );
           } else {
-            // Submit logic here
+            // Submit manager here
           }
         },
         style: ElevatedButton.styleFrom(
@@ -365,7 +365,7 @@ class _AccountSetupScreenState extends State<AccountSetupScreen> {
 //               curve: Curves.easeInOut,
 //             );
 //           } else {
-//             // Submit logic here
+//             // Submit manager here
 //           }
 //         },
 //         style: ElevatedButton.styleFrom(
@@ -581,7 +581,7 @@ class _AccountSetupScreenState extends State<AccountSetupScreen> {
 //                   curve: Curves.easeInOut,
 //                 );
 //               } else {
-//                 // Submit logic here
+//                 // Submit manager here
 //               }
 //             },
 //             child: Text(

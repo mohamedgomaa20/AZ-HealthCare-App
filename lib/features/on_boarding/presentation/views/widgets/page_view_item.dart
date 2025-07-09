@@ -1,7 +1,7 @@
 import 'package:az_health_care/core/utils/app_text_styles.dart';
 import 'package:flutter/material.dart';
 
-import '../../../domain/models/boarding_model.dart';
+import '../../../data/models/boarding_model.dart';
 
 class PageViewItem extends StatelessWidget {
   final BoardingModel model;

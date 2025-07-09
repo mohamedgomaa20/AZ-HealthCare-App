@@ -36,10 +36,11 @@ class _SplashViewBodyState extends State<SplashViewBody>
   void startWidget() {
     bool isOnBoardingScreen =
         CacheHelper.getData(key: kIsOnBoardingScreen) ?? false;
-    String token = CacheHelper.getData(key: kToken) ?? "";
+    // String token = CacheHelper.getData(key: kToken) ?? "";
+    String id = CacheHelper.getData(key: 'id') ?? "";
 
     if (isOnBoardingScreen) {
-      if (token.isNotEmpty) {
+      if (id.isNotEmpty) {
         Navigator.pushReplacementNamed(context, HomeLayout.routeName);
       } else {
         Navigator.pushReplacementNamed(context, GetStartView.routeName);

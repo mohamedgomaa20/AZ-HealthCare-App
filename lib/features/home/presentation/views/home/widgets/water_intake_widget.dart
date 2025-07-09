@@ -1,16 +1,14 @@
-import 'package:az_health_care/features/home/presentation/views/home/water_tracker/presentation/cubit/water_tracking_cubit.dart';
-import 'package:az_health_care/features/home/presentation/views/home/water_tracker/presentation/cubit/water_tracking_cubit.dart';
-import 'package:az_health_care/features/home/presentation/views/home/water_tracker/presentation/cubit/water_tracking_state.dart';
-import 'package:az_health_care/features/home/presentation/views/home/water_tracker/presentation/views/water_tracker_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../../core/utils/app_colors.dart';
 import '../../../../../../core/utils/app_text_styles.dart';
-import '../water_tracker/presentation/views/water_tracking_screen.dart';
+import '../../../../../water_tracker/manager/water_tracking_cubit/water_tracking_cubit.dart';
+import '../../../../../water_tracker/manager/water_tracking_cubit/water_tracking_state.dart';
+import '../../../../../water_tracker/presentation/views/water_tracking_screen.dart';
 
 class WaterIntakeWidget extends StatelessWidget {
-  const WaterIntakeWidget({Key? key}) : super(key: key);
+  const WaterIntakeWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -20,13 +18,13 @@ class WaterIntakeWidget extends StatelessWidget {
         final goal = cubit.goal;
 
         if (goal == null) {
-          return const Center(
-            child: CircularProgressIndicator(),
-          );
+          return const Center(child: CircularProgressIndicator());
         }
 
-        final progress =
-        (goal.achievedAmount / goal.targetAmount).clamp(0.0, 1.0);
+        final progress = (goal.achievedAmount / goal.targetAmount).clamp(
+          0.0,
+          1.0,
+        );
         final percentage = (progress * 100).toInt();
 
         return Container(
@@ -76,7 +74,11 @@ class WaterIntakeWidget extends StatelessWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Icon(Icons.water_drop, color: AppColors.blueColor, size: 40),
+                    Icon(
+                      Icons.water_drop,
+                      color: AppColors.blueColor,
+                      size: 40,
+                    ),
                     GestureDetector(
                       onTap: () {
                         Navigator.push(
@@ -93,8 +95,11 @@ class WaterIntakeWidget extends StatelessWidget {
                           color: AppColors.backgroundArrowColor,
                           shape: BoxShape.circle,
                         ),
-                        child: const Icon(Icons.arrow_forward,
-                            color: Colors.white, size: 16),
+                        child: const Icon(
+                          Icons.arrow_forward,
+                          color: Colors.white,
+                          size: 16,
+                        ),
                       ),
                     ),
                   ],

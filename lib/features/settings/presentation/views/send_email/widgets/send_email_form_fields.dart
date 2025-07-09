@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:az_health_care/core/utils/app_text_styles.dart';
 import 'package:az_health_care/core/widgets/custom_text_form_field.dart';
 
-import '../send_email_cubit/send_email_cubit.dart';
+ import '../../../../manager/send_email_cubit/send_email_cubit.dart';
 import 'attachments_section.dart';
 
 class SendEmailFormFields extends StatelessWidget {

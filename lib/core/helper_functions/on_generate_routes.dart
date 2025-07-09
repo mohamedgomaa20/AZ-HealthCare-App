@@ -7,13 +7,12 @@ import '../../features/Auth/presentation/views/all_set_password/all_set_password
 import '../../features/Auth/presentation/views/forget_password/forgot_password_view.dart';
 import '../../features/Auth/presentation/views/login/login_view.dart';
 import '../../features/Auth/presentation/views/sign_up/sign_up_view.dart';
-import '../../features/Auth/presentation/views/welcome_to_a2z_care/welcome_to_a2z_care_view.dart';
-import '../../features/home/presentation/views/home_layout.dart';
+ import '../../features/home/presentation/views/home_layout.dart';
 import '../../features/home/presentation/views/home/home_view.dart';
 import '../../features/home/presentation/views/notification/notification_view.dart';
-import '../../features/home/presentation/views/personal_info/personal_info_view.dart';
+ import '../../features/home/presentation/views/profile/personal_info/personal_info_view.dart';
 import '../../features/home/presentation/views/profile/profile_view.dart';
-import '../../features/home/presentation/views/tracker/tracker_view.dart';
+import '../../features/home/presentation/views/tracker/views/tracker_view.dart';
 import '../../features/home/presentation/views/vip/vip_view.dart';
 import '../../features/onboarding_profile_setup/presentation/views/onboarding_profile_setup_view.dart';
 import '../../features/settings/presentation/views/change_password/change_password_view.dart';
@@ -40,15 +39,12 @@ Route<dynamic> onGenerateRoute(RouteSettings settings) {
     case PersonalInfoView.routeName:
       return MaterialPageRoute(builder: (context) => const PersonalInfoView());
 
-    case WelcomeToA2zCareView.routeName:
-      return MaterialPageRoute(
-        builder: (context) => const WelcomeToA2zCareView(),
-      );
+
     //home------------------------------
     case HomeLayout.routeName:
       return MaterialPageRoute(builder: (context) => const HomeLayout());
     case HomeView.routeName:
-      return MaterialPageRoute(builder: (context) => const HomeView());
+      return MaterialPageRoute(builder: (context) =>   HomeView());
     case VipView.routeName:
       return MaterialPageRoute(builder: (context) => const VipView());
 

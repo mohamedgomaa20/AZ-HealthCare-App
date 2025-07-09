@@ -1,13 +1,21 @@
+import '../features/Auth/data/models/register_result.dart';
+import '../features/home/presentation/views/profile/personal_info/models/user_data_model.dart';
+import '../features/onboarding_profile_setup/data/models/update_profile_response_model .dart';
+
 const kHorizontalPadding = 16.0;
 const kDefaultPadding = 16.0;
 const kDefaultRadius = 50.0;
 const kTopPadding = 20.0;
 const kPrimaryBorderRadius = 10.0;
+ResultModel? userModel;
+UserData? userData;
+String valueOfSwitch = "valueOfSwitch";
+UserProfileResult? userProfileResult;
+UpdateProfileResponse? updatedProfileResponse;
 
 const kIsOnBoardingScreen = 'isOnBoardingScreen';
 const kIsLoggedIn = 'isLoggedIn';
 const kToken = 'token';
-
 
 const String termsAndConditions = '''
  Welcome to A2ZCare!

@@ -5,8 +5,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../../../core/widgets/auth_nested_scroll_view.dart';
 import '../../../../../../core/utils/app_text_styles.dart';
-import '../forget_password_cubit/forget_password_cubit.dart';
-import '../forget_password_cubit/forgot_password_states.dart';
+ import '../../../../manger/forget_password_cubit/forget_password_cubit.dart';
+import '../../../../manger/forget_password_cubit/forgot_password_states.dart';
 import 'forgot_password_form_field.dart';
 
 class ForgotPasswordViewBody extends StatelessWidget {
