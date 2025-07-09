@@ -64,55 +64,3 @@ class BuildAppBar extends StatelessWidget {
     );
   }
 }
-
-/*
-Center(
-        child:Padding(
-          padding: const EdgeInsets.all(20.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              ElevatedButton(
-                onPressed: () {
-                  NotificationService.showSimpleNotification(
-                    title: '📢 إشعار بسيط',
-                    body: 'ده إشعار بسيط لما تدوس على الزرار',
-                  );
-                },
-                child: Text('إشعار بسيط'),
-              ),
-              SizedBox(height: 20),
-              ElevatedButton(
-                onPressed: () {
-                  NotificationService.showNetworkImageNotification(
-                    imageUrl: 'https://picsum.photos/800/400',
-                    title: '📷 إشعار بصورة من الإنترنت',
-                    body: 'اضغط علشان تشوف الصورة',
-                    summary: 'صورة جميلة من الإنترنت',
-                  );
-                },
-                child: Text('إشعار بصورة من الإنترنت'),
-              ),
-              SizedBox(height: 20),
-              ElevatedButton(
-                onPressed: () {
-                  NotificationService.showLocalImageNotification(
-                    drawableName: '@mipmap/ic_launcher',
-                    title: '🖼️ إشعار بصورة محلية',
-                    body: 'دي صورة من داخل التطبيق',
-                    summary: 'ده مثال لإشعار بصورة محلية.',
-                  );
-                },
-                child: Text('إشعار بصورة محلية'),
-              ),
-            ],
-          ),
-        ),
-
-      )
-  http: ^0.13.6
-  path_provider: ^2.1.2
-  permission_handler: ^11.3.0
-  device_info_plus: ^10.1.0
-  flutter_local_notifications: ^17.0.0
- */

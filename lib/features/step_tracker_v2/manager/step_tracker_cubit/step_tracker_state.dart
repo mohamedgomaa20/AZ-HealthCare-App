@@ -17,12 +17,14 @@ class StepTrackerLoaded extends StepTrackerState {
   final StepData? todayData;
   final List<StepData> weeklyData;
   final int dailyGoal;
+  final int caloriesTarget;
   final bool hasPermission;
 
   const StepTrackerLoaded({
     this.todayData,
     this.weeklyData = const [],
     this.dailyGoal = 10000,
+    this.caloriesTarget = 20000,
     this.hasPermission = false,
   });
 

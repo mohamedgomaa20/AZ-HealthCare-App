@@ -5,6 +5,7 @@ import 'package:permission_handler/permission_handler.dart';
 import 'package:intl/intl.dart';
 import 'dart:async';
 
+import '../../../../core/services/cache_helper.dart';
 import '../../data/database/database_helper.dart';
 
 import '../../data/models/step_data.dart';
@@ -17,6 +18,7 @@ class StepTrackerCubit extends Cubit<StepTrackerState> {
 
   Future<void> initializeStepTracker() async {
     emit(StepTrackerLoading());
+
     try {
       final hasPermission = await _requestPermissions();
 
@@ -27,6 +29,7 @@ class StepTrackerCubit extends Cubit<StepTrackerState> {
 
       await _loadTodayData();
       await _loadWeeklyData();
+
       await _startStepCounting();
 
       emit(
@@ -42,16 +45,23 @@ class StepTrackerCubit extends Cubit<StepTrackerState> {
   }
 
   int _dailyGoal = 10000;
+  int _caloriesTarget = 2000;
 
-  int get dailyGoal => _dailyGoal;
+  int get caloriesTarget =>
+      CacheHelper.getData(key: 'calculatedCaloriesTarget') ?? _caloriesTarget;
+
+  int get dailyGoal => CacheHelper.getData(key: 'dailyGoal') ?? _dailyGoal;
 
   void updateDailyGoal(int newGoal) async {
-    _dailyGoal = newGoal;
+    CacheHelper.saveData(key: 'dailyGoal', value: newGoal);
+    _dailyGoal = CacheHelper.getData(key: 'dailyGoal');
     if (state is StepTrackerLoaded) {
       final current = state as StepTrackerLoaded;
       emit(current.copyWith(dailyGoal: _dailyGoal));
     }
   }
+
+
 
   Future<bool> _requestPermissions() async {
     final status = await Permission.activityRecognition.status;
@@ -66,6 +76,7 @@ class StepTrackerCubit extends Cubit<StepTrackerState> {
       } else if (result.isPermanentlyDenied) {
         openAppSettings();
       }
+
       return false;
     }
   }
@@ -111,7 +122,8 @@ class StepTrackerCubit extends Cubit<StepTrackerState> {
         final newData = StepData(
           id: DateTime.now().millisecondsSinceEpoch.toString(),
           userId: 'user1',
-           date: today,
+          // You can get this from authentication
+          date: today,
           steps: steps,
           caloriesBurned: caloriesBurned,
           distanceKm: distance,
@@ -142,7 +154,8 @@ class StepTrackerCubit extends Cubit<StepTrackerState> {
     final data = await DatabaseHelper.getStepDataByDate(today);
 
     if (data == null) {
-       final newData = StepData(
+      // Create today's entry
+      final newData = StepData(
         id: DateTime.now().millisecondsSinceEpoch.toString(),
         userId: 'user1',
         date: today,

@@ -1,6 +1,7 @@
 import 'package:az_health_care/core/constants.dart';
 import 'package:az_health_care/core/utils/app_colors.dart';
- import 'package:flutter/material.dart';
+import 'package:az_health_care/features/home/presentation/views/tracker/views/emergency_contact_view.dart';
+import 'package:flutter/material.dart';
 
 import '../../../../../../core/utils/app_text_styles.dart';
 import '../../../../../onboarding_profile_setup/data/models/EmergencyContactsResponse.dart';
@@ -57,7 +58,8 @@ class LocationSharingView extends StatelessWidget {
               child: ListView.builder(
                 itemCount: contactList.length,
                 itemBuilder:
-                    (context, index) => ItemCard(
+                    (context, index) =>
+                    ItemCard(
                       emergencyContactModel: contactList[index],
                       onPressed: null,
                     ),
@@ -82,52 +84,58 @@ class ItemCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 90,
-      child: Card(
-        color: AppColors.blueGrayBackground2,
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 8.0),
-          child: Row(
-            children: [
-              CircleAvatar(child: Icon(Icons.person)),
-              SizedBox(width: 10),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(emergencyContactModel.name ?? "user"),
-                  SizedBox(height: 5),
-                  Text(
-                    emergencyContactModel.email ?? "2@2.com",
-                    style: TextStyle(color: Colors.grey),
-                  ),
-                ],
-              ),
-              Spacer(),
-              SizedBox(
-                width: 90,
-                height: 45,
-                child: ElevatedButton(
-                  onPressed: onPressed,
-                  style: ElevatedButton.styleFrom(
-                    padding: EdgeInsets.zero,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(30),
+    return InkWell(
+      onTap: () {
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => EmergencyContactView(),));
+      },
+      child: SizedBox(
+        height: 90,
+        child: Card(
+          color: AppColors.blueGrayBackground2,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8.0),
+            child: Row(
+              children: [
+                CircleAvatar(child: Icon(Icons.person)),
+                SizedBox(width: 10),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(emergencyContactModel.name ?? "user"),
+                    SizedBox(height: 5),
+                    Text(
+                      emergencyContactModel.email ?? "2@2.com",
+                      style: TextStyle(color: Colors.grey),
+                    ),
+                  ],
+                ),
+                Spacer(),
+                SizedBox(
+                  width: 90,
+                  height: 45,
+                  child: ElevatedButton(
+                    onPressed: onPressed,
+                    style: ElevatedButton.styleFrom(
+                      padding: EdgeInsets.zero,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30),
+                      ),
+                    ),
+
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(Icons.send, color: Colors.white),
+                        SizedBox(width: 5),
+                        Text("share"),
+                      ],
                     ),
                   ),
-
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(Icons.send, color: Colors.white),
-                      SizedBox(width: 5),
-                      Text("share"),
-                    ],
-                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

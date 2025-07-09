@@ -1,4 +1,5 @@
 import 'package:az_health_care/core/constants.dart';
+import 'package:az_health_care/core/services/cache_helper.dart';
 import 'package:az_health_care/core/utils/app_colors.dart';
 import 'package:az_health_care/core/utils/app_text_styles.dart';
 import 'package:az_health_care/features/home/presentation/views/home/widgets/blood_pressure_card.dart';
@@ -13,6 +14,7 @@ import 'package:az_health_care/features/on_boarding/presentation/views/widgets/c
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../step_tracker_v2/manager/step_tracker_cubit/step_tracker_cubit.dart';
 import '../../../manager/home_cubit/home_cubit.dart';
 import '../../../manager/home_cubit/home_states.dart';
 
@@ -31,6 +33,7 @@ class HomeView extends StatelessWidget {
         child: Column(
           children: [
             const HeaderWidget(),
+              SizedBox(height: 10),
             Expanded(
               child: SingleChildScrollView(
                 child: Column(

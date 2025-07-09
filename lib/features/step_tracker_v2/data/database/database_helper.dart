@@ -40,7 +40,7 @@ class DatabaseHelper {
         caloriesBurned INTEGER NOT NULL DEFAULT 0,
         distanceKm REAL NOT NULL DEFAULT 0.0,
         activeMinutes INTEGER NOT NULL DEFAULT 0,
-        
+      
         lastUpdated INTEGER NOT NULL
       )
     ''');
@@ -53,6 +53,7 @@ class DatabaseHelper {
         steps INTEGER NOT NULL DEFAULT 0,
         distance REAL NOT NULL DEFAULT 0.0,
         caloriesBurned REAL NOT NULL DEFAULT 0.0,
+        
         duration INTEGER NOT NULL DEFAULT 0,
         isActive INTEGER NOT NULL DEFAULT 0
       )
@@ -133,6 +134,47 @@ class DatabaseHelper {
       whereArgs: [date],
     );
   }
+
+  static Future<int> updateDailyGoalForUser(String userId, int newGoal) async {
+    final db = await database;
+    return await db.update(
+      tableStepData,
+      {
+        'dailyGoal': newGoal,
+        'lastUpdated': DateTime.now().millisecondsSinceEpoch,
+      },
+      where: 'userId = ?',
+      whereArgs: [userId],
+    );
+  }
+  static Future<int> updateDailyGoalForDate(String date, int newGoal) async {
+    final db = await database;
+    return await db.update(
+      tableStepData,
+      {
+        'dailyGoal': newGoal,
+        'lastUpdated': DateTime.now().millisecondsSinceEpoch,
+      },
+      where: 'date = ?',
+      whereArgs: [date],
+    );
+  }
+
+  static Future<int> getDailyGoal(String date) async {
+    final db = await database;
+    final maps = await db.query(
+      tableStepData,
+      columns: ['dailyGoal'],
+      where: 'date = ?',
+      whereArgs: [date],
+    );
+
+    if (maps.isNotEmpty) {
+      return maps.first['dailyGoal'] as int;
+    }
+    return 10000;
+  }
+
 
    static Future<int> insertRunningSession(RunningSession session) async {
     final db = await database;

@@ -9,6 +9,8 @@ import '../../../../../../core/network/end_points.dart';
 import '../../../../../../core/services/cache_helper.dart';
 import '../../../../../../core/utils/gender_enum.dart';
 import '../../../../../../shared/network/remote/dio_helper.dart';
+import '../../../step_tracker_v2/data/database/database_helper.dart';
+import '../../../step_tracker_v2/data/models/step_data.dart';
 import '../../data/models/update_profile_response_model .dart';
 import '../../presentation/views/acitivity_level.dart';
 import '../../presentation/views/basic_information.dart';
@@ -171,7 +173,6 @@ class OnboardingProfileSetupCubit extends Cubit<OnboardingProfileSetupStates> {
     }
   }
 
-  /// ================= gender View Logic =================
   Gender? get selectedGender {
     switch (gender) {
       case 'Male':
@@ -185,7 +186,7 @@ class OnboardingProfileSetupCubit extends Cubit<OnboardingProfileSetupStates> {
     }
   }
 
-  void calculateDailyTargets() {
+  void calculateDailyTargets() async {
     final double weightKg = weight ?? 0.0;
     final int? ageYears = int.tryParse(age ?? '');
 
@@ -242,7 +243,37 @@ class OnboardingProfileSetupCubit extends Cubit<OnboardingProfileSetupStates> {
 
     calculatedStepsTarget = (activityFactor * 3000).round();
 
+    CacheHelper.saveData(key: 'dailyGoal', value: calculatedStepsTarget);
+    print('dailyGoal ${CacheHelper.getData(key: 'dailyGoal')}');
+
+    CacheHelper.saveData(key: 'calculatedCaloriesTarget', value: calculatedCaloriesTarget);
+    print('calculatedCaloriesTarget ${CacheHelper.getData(key: 'calculatedCaloriesTarget')}');
+
+
+
+
     emit(OnboardingProfileSetupSuccessState());
+  }
+
+  Future<void> _insertInitialDailyGoal(String userId, int dailyGoal) async {
+    final today = DateTime.now();
+    final todayStr =
+        "${today.year.toString().padLeft(4, '0')}-"
+        "${today.month.toString().padLeft(2, '0')}-"
+        "${today.day.toString().padLeft(2, '0')}";
+
+    final newStepData = StepData(
+      id: DateTime.now().millisecondsSinceEpoch.toString(),
+      userId: userId,
+      date: todayStr,
+      steps: 0,
+      caloriesBurned: 0,
+      distanceKm: 0.0,
+      activeMinutes: 0,
+       lastUpdated: DateTime.now(),
+    );
+
+    await DatabaseHelper.insertStepData(newStepData);
   }
 
   Future<void> updateUserProfile() async {
@@ -292,17 +323,13 @@ class OnboardingProfileSetupCubit extends Cubit<OnboardingProfileSetupStates> {
           response.data.statusCode == 204 &&
               updatedProfileResponse?.result != null) {
         userProfileResult = updatedProfileResponse?.result!;
-        print(userProfileResult);
-        print(userProfileResult?.id ?? "");
-        print(userProfileResult?.firstName ?? "");
-        print(userProfileResult?.lastName ?? "");
-        print(userProfileResult?.age ?? "");
-        print(userProfileResult?.height ?? "");
-        print(userProfileResult?.weightKg ?? "");
-        print(userProfileResult?.phoneNumber ?? "");
-        print(userProfileResult?.gender ?? "");
-        print(userProfileResult?.healthGoals ?? "");
         emit(UpdateProfileSuccessState(userProfileResult));
+
+        print("dailyGoal:${CacheHelper.getData(key: 'dailyGoal')} ");
+        print("dailyGoal: ");
+        print(CacheHelper.getData(key: 'dailyGoal'));
+
+
         print("====================end of data=========================");
       } else {
         print("Failed with status: ${response.data..statusCode}");
@@ -361,50 +388,3 @@ class OnboardingProfileSetupCubit extends Cubit<OnboardingProfileSetupStates> {
     emit(OnboardingProfileSetupInitialState());
   }
 }
-
-// void getProfileData() {
-//   emit(GetProfileDataLoadingState());
-//
-//   var id = CacheHelper.getData(key: "id");
-//   print("=================================");
-//   print("id: $id");
-//   print("=================================");
-//
-//   DioHelper.getData(url: "/api/Users/userdata/by-id/$id")
-//       .then((value) {
-//         print("================= success ===================");
-//         print(value.statusCode);
-//         print(value.statusMessage);
-//         print(value.data);
-//         // updatedProfileResponse = UpdateProfileResponse.fromJson(value.data);
-//         print("===================data==========================");
-//         // updatedProfileResponse = UpdateProfileResponse.fromJson(value.data);
-//         if (value.statusCode == 200 ||
-//             value.statusCode == 204 &&
-//                 updatedProfileResponse?.result != null) {
-//           userProfileResult = updatedProfileResponse?.result!;
-//           print("$userProfileResult =============================");
-//           print(userProfileResult?.id ?? "");
-//           print(userProfileResult?.firstName ?? "");
-//           print(userProfileResult?.lastName ?? "");
-//           print(userProfileResult?.age ?? "");
-//           print(userProfileResult?.height ?? "");
-//           print(userProfileResult?.weightKg ?? "");
-//           print(userProfileResult?.phoneNumber ?? "");
-//           print(userProfileResult?.gender ?? "");
-//           print(userProfileResult?.healthGoals ?? "");
-//           emit(UpdateProfileSuccessState(userProfileResult));
-//           print("====================end of data=========================");
-//         } else {
-//           print("Failed with status: ${value.statusCode}");
-//           emit(GetProfileDataErrorState("Server error: ${value.statusCode}"));
-//         }
-//       })
-//       .catchError((error) {
-//         print("================= error ===================");
-//         emit(GetProfileDataErrorState(error.toString()));
-//
-//         print(error.toString());
-//         print("=============================================");
-//       });
-// }

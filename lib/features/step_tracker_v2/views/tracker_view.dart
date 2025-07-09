@@ -1,4 +1,6 @@
+import 'package:az_health_care/core/services/cache_helper.dart';
 import 'package:az_health_care/core/utils/app_colors.dart';
+import 'package:az_health_care/core/utils/app_text_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -50,15 +52,14 @@ class TrackerScreenView extends StatelessWidget {
           }
 
           if (state is StepTrackerError) {
-            print("=====================================");
-            print("=====================================");
+             print("=====================================");
             print(state.message);
-            print("=====================================");
-            print("=====================================");
+             print("=====================================");
             return Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
+
                   const Icon(Icons.error_outline, size: 64, color: Colors.red),
                   const SizedBox(height: 16),
                   Text(
@@ -82,6 +83,7 @@ class TrackerScreenView extends StatelessWidget {
             );
           }
           if (state is StepTrackerLoaded) {
+            int goal = BlocProvider.of<StepTrackerCubit>(context).dailyGoal ?? 1000;
             return SingleChildScrollView(
               padding: const EdgeInsets.all(16),
               child: Column(
@@ -89,13 +91,13 @@ class TrackerScreenView extends StatelessWidget {
                 children: [
                   TodayProgressCardWater(
                     todayData: state.todayData,
-                    dailyGoal: state.dailyGoal,
+                    dailyGoal: goal,
                   ),
                   const SizedBox(height: 20),
 
                   StepSummaryStats(
                     todayData: state.todayData,
-                    dailyGoal: state.dailyGoal,
+                    dailyGoal: goal,
                   ),
                   const SizedBox(height: 20),
                   WeeklyStepChart(weeklyData: state.weeklyData),
@@ -191,7 +193,7 @@ class TrackerScreenView extends StatelessWidget {
             ElevatedButton(
               onPressed: () {
                 final input = controller.text;
-                final goal = int.tryParse(input);
+                 final goal = int.tryParse(input);
 
                 if (goal != null && goal > 0) {
                   context.read<StepTrackerCubit>().updateDailyGoal(goal);
